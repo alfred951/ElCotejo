@@ -59,6 +59,8 @@
                 <category android:name="co.edu.eafit.yomas10" />
             </intent-filter>
         </receiver>
+
+        <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/push_ico2"/>
     </application>
 
 </manifest>
