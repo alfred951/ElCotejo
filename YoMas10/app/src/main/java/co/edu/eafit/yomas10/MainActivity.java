@@ -15,8 +15,6 @@ import com.parse.ParsePush;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button sendInv;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,23 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
         final Context ctx = this;
 
-        Parse.initialize(this, "pugXkDo33e0MsbWMTsL5EChTBx3jKyWoDYI6ZE40", "rxxO31IwOiUHan1udkZjFwHgEIOJPI9zvPWGxm52");
+        Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
-        ParsePush.subscribeInBackground("Canal1");
-
-        sendInv = (Button) findViewById(R.id.ntfyBt);
-        sendInv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParsePush push = new ParsePush();
-                push.setChannel("Canal1");
-                push.setMessage("Test desde la app");
-                push.sendInBackground();
-                Toast.makeText(ctx, "Se ha mandado la notificacion", Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 
 
@@ -65,4 +49,29 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void actSistemas(View view) {
+        ParsePush.subscribeInBackground("Sistemas");
+    }
+
+    public void actDiseno(View view) {
+        ParsePush.subscribeInBackground("Diseno");
+    }
+
+    public void actPsicologia(View view) {
+        ParsePush.subscribeInBackground("Psicologia");
+    }
+
+    public void desSistemas(View view) {
+        ParsePush.unsubscribeInBackground("Sistemas");
+    }
+
+    public void desDiseno(View view) {
+        ParsePush.unsubscribeInBackground("Diseno");
+    }
+
+    public void desPsicologia(View view) {
+        ParsePush.unsubscribeInBackground("Psicologia");
+    }
+
 }

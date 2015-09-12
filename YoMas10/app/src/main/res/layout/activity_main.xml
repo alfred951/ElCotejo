@@ -19,9 +19,60 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Probar Notificaciones"
-        android:id="@+id/ntfyBt"
+        android:text="Act Sistemas"
+        android:id="@+id/sO"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/textView"
+        android:onClick="actSistemas"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACT DISENO"
+        android:id="@+id/dO"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/sO"
+        android:layout_alignEnd="@+id/sO"
+        android:onClick="actDiseno"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACT PSICOLOGIA"
+        android:id="@+id/pO"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="107dp" />
+        android:layout_toStartOf="@+id/textView"
+        android:layout_marginBottom="33dp"
+        android:onClick="actPsicologia"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DES PSICOLOGIA"
+        android:id="@+id/pF"
+        android:layout_alignTop="@+id/pO"
+        android:layout_toEndOf="@+id/textView"
+        android:onClick="desPsicologia"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DES DISENO"
+        android:id="@+id/dF"
+        android:layout_alignTop="@+id/dO"
+        android:layout_toEndOf="@+id/textView"
+        android:onClick="actDiseno"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DES SISTEMAS"
+        android:id="@+id/sF"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/textView"
+        android:onClick="desDiseno"/>
+
+
 </RelativeLayout>
