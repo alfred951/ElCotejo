@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "Yoplus10": {
+      "applicationId": "pugXkDo33e0MsbWMTsL5EChTBx3jKyWoDYI6ZE40"
+    },
+    "_default": {
+      "link": "Yoplus10"
+    }
+  }
+}

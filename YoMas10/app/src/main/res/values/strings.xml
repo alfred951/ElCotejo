@@ -5,4 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="app_id">pugXkDo33e0MsbWMTsL5EChTBx3jKyWoDYI6ZE40</string>
     <string name="client_key">rxxO31IwOiUHan1udkZjFwHgEIOJPI9zvPWGxm52</string>
+
+    <string name="eSistemas">Sistemas</string>
+    <string name="ePsicologia">Psicologia</string>
+    <string name="eDiseno">Diseno</string>
 </resources>

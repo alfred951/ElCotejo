@@ -12,9 +12,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Yo+10"
         android:id="@+id/textView"
+        android:layout_marginTop="24dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -73,6 +73,17 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/textView"
         android:onClick="desDiseno"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notificar"
+        android:id="@+id/send"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:onClick="notifyUsers"/>
 
 
 </RelativeLayout>

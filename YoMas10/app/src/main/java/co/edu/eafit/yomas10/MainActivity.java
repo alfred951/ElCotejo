@@ -11,7 +11,10 @@ import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.parse.ParsePush;
+import com.parse.ParsePushBroadcastReceiver;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,27 +54,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void actSistemas(View view) {
-        ParsePush.subscribeInBackground("Sistemas");
+        ParsePush.subscribeInBackground(getString(R.string.eSistemas));
     }
 
     public void actDiseno(View view) {
-        ParsePush.subscribeInBackground("Diseno");
+        ParsePush.subscribeInBackground(getString(R.string.eDiseno));
     }
 
     public void actPsicologia(View view) {
-        ParsePush.subscribeInBackground("Psicologia");
+        ParsePush.subscribeInBackground(getString(R.string.ePsicologia));
     }
 
     public void desSistemas(View view) {
-        ParsePush.unsubscribeInBackground("Sistemas");
+        ParsePush.unsubscribeInBackground(getString(R.string.eSistemas));
     }
 
     public void desDiseno(View view) {
-        ParsePush.unsubscribeInBackground("Diseno");
+        ParsePush.unsubscribeInBackground(getString(R.string.eDiseno));
     }
 
     public void desPsicologia(View view) {
-        ParsePush.unsubscribeInBackground("Psicologia");
+        ParsePush.unsubscribeInBackground(getString(R.string.ePsicologia));
     }
 
+    public void notifyUsers(View view){
+        ParsePush push = new ParsePush();
+        push.setChannel(getString(R.string.eSistemas));
+        push.setMessage("Partido Manana a las 9");
+        push.sendInBackground();
+    }
+
+
+
 }
+
+//clave de Parse LO5XvpbqZL7cLu3vvKWpKZbTr9b3Cc21DU1pd7h3
