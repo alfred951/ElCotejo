@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.Parse;
@@ -18,6 +19,8 @@ import com.parse.ParsePushBroadcastReceiver;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText equipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
         ParseInstallation.getCurrentInstallation().saveInBackground();
+        
+        equipo = (EditText) findViewById(R.id.equipo);
 
     }
 
@@ -53,35 +58,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void actSistemas(View view) {
-        ParsePush.subscribeInBackground(getString(R.string.eSistemas));
-    }
 
-    public void actDiseno(View view) {
-        ParsePush.subscribeInBackground(getString(R.string.eDiseno));
-    }
-
-    public void actPsicologia(View view) {
-        ParsePush.subscribeInBackground(getString(R.string.ePsicologia));
-    }
-
-    public void desSistemas(View view) {
-        ParsePush.unsubscribeInBackground(getString(R.string.eSistemas));
-    }
-
-    public void desDiseno(View view) {
-        ParsePush.unsubscribeInBackground(getString(R.string.eDiseno));
-    }
-
-    public void desPsicologia(View view) {
-        ParsePush.unsubscribeInBackground(getString(R.string.ePsicologia));
-    }
 
     public void notifyUsers(View view){
         ParsePush push = new ParsePush();
-        push.setChannel(getString(R.string.eSistemas));
-        push.setMessage("Partido Manana a las 9");
+        push.setChannel(equipo.getText().toString());
+        push.setMessage("Notificacion Recibida");
         push.sendInBackground();
+    }
+
+    public void suscribeNewChannel(View view){
+        ParsePush.subscribeInBackground(equipo.getText().toString());
     }
 
 
