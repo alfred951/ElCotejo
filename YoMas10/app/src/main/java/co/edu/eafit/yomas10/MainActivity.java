@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
         ParseInstallation.getCurrentInstallation().saveInBackground();
-        
+
         equipo = (EditText) findViewById(R.id.equipo);
 
     }

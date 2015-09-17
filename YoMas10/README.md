@@ -1,0 +1,1 @@
+Yo+10 es una aplicación que busca conectar gente a través del deporte en Medellín, Colombia.
