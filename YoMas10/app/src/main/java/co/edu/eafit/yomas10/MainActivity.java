@@ -6,15 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
-import com.parse.ParseObject;
 import com.parse.ParsePush;
-import com.parse.ParsePushBroadcastReceiver;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,15 +23,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Context ctx = this;
-
         Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
+        final Context ctx = this;
         equipo = (EditText) findViewById(R.id.equipo);
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public void notifyUsers(View view){
         ParsePush push = new ParsePush();
         push.setChannel(equipo.getText().toString());
@@ -67,12 +60,9 @@ public class MainActivity extends AppCompatActivity {
         push.sendInBackground();
     }
 
-    public void suscribeNewChannel(View view){
+    public void suscribeNewChannel(View view) {
         ParsePush.subscribeInBackground(equipo.getText().toString());
     }
-
-
-
 }
 
 //clave de Parse LO5XvpbqZL7cLu3vvKWpKZbTr9b3Cc21DU1pd7h3

@@ -9,4 +9,5 @@
     <string name="eSistemas">Sistemas</string>
     <string name="ePsicologia">Psicologia</string>
     <string name="eDiseno">Diseno</string>
+    <string name="title_activity_partido">Informacion del Partido</string>
 </resources>
