@@ -1,6 +1,7 @@
 package co.edu.eafit.yomas10;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,20 +49,17 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == R.id.action_newNoti){
+            Intent in = new Intent(MainActivity.this, CreateNotificacionActivity.class);
+            startActivity(in);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void notifyUsers(View view){
-        ParsePush push = new ParsePush();
-        push.setChannel(equipo.getText().toString());
-        push.setMessage("Notificacion Recibida");
-        push.sendInBackground();
-    }
-
     public void suscribeNewChannel(View view) {
         ParsePush.subscribeInBackground(equipo.getText().toString());
+        Toast.makeText(this, getString(R.string.suscripcion) + " " +equipo.getText().toString(),Toast.LENGTH_LONG).show();
     }
 }
 

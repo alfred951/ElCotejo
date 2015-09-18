@@ -38,7 +38,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
             Iterator itr = json.keys();
             while(itr.hasNext()){
                 String key = (String) itr.next();
-                if (key.equals("string")){
+                if (key.equals("msg")){
                     msg = json.getString(key);
                 }else if (key.equals("date")){
                     date = json.getString(key);
@@ -64,7 +64,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         PendingIntent pi = PendingIntent.getActivity(ctx, (int)System.currentTimeMillis(), lauchActivity, 0);
 
         Notification not = new NotificationCompat.Builder(ctx)
-                .setContentTitle("PUSH RECEIVED")
+                .setContentTitle("Yo+10")
                 .setContentText(msg)
                 .setSmallIcon(R.drawable.push_ico2)
                 .setLargeIcon(icon)

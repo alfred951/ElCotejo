@@ -1,6 +1,6 @@
 {
 	"action": "co.edu.eafit.yomas10.RECEIVE_PUSH",
-	"string": "Nueva Notificacion",
+	"msg": "Invitacion a partido",
 	"date"  : "19 de Mayo",
 	"nombre": "Delfines vs Leones"
 }

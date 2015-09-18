@@ -16,17 +16,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notificar"
-        android:id="@+id/send"
-        android:onClick="notifyUsers"
-        android:layout_below="@+id/equipo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
-
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -41,10 +30,10 @@
         android:layout_height="wrap_content"
         android:text="Suscribirse"
         android:id="@+id/suscribe"
-        android:layout_below="@+id/send"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="84dp"
-        android:onClick="suscribeNewChannel" />
+        android:onClick="suscribeNewChannel"
+        android:layout_below="@+id/equipo" />
 
 
 </RelativeLayout>

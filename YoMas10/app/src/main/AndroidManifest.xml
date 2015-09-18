@@ -58,23 +58,22 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
                    IMPORTANT: Change "com.parse.starter" to match your app's package name.
                 <category android:name="co.edu.eafit.yomas10" />
             </intent-filter>
-
-
         </receiver>
 
-        <!-- My notification receiver-->
-        <receiver android:name="co.edu.eafit.yomas10.ParseReceiver" android:exported="false">
+        <!-- My notification receiver -->
+        <receiver
+            android:name=".ParseReceiver"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.OPEN" />
                 <action android:name="com.parse.push.intent.DELETE" />
             </intent-filter>
         </receiver>
-        <!-- End custon notification receiver-->
+        <!-- End custom notification receiver -->
 
         <meta-data
             android:name="com.parse.push.notification_icon"
@@ -83,6 +82,10 @@
         <activity
             android:name=".PartidoActivity"
             android:label="@string/title_activity_partido" >
+        </activity>
+        <activity
+            android:name=".CreateNotificacionActivity"
+            android:label="@string/title_activity_create_notificacion" >
         </activity>
     </application>
 
