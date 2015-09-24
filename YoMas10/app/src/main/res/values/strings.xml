@@ -16,4 +16,7 @@
 
     <string name="newNotif">Nueva Notificación</string>
     <string name="title_activity_create_notificacion">Nueva Notificacion</string>
+    <string name="title_activity_perfil">Mi Perfil</string>
+
+    <string name="selecImagen">Selecciona una imagen de perfil</string>
 </resources>

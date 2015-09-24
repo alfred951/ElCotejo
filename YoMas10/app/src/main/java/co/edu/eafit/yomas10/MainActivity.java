@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         }else if (id == R.id.action_newNoti){
             Intent in = new Intent(MainActivity.this, CreateNotificacionActivity.class);
             startActivity(in);
+        }else if (id == R.id.action_profile){
+            Intent in = new Intent(MainActivity.this, PerfilActivity.class);
+            startActivity(in);
         }
 
         return super.onOptionsItemSelected(item);

@@ -9,6 +9,10 @@ public class Capitan extends Jugador{
 
     private Equipo equipo;
 
+    public Capitan(String name){
+        super(name);
+    }
+
     public void invitarJugador(Jugador jug){
         //TODO
     }

@@ -1,6 +1,5 @@
 package co.edu.eafit.yomas10;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,30 +7,47 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.ParsePush;
+import co.edu.eafit.yomas10.Clases.Jugador;
 
-/**
- * Activy con el perfil del usuario
- */
 public class PerfilActivity extends AppCompatActivity {
 
-
+    private ImageView profilePic;
+    private EditText name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); //cambiar
+        setContentView(R.layout.activity_perfil);
 
-        Jugador user = new Jugador();
+        profilePic = (ImageView) findViewById(R.id.usrPic);
+        name = (EditText) findViewById(R.id.userName);
+
+
+        Jugador user = new Jugador(name.getText().toString());
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent();
+                in.setType("image/*");
+                in.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(in,getString(R.string.selecImagen)), 1);
+            }
+        });
+    }
+
+    public void onActityResult(int reqCode, int resCode, Intent data){
+        if(resCode == RESULT_OK){
+            if (reqCode == 1)
+                profilePic.setImageURI(data.getData());
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_perfil, menu);
         return true;
     }
 
@@ -45,9 +61,8 @@ public class PerfilActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 }
-
-//clave de Parse LO5XvpbqZL7cLu3vvKWpKZbTr9b3Cc21DU1pd7h3

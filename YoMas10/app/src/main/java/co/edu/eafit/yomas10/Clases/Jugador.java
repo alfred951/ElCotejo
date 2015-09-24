@@ -15,7 +15,8 @@ public class Jugador {
     private LinkedList<Cancha> canchasFavoritas;
     private LinkedList<String> canales;
 
-    public Jugador(){
+    public Jugador(String name){
+        nombre = name;
         //sacar los datos de la base de datos
     }
 
