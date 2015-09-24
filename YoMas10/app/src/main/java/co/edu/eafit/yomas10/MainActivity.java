@@ -24,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        try {
+            Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
+            ParseInstallation.getCurrentInstallation().saveInBackground();
+        }catch (Exception e){}
 
         final Context ctx = this;
         equipo = (EditText) findViewById(R.id.equipo);

@@ -6,22 +6,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import co.edu.eafit.yomas10.Clases.Jugador;
 
 public class PerfilActivity extends AppCompatActivity {
 
     private ImageView profilePic;
-    private EditText name;
+    private TextView name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
         profilePic = (ImageView) findViewById(R.id.usrPic);
-        name = (EditText) findViewById(R.id.userName);
+        name = (TextView) findViewById(R.id.userName);
 
 
         Jugador user = new Jugador(name.getText().toString());
@@ -37,7 +37,7 @@ public class PerfilActivity extends AppCompatActivity {
         });
     }
 
-    public void onActityResult(int reqCode, int resCode, Intent data){
+    public void onActivityResult(int reqCode, int resCode, Intent data){
         if(resCode == RESULT_OK){
             if (reqCode == 1)
                 profilePic.setImageURI(data.getData());
