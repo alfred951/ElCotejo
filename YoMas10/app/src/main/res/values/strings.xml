@@ -18,5 +18,11 @@
     <string name="title_activity_create_notificacion">Nueva Notificacion</string>
     <string name="title_activity_perfil">Mi Perfil</string>
 
+    <string name="username">Usuario:</string>
+    <string name="posicion">Posición:</string>
+    <string name="about">Sobre mí:</string>
+    <string name="email">Correo:</string>
+
+    <string name="infoImagen">Imagen de perfil</string>
     <string name="selecImagen">Selecciona una imagen de perfil</string>
 </resources>

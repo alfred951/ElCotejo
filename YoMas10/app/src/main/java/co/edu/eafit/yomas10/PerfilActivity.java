@@ -15,15 +15,23 @@ public class PerfilActivity extends AppCompatActivity {
 
     private ImageView profilePic;
     private TextView name;
+    private TextView username;
+    private TextView posicion;
+    private TextView userBio;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-        profilePic = (ImageView) findViewById(R.id.usrPic);
-        name = (TextView) findViewById(R.id.userName);
+        profilePic = (ImageView)findViewById(R.id.usrPic);
+        name       = (TextView) findViewById(R.id.name);
+        username   = (TextView) findViewById(R.id.username);
+        posicion   = (TextView) findViewById(R.id.posicion);
+        userBio    = (TextView) findViewById(R.id.userBio);
 
-
+        //TODO: Cargar los atributos del usuario de la base de datos y mostrarlos en el perfil
         Jugador user = new Jugador(name.getText().toString());
 
         profilePic.setOnClickListener(new View.OnClickListener() {

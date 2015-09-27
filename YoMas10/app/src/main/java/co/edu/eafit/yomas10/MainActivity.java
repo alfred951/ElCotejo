@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void suscribeNewChannel(View view) {
-        ParsePush.subscribeInBackground(equipo.getText().toString());
+        ParsePush.subscribeInBackground(equipo.getText().toString().toLowerCase());
         Toast.makeText(this, getString(R.string.suscripcion) + " " +equipo.getText().toString(),Toast.LENGTH_LONG).show();
     }
 }

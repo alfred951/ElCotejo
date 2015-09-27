@@ -66,7 +66,7 @@ public class CreateNotificacionActivity extends AppCompatActivity {
 
 
         ParsePush push = new ParsePush();
-        push.setChannel(canal.getText().toString());
+        push.setChannel(canal.getText().toString().toLowerCase());
         push.setData(json);
         push.sendInBackground();
 
