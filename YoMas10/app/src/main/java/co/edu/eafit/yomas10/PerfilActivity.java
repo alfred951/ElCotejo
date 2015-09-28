@@ -47,10 +47,14 @@ public class PerfilActivity extends AppCompatActivity {
 
     public void onActivityResult(int reqCode, int resCode, Intent data){
         if(resCode == RESULT_OK){
-            if (reqCode == 1)
+            if (reqCode == 1) {
                 profilePic.setImageURI(data.getData());
+
+            }
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
