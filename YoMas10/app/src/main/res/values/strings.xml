@@ -1,22 +1,24 @@
 <resources>
     <string name="app_name">Yo+10</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_editar_perfil">Editar Perfil</string>
+    <string name="title_activity_partido">Informacion del Partido</string>
+    <string name="title_activity_create_notificacion">Nueva Notificacion</string>
+    <string name="title_activity_perfil">Mi Perfil</string>
+
+    <string name="action_settings">Configuracion</string>
     <string name="app_id">pugXkDo33e0MsbWMTsL5EChTBx3jKyWoDYI6ZE40</string>
     <string name="client_key">rxxO31IwOiUHan1udkZjFwHgEIOJPI9zvPWGxm52</string>
 
     <string name="eSistemas">Sistemas</string>
     <string name="ePsicologia">Psicologia</string>
     <string name="eDiseno">Diseno</string>
-    <string name="title_activity_partido">Informacion del Partido</string>
 
     <string name="suscripcion">Se ha suscrito satisfactoriamente al canal </string>
     <string name="notificacion">Se ha mandado la notificación exitosamente</string>
 
     <string name="newNotif">Nueva Notificación</string>
-    <string name="title_activity_create_notificacion">Nueva Notificacion</string>
-    <string name="title_activity_perfil">Mi Perfil</string>
+    <string name="editProfile">Editar Perfil</string>
 
     <string name="username">Usuario:</string>
     <string name="posicion">Posición:</string>
@@ -25,4 +27,6 @@
 
     <string name="infoImagen">Imagen de perfil</string>
     <string name="selecImagen">Selecciona una imagen de perfil</string>
+
+    <string name="save">Guardar</string>
 </resources>
