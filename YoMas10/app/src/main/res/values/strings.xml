@@ -16,6 +16,7 @@
 
     <string name="suscripcion">Se ha suscrito satisfactoriamente al canal </string>
     <string name="notificacion">Se ha mandado la notificación exitosamente</string>
+    <string name="editado">Se ha editado satisfactoriamente el perfil</string>
 
     <string name="newNotif">Nueva Notificación</string>
     <string name="editProfile">Editar Perfil</string>

@@ -1,6 +1,7 @@
 package co.edu.eafit.yomas10;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,17 +33,27 @@ public class PerfilActivity extends AppCompatActivity {
         userBio    = (TextView) findViewById(R.id.userBio);
 
         //TODO: Cargar los atributos del usuario de la base de datos y mostrarlos en el perfil
-        Jugador user = new Jugador(name.getText().toString());
+        name.setText(MainActivity.jugador.getNombre());
+        username.setText(MainActivity.jugador.getUsername());
+        posicion.setText(MainActivity.jugador.getPosicion());
+        userBio.setText(MainActivity.jugador.getBio());
 
-        profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent();
-                in.setType("image/*");
-                in.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(in,getString(R.string.selecImagen)), 1);
+
+        Bundle bn = this.getIntent().getExtras();
+        try{
+            if(bn.getString("Cambios").equals("si")){
+                name.setText(bn.getString("name"));
+                MainActivity.jugador.setNombre(bn.getString("name"));
+                posicion.setText(bn.getString("posicion"));
+                MainActivity.jugador.setPosicion(bn.getString("posicion"));
+                userBio.setText(bn.getString("bio"));
+                MainActivity.jugador.setBio(bn.getString("bio"));
+                profilePic.setImageURI(Uri.parse(bn.getString("image")));
             }
-        });
+        }catch (Exception e){}
+
+        //TODO: guardar la imagen de perfil
+
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data){
@@ -53,8 +64,6 @@ public class PerfilActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,10 +83,21 @@ public class PerfilActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if (id == R.id.action_edit) {
+            Bundle bn = new Bundle();
+            bn.putString("NOMBRE", name.getText().toString());
+            bn.putString("POSICION", posicion.getText().toString());
+            bn.putString("BIO", userBio.getText().toString());
+
             Intent in = new Intent(this, EditarPerfilActivity.class);
+            in.putExtras(bn);
             startActivity(in);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void onBackPressed(){
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

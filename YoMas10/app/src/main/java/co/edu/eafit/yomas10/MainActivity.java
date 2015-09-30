@@ -14,15 +14,22 @@ import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 
+import co.edu.eafit.yomas10.Clases.Jugador;
+
 
 public class MainActivity extends AppCompatActivity {
 
     EditText equipo;
+    public static Jugador jugador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        jugador = new Jugador("Alejandro");
+        jugador.setUsername("Aleochoam");
+        jugador.setPosicion("Portero");
+        jugador.setBio("Mido 1.80, he jugado en el Nacional y tengo 20 años");
 
         try {
             Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));

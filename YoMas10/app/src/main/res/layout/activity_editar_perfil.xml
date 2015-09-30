@@ -27,7 +27,6 @@
         android:text=""
         android:id="@+id/name"
         android:layout_gravity="fill_horizontal|center_horizontal"
-        android:layout_margin="10dp"
         android:layout_marginBottom="10dp"
         android:layout_row="0"
         android:layout_column="1"
@@ -60,7 +59,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/about"
         android:id="@+id/aboutTV"
-        android:layout_row="7"
+        android:layout_row="6"
         android:layout_column="0"
         android:layout_marginStart="10dp"
         android:textColor="#010101"/>
@@ -84,10 +83,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/email"
         android:id="@+id/emailTV"
-        android:layout_row="10"
+        android:layout_row="9"
         android:layout_column="0"
         android:layout_marginStart="10dp"
-        android:layout_columnSpan="2"
         android:textColor="#010101"/>
 
     <TextView
