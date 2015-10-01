@@ -52,7 +52,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
             Log.e(TAG, "JSONException: " + e.getMessage());
         }
 
-        Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.push_ico2);
+        Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_launcher);
 
         Intent lauchActivity = new Intent(ctx, PartidoActivity.class);
 
@@ -66,7 +66,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         Notification not = new NotificationCompat.Builder(ctx)
                 .setContentTitle("Yo+10")
                 .setContentText(msg)
-                .setSmallIcon(R.drawable.push_ico2)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(icon)
                 .setContentIntent(pi)
                 .setAutoCancel(true)

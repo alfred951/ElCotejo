@@ -1,39 +1,36 @@
-package co.edu.eafit.yomas10;
+package co.edu.eafit.yomas10.Clases;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import org.w3c.dom.Text;
+import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.R;
 
-import co.edu.eafit.yomas10.Clases.Equipo;
+public class EquipoActivity extends AppCompatActivity {
 
-public class PartidoActivity extends AppCompatActivity {
+    private ListView listaJugadores;
 
-    private TextView nPartido;
-    private TextView nDia;
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_partido);
+        setContentView(R.layout.activity_equipo);
 
-        nPartido = (TextView) findViewById(R.id.nPartido);
-        nDia = (TextView) findViewById(R.id.nDia);
+        ArrayAdapter<Jugador> adapter = new ArrayAdapter<Jugador>
+                (this, android.R.layout.simple_list_item_1, MainActivity.jugadores);
 
-        Bundle bn = this.getIntent().getExtras();
-        nPartido.setText(bn.getString("NOMBRE"));
-        nDia.setText(bn.getString("FECHA"));
+        listaJugadores = (ListView) findViewById(R.id.listaJugadores);
+        listaJugadores.setAdapter(adapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_partido, menu);
+        getMenuInflater().inflate(R.menu.menu_equipo, menu);
         return true;
     }
 
@@ -50,13 +47,5 @@ public class PartidoActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void aceptarPartido(View view){
-
-    }
-
-    public void rechazarPartido(View viw){
-
     }
 }

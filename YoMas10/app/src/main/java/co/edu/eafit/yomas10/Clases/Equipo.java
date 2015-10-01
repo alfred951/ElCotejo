@@ -23,6 +23,13 @@ public class Equipo {
         if(!integrantes.contains(jug)){
             integrantes.add(jug);
         }
+
+        //TODO: subir a la base de datos
+    }
+
+    public Equipo getInfoDB(){
+        //TODO
+        return null;
     }
 
 

@@ -72,7 +72,7 @@
 
         <meta-data
             android:name="com.parse.push.notification_icon"
-            android:resource="@drawable/push_ico2" />
+            android:resource="@drawable/ic_launcher" />
 
         <activity
             android:name=".MainActivity"
@@ -103,6 +103,18 @@
         <activity
             android:name=".EditarPerfilActivity"
             android:label="@string/title_activity_editar_perfil" >
+        </activity>
+        <activity
+            android:name=".Clases.PerfilExterno"
+            android:label="@string/title_activity_perfil_externo" >
+        </activity>
+        <activity
+            android:name=".InvitacionEquipo"
+            android:label="@string/title_activity_invitacion_equipo" >
+        </activity>
+        <activity
+            android:name=".Clases.EquipoActivity"
+            android:label="@string/title_activity_equipo" >
         </activity>
     </application>
 

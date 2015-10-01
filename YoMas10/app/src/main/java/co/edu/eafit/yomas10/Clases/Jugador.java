@@ -15,12 +15,13 @@ public class Jugador {
     private String posicion;
     private String correo;
     private Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
+    private LinkedList<Equipo> equipos;
     private LinkedList<Jugador> amigos;
     private LinkedList<Cancha> canchasFavoritas;
     private LinkedList<String> canales;
 
-    public Jugador(String name){
-        nombre = name;
+    public Jugador(String username){
+        this.username = username;
         //TODO: sacar los datos de la base de datos
     }
 
@@ -58,7 +59,15 @@ public class Jugador {
 
     public Equipo crearEquipo(String nombre){
         Equipo equipo = new Equipo(nombre, this);
+        agregarEquipo(equipo);
+
         return equipo;
+    }
+
+    public void agregarEquipo(Equipo equipo){
+        if (!equipos.contains(equipo)){
+            equipos.add(equipo);
+        }
     }
 
     public String getUsername() {
@@ -104,4 +113,7 @@ public class Jugador {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+
+
 }

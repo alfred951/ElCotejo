@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="trety"
+        android:text=""
         android:id="@+id/name"
         android:layout_row="0"
         android:layout_column="0"
@@ -43,14 +43,14 @@
         android:layout_row="3"
         android:layout_column="0"
         android:text="@string/username"
-        android:textColor="#010101"
+        android:textColor="@color/negro"
         android:layout_marginLeft="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="dfgdf"
+        android:text=""
         android:id="@+id/username"
         android:layout_marginBottom="10dp"
         android:layout_row="4"
@@ -66,7 +66,7 @@
         android:layout_row="5"
         android:layout_column="0"
         android:text="@string/posicion"
-        android:textColor="#010101"
+        android:textColor="@color/negro"
         android:layout_marginLeft="10dp" />
 
 
@@ -92,7 +92,7 @@
         android:id="@+id/aboutTV"
         android:layout_row="7"
         android:layout_column="0"
-        android:textColor="#010101"
+        android:textColor="@color/negro"
         android:layout_marginLeft="10dp" />
 
     <TextView
@@ -119,7 +119,7 @@
         android:layout_row="9"
         android:layout_column="0"
         android:layout_columnSpan="2"
-        android:textColor="#010101"
+        android:textColor="@color/negro"
         android:layout_marginLeft="10dp" />
 
     <TextView

@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import co.edu.eafit.yomas10.Clases.Jugador;
-
 public class PerfilActivity extends AppCompatActivity {
 
     private ImageView profilePic;

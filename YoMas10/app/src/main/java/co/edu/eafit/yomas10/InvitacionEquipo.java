@@ -7,33 +7,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import co.edu.eafit.yomas10.Clases.Equipo;
+import co.edu.eafit.yomas10.Clases.Jugador;
+import co.edu.eafit.yomas10.Helpers.NotificationCreator;
 
-public class PartidoActivity extends AppCompatActivity {
+public class InvitacionEquipo extends AppCompatActivity {
 
-    private TextView nPartido;
-    private TextView nDia;
-    
+    private TextView equipoTV;
+    private Equipo equipo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_partido);
+        setContentView(R.layout.activity_invitacion_equipo);
 
-        nPartido = (TextView) findViewById(R.id.nPartido);
-        nDia = (TextView) findViewById(R.id.nDia);
+        Bundle bn = getIntent().getExtras();
 
-        Bundle bn = this.getIntent().getExtras();
-        nPartido.setText(bn.getString("NOMBRE"));
-        nDia.setText(bn.getString("FECHA"));
+        equipoTV = (TextView) findViewById(R.id.equipo);
+        equipoTV.setText(bn.getString("NOMBRE"));
+
+        equipo = new Equipo(bn.getString("NOMBRE"), new Jugador(bn.getString("CAPITAN")));
+        equipo.getInfoDB();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_partido, menu);
+        getMenuInflater().inflate(R.menu.menu_invitacion_equipo, menu);
         return true;
     }
 
@@ -52,11 +53,15 @@ public class PartidoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void aceptarPartido(View view){
+    public void aceptarEquipo(View view){
+        MainActivity.jugador.agregarEquipo(equipo);
+        //TODO: agregarse al equipo en la base de datos
+        equipo.agregarJugador(MainActivity.jugador);
+        NotificationCreator.sendParseNotification();
 
     }
 
-    public void rechazarPartido(View viw){
+    public void rechazarEquipo(View view){
 
     }
 }
