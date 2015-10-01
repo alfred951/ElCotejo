@@ -15,7 +15,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
     private EditText name, posicion, userBio;
     private ImageView profilePic;
-    private String dataPic;
+    private Uri dataPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
         if(resCode == RESULT_OK){
             if (reqCode == 1) {
                 profilePic.setImageURI(data.getData());
-                dataPic = data.getData().toString();
+                dataPic = data.getData();
                 //TODO: Guardar la imagen en el sistema de archivos
             }
         }
@@ -56,7 +56,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_editar_perfil, menu);
         return true;
     }
@@ -72,37 +72,27 @@ public class EditarPerfilActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if (id == R.id.action_editSave){
-            Bundle bn = saveChanges();
+           saveChanges();
             Toast.makeText(this, getString(R.string.editado), Toast.LENGTH_LONG).show();
-
             Intent in = new Intent(this, PerfilActivity.class);
-            in.putExtras(bn);
             startActivity(in);
+            finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
 
-    public Bundle saveChanges(){
+    public void saveChanges(){
         String nameT     = name.getText().toString();
         String posicionT = posicion.getText().toString();
         String userBioT  = userBio.getText().toString();
+        Uri picture      = dataPic;
 
         MainActivity.jugador.setNombre(nameT);
         MainActivity.jugador.setPosicion(posicionT);
         MainActivity.jugador.setBio(userBioT);
+        MainActivity.jugador.setProfilePic(picture);
 
         //TODO: Subir los nuevos datos a la base de datos
-
-        Bundle bn = new Bundle();
-        bn.putString("Cambios", "si");
-        bn.putString("name", nameT);
-        bn.putString("posicion", posicionT);
-        bn.putString("bio", userBioT);
-        bn.putString("image", dataPic);
-
-        return bn;
-
     }
 }

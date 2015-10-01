@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         jugador.setUsername("Aleochoam");
         jugador.setPosicion("Portero");
         jugador.setBio("Mido 1.80, he jugado en el Nacional y tengo 20 años");
+        jugador.setCorreo("alejo8a_3@hotmail.com");
 
         try {
             Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));

@@ -1,5 +1,6 @@
 package co.edu.eafit.yomas10.Clases;
 
+import android.net.Uri;
 import java.util.LinkedList;
 
 
@@ -13,6 +14,7 @@ public class Jugador {
     private String bio;
     private String posicion;
     private String correo;
+    private Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
     private LinkedList<Jugador> amigos;
     private LinkedList<Cancha> canchasFavoritas;
     private LinkedList<String> canales;
@@ -89,5 +91,17 @@ public class Jugador {
 
     public void setPosicion(String posicion) {
         this.posicion = posicion;
+    }
+
+    public Uri getProfilePic(){ return profilePic; }
+
+    public void setProfilePic(Uri profilePic) { this.profilePic = profilePic; }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }
