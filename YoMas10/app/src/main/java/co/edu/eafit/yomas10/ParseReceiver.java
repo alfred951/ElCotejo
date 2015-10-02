@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 /**
  * Created by Alejandro on 17/09/2015.
+ * Clase que se encarga de recibir las notificaciones que llegan desde parse
  */
 public class ParseReceiver extends ParsePushBroadcastReceiver {
 
@@ -28,9 +29,15 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
     private String date;
     private String nombre;
 
+    /**
+     * Este metodo se invoca cuando llega una notificacion de parse al celular
+     * @param ctx
+     * @param intent
+     */
     public void onPushReceive(Context ctx, Intent intent){
         Log.i(TAG, "PUSH RECEIVED!!");
         try{
+            // Se descompone el JSON que llego con la notificacion
             String action = intent.getAction();
             String channel = intent.getExtras().getString("com.parse.Channel");
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
@@ -51,6 +58,8 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         }catch (JSONException e){
             Log.e(TAG, "JSONException: " + e.getMessage());
         }
+
+        // Se prepara la notificacion que se mostrara al usuario
 
         Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_launcher);
 

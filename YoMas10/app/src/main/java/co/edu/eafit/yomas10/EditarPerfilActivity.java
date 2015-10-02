@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import co.edu.eafit.yomas10.Clases.Jugador;
+
+/**
+ * Activity para modificar el perfil del usuario, estos datos tambien deben ser guardados en la DB
+ */
 public class EditarPerfilActivity extends AppCompatActivity {
 
     private EditText name, posicion, userBio;
@@ -81,7 +86,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * Guarda los cambios realizados en el activity al perfil y los sube a la DB
+     */
     public void saveChanges(){
         String nameT     = name.getText().toString();
         String posicionT = posicion.getText().toString();

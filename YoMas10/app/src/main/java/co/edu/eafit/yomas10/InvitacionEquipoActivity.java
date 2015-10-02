@@ -11,7 +11,10 @@ import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Clases.Jugador;
 import co.edu.eafit.yomas10.Helpers.NotificationCreator;
 
-public class InvitacionEquipo extends AppCompatActivity {
+/**
+ * Activity que se muestra cuando se recibe una notificacion para unirse a un equipo
+ */
+public class InvitacionEquipoActivity extends AppCompatActivity {
 
     private TextView equipoTV;
     private Equipo equipo;
@@ -54,6 +57,8 @@ public class InvitacionEquipo extends AppCompatActivity {
     }
 
     public void aceptarEquipo(View view){
+
+        //TODO: Cambiar Todo esto
         MainActivity.jugador.agregarEquipo(equipo);
         //TODO: agregarse al equipo en la base de datos
         equipo.agregarJugador(MainActivity.jugador);
@@ -62,6 +67,6 @@ public class InvitacionEquipo extends AppCompatActivity {
     }
 
     public void rechazarEquipo(View view){
-
+        //TODO
     }
 }

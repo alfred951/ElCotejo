@@ -14,6 +14,9 @@ import com.parse.ParsePush;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Clase que sirve como ejemplo para crear las notificaciones que seran enviadas
+ */
 public class CreateNotificacionActivity extends AppCompatActivity {
 
     private EditText msg;
@@ -54,6 +57,15 @@ public class CreateNotificacionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * El metodo importante
+     * Crea un JSON, lo inicializa con la informacion que se desea.
+     * Se crea una notificacion Parse
+     * Se setea el canal de la notificacion
+     * Se setea la informacion de la notificacion, en este caso, el JSON
+     * Se manda la notificacion
+     * @param view
+     */
     public void sendNotification(View view){
         JSONObject json = new JSONObject();
         try{

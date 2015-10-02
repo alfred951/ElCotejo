@@ -1,36 +1,31 @@
-package co.edu.eafit.yomas10.Clases;
+package co.edu.eafit.yomas10;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
 
-public class EquipoActivity extends AppCompatActivity {
+/**
+ * Perfil de una persona diferente al usuario mismo
+ */
 
-    private ListView listaJugadores;
-
+//TODO
+public class PerfilExterno extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_equipo);
+        setContentView(R.layout.activity_perfil_externo);
 
-        ArrayAdapter<Jugador> adapter = new ArrayAdapter<Jugador>
-                (this, android.R.layout.simple_list_item_1, MainActivity.jugadores);
-
-        listaJugadores = (ListView) findViewById(R.id.listaJugadores);
-        listaJugadores.setAdapter(adapter);
+        setTitle("Alejandro");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_equipo, menu);
+        getMenuInflater().inflate(R.menu.menu_perfil_externo, menu);
         return true;
     }
 

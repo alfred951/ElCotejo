@@ -105,7 +105,7 @@
             android:label="@string/title_activity_editar_perfil" >
         </activity>
         <activity
-            android:name=".Clases.PerfilExterno"
+            android:name=".PerfilExterno"
             android:label="@string/title_activity_perfil_externo" >
         </activity>
         <activity
@@ -113,7 +113,7 @@
             android:label="@string/title_activity_invitacion_equipo" >
         </activity>
         <activity
-            android:name=".Clases.EquipoActivity"
+            android:name=".EquipoActivity"
             android:label="@string/title_activity_equipo" >
         </activity>
     </application>

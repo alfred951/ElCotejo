@@ -11,6 +11,9 @@ import org.w3c.dom.Text;
 
 import co.edu.eafit.yomas10.Clases.Equipo;
 
+/**
+ * Activity con la informacion del partido que la llamo
+ */
 public class PartidoActivity extends AppCompatActivity {
 
     private TextView nPartido;
@@ -53,10 +56,10 @@ public class PartidoActivity extends AppCompatActivity {
     }
 
     public void aceptarPartido(View view){
-
+        //TODO
     }
 
     public void rechazarPartido(View viw){
-
+        //TODO
     }
 }

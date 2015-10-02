@@ -9,21 +9,27 @@ import java.util.LinkedList;
  */
 public class Jugador {
 
-    private String username;
-    private String nombre;
-    private String bio;
-    private String posicion;
-    private String correo;
-    private Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
-    private LinkedList<Equipo> equipos;
-    private LinkedList<Jugador> amigos;
-    private LinkedList<Cancha> canchasFavoritas;
-    private LinkedList<String> canales;
+    protected String username;
+    protected String nombre;
+    protected String bio;
+    protected String posicion;
+    protected String correo;
+    protected Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
+    protected LinkedList<Equipo> equipos;
+    protected LinkedList<Jugador> amigos;
+    protected LinkedList<Cancha> canchasFavoritas;
+    protected LinkedList<String> canales;
 
+
+    /**
+     * Constructor del jugador
+     * @param username el usuario del jugador, debe ser unico y sera la llave primaria en la DB
+     */
     public Jugador(String username){
         this.username = username;
         //TODO: sacar los datos de la base de datos
     }
+
 
     public LinkedList getChannels(){
         return canales;
@@ -41,6 +47,10 @@ public class Jugador {
         }
     }
 
+    /**
+     * Como jugador, se solicita el ingreso a un equipo medianta una notificacion al capitan
+     * @param equi equipo al que se quiere inscribir
+     */
     public void solicitarIngreso(Equipo equi){
         //TODO
     }
@@ -57,6 +67,11 @@ public class Jugador {
         }
     }
 
+    /**
+     * Metodo para crear un equipo, en dicho equipo quedara como capitan
+     * @param nombre nombre del equipo
+     * @return el equipo nuevo
+     */
     public Equipo crearEquipo(String nombre){
         Equipo equipo = new Equipo(nombre, this);
         agregarEquipo(equipo);
@@ -64,6 +79,10 @@ public class Jugador {
         return equipo;
     }
 
+    /**
+     * Agregar un equipo a la lista de los equipos donde esta registrado
+     * @param equipo equipo al que se va a unir
+     */
     public void agregarEquipo(Equipo equipo){
         if (!equipos.contains(equipo)){
             equipos.add(equipo);
@@ -72,10 +91,6 @@ public class Jugador {
 
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getNombre() {
@@ -102,9 +117,13 @@ public class Jugador {
         this.posicion = posicion;
     }
 
-    public Uri getProfilePic(){ return profilePic; }
+    public Uri getProfilePic(){
+        return profilePic;
+    }
 
-    public void setProfilePic(Uri profilePic) { this.profilePic = profilePic; }
+    public void setProfilePic(Uri profilePic) {
+        this.profilePic = profilePic;
+    }
 
     public String getCorreo() {
         return correo;
@@ -114,6 +133,7 @@ public class Jugador {
         this.correo = correo;
     }
 
-
-
+    public LinkedList<Equipo> getEquipos() {
+        return equipos;
+    }
 }
