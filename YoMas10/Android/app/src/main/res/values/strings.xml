@@ -38,5 +38,7 @@
     <string name="title_activity_invitacion_equipo">Invitacion Equipo</string>
     <string name="title_activity_equipo">Equipo</string>
 
+    <string name="sinEquipos">No estas en ningun equipo</string>
+
 
 </resources>

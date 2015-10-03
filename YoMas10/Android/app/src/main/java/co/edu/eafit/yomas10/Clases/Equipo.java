@@ -18,7 +18,7 @@ public class Equipo {
      */
     public Equipo(String nombre, Jugador creador){
         this.nombre = nombre;
-        this.capitan = (Capitan) creador;
+        this.capitan = new Capitan(creador);
         this.capitan.setEquipo(this);
     }
 

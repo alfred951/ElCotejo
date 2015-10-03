@@ -17,6 +17,7 @@ import java.util.LinkedList;
 
 import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Clases.Jugador;
+import co.edu.eafit.yomas10.Helpers.StaticUser;
 
 public class PerfilActivity extends AppCompatActivity {
 
@@ -45,18 +46,18 @@ public class PerfilActivity extends AppCompatActivity {
         correo     = (TextView) findViewById(R.id.email);
 
         //TODO: Cargar los atributos del usuario de la base de datos y mostrarlos en el perfil
-        name.setText(MainActivity.jugador.getNombre());
-        username.setText(MainActivity.jugador.getUsername());
-        posicion.setText(MainActivity.jugador.getPosicion());
-        userBio.setText(MainActivity.jugador.getBio());
-        correo.setText(MainActivity.jugador.getCorreo());
-        profilePic.setImageURI(MainActivity.jugador.getProfilePic());
+        name.setText(StaticUser.jugador.getNombre());
+        username.setText(StaticUser.jugador.getUsername());
+        posicion.setText(StaticUser.jugador.getPosicion());
+        userBio.setText(StaticUser.jugador.getBio());
+        correo.setText(StaticUser.jugador.getCorreo());
+        profilePic.setImageURI(StaticUser.jugador.getProfilePic());
 
 
         listaEquipos = (ListView) findViewById(R.id.listaEquipos);
 
-        for (int i = 0; i<MainActivity.jugador.getEquipos().size();i++){
-            nombreEquipos.add(MainActivity.jugador.getEquipos().get(i).getNombre());
+        for (int i = 0; i<StaticUser.jugador.getEquipos().size();i++){
+            nombreEquipos.add(StaticUser.jugador.getEquipos().get(i).getNombre());
         }
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -70,7 +71,8 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent in = new Intent(ctx, Equipo.class);
+                Intent in = new Intent(ctx, EquipoActivity.class);
+                
                 in.putExtra("NOMBRE", adapter.getItem(position));
 
                 startActivity(in);
@@ -83,8 +85,6 @@ public class PerfilActivity extends AppCompatActivity {
         if(resCode == RESULT_OK){
             if (reqCode == 1) {
                 profilePic.setImageURI(data.getData());
-
-
             }
         }
     }

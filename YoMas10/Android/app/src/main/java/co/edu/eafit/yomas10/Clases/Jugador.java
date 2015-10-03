@@ -1,6 +1,10 @@
 package co.edu.eafit.yomas10.Clases;
 
 import android.net.Uri;
+import android.util.Log;
+
+import com.parse.ParsePush;
+
 import java.util.LinkedList;
 
 
@@ -28,6 +32,18 @@ public class Jugador {
     public Jugador(String username){
         this.username = username;
         //TODO: sacar los datos de la base de datos
+    }
+
+    /**
+     * Metodo para crear un equipo, en dicho equipo quedara como capitan
+     * @param nombre nombre del equipo
+     * @return el equipo nuevo
+     */
+    public Equipo crearEquipo(String nombre){
+        Equipo equipo = new Equipo(nombre, this);
+        agregarEquipo(equipo);
+
+        return equipo;
     }
 
 
@@ -67,17 +83,7 @@ public class Jugador {
         }
     }
 
-    /**
-     * Metodo para crear un equipo, en dicho equipo quedara como capitan
-     * @param nombre nombre del equipo
-     * @return el equipo nuevo
-     */
-    public Equipo crearEquipo(String nombre){
-        Equipo equipo = new Equipo(nombre, this);
-        agregarEquipo(equipo);
 
-        return equipo;
-    }
 
     /**
      * Agregar un equipo a la lista de los equipos donde esta registrado
@@ -86,6 +92,7 @@ public class Jugador {
     public void agregarEquipo(Equipo equipo){
         if (!equipos.contains(equipo)){
             equipos.add(equipo);
+            ParsePush.subscribeInBackground(equipo.getNombre());
         }
     }
 

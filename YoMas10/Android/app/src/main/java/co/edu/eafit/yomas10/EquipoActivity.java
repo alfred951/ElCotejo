@@ -12,14 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-import co.edu.eafit.yomas10.Clases.Equipo;
-import co.edu.eafit.yomas10.Clases.Jugador;
-import co.edu.eafit.yomas10.MainActivity;
-import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Helpers.StaticUser;
 
 /**
  * Activity con la informacion del equipo que lo haya llamado
@@ -41,10 +36,11 @@ public class EquipoActivity extends AppCompatActivity {
         capitan = (TextView) findViewById(R.id.capitanTV);
         listaJugadores = (ListView) findViewById(R.id.listaJugadores);
 
-        capitan.setText(MainActivity.equipo.getCapitan().getNombre());
+        //TODO: Sacar la info del la DB
+        capitan.setText(StaticUser.jugador..getCapitan().getNombre());
 
-        for (int i = 0; i<MainActivity.jugadores.size();i++){
-            nombreJugadores.add(MainActivity.jugadores.get(i).getNombre());
+        for (int i = 0; i<StaticUser.jugadores.size();i++){
+            nombreJugadores.add(StaticUser.jugadores.get(i).getNombre());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>

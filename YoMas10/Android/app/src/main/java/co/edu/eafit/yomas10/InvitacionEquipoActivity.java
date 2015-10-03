@@ -10,6 +10,7 @@ import android.widget.TextView;
 import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Clases.Jugador;
 import co.edu.eafit.yomas10.Helpers.NotificationCreator;
+import co.edu.eafit.yomas10.Helpers.StaticUser;
 
 /**
  * Activity que se muestra cuando se recibe una notificacion para unirse a un equipo
@@ -59,9 +60,9 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
     public void aceptarEquipo(View view){
 
         //TODO: Cambiar Todo esto
-        MainActivity.jugador.agregarEquipo(equipo);
+        StaticUser.jugador.agregarEquipo(equipo);
         //TODO: agregarse al equipo en la base de datos
-        equipo.agregarJugador(MainActivity.jugador);
+        equipo.agregarJugador(StaticUser.jugador);
         NotificationCreator.sendParseNotification();
 
     }
