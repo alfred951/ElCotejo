@@ -16,15 +16,15 @@ import co.edu.eafit.yomas10.Helpers.StaticUser;
 public class Jugador {
 
     protected String username;
-    protected String nombre;
-    protected String bio;
-    protected String posicion;
-    protected String correo;
+    protected String nombre = null;
+    protected String bio = null;
+    protected String posicion = null;
+    protected String correo = null;
     protected Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
-    protected LinkedList<Equipo> equipos;
-    protected LinkedList<Jugador> amigos;
-    protected LinkedList<Cancha> canchasFavoritas;
-    protected LinkedList<String> canales;
+    protected LinkedList<Equipo> equipos = null;
+    protected LinkedList<Jugador> amigos = null;
+    protected LinkedList<Cancha> canchasFavoritas = null;
+    protected LinkedList<String> canales = null;
 
 
     /**
@@ -33,6 +33,7 @@ public class Jugador {
      */
     public Jugador(String username){
         this.username = username;
+
         //TODO: sacar los datos de la base de datos
     }
 

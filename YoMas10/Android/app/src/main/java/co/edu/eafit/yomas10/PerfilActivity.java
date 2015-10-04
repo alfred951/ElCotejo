@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 
@@ -56,28 +57,38 @@ public class PerfilActivity extends AppCompatActivity {
 
         listaEquipos = (ListView) findViewById(R.id.listaEquipos);
 
-        for (int i = 0; i<StaticUser.jugador.getEquipos().size();i++){
-            nombreEquipos.add(StaticUser.jugador.getEquipos().get(i).getNombre());
+        if (StaticUser.jugador.getEquipos() == null){
+            listaEquipos.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, getString(R.string.sinEquipos), Toast.LENGTH_SHORT).show();
+        }else{
+            for (int i = 0; i<StaticUser.jugador.getEquipos().size();i++){
+                nombreEquipos.add(StaticUser.jugador.getEquipos().get(i).getNombre());
+            }
+
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_list_item_1, nombreEquipos);
+
+            listaEquipos.setAdapter(adapter);
+
+            listaEquipos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent in = new Intent(ctx, EquipoActivity.class);
+
+                    in.putExtra("NOMBRE", adapter.getItem(position));
+
+                    startActivity(in);
+                }
+            });
+
+
         }
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, nombreEquipos);
 
 
 
-        listaEquipos.setAdapter(adapter);
 
-        listaEquipos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent in = new Intent(ctx, EquipoActivity.class);
-
-                in.putExtra("NOMBRE", adapter.getItem(position));
-
-                startActivity(in);
-            }
-        });
 
     }
 
