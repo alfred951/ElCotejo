@@ -72,7 +72,7 @@ public class PerfilActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent in = new Intent(ctx, EquipoActivity.class);
-                
+
                 in.putExtra("NOMBRE", adapter.getItem(position));
 
                 startActivity(in);

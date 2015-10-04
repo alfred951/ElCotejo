@@ -7,6 +7,8 @@ import com.parse.ParsePush;
 
 import java.util.LinkedList;
 
+import co.edu.eafit.yomas10.Helpers.StaticUser;
+
 
 /**
  * Created by Alejandro on 23/09/2015.
@@ -41,9 +43,24 @@ public class Jugador {
      */
     public Equipo crearEquipo(String nombre){
         Equipo equipo = new Equipo(nombre, this);
+
+        //TODO: provisional
+        LinkedList<Jugador> jugadores = StaticUser.crearJugadores();
+        for (int i = 0;i< jugadores.size();i++){
+            equipo.agregarJugador(jugadores.get(i));
+        }
         agregarEquipo(equipo);
 
         return equipo;
+    }
+
+    public Equipo findEquipo(String nombre){
+        for (int i = 0; i<equipos.size();i++){
+            if (equipos.get(i).getNombre().equals(nombre)){
+                return equipos.get(i);
+            }
+        }
+        return null;
     }
 
 
@@ -82,8 +99,6 @@ public class Jugador {
             canales.remove(canal);
         }
     }
-
-
 
     /**
      * Agregar un equipo a la lista de los equipos donde esta registrado

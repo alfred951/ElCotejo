@@ -31,22 +31,23 @@ public class EquipoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo);
 
-        setTitle(getIntent().getExtras().getString("NOMBRE"));
+        String nombreEquipo = getIntent().getExtras().getString("NOMBRE");
+
+        setTitle(nombreEquipo);
 
         capitan = (TextView) findViewById(R.id.capitanTV);
         listaJugadores = (ListView) findViewById(R.id.listaJugadores);
 
         //TODO: Sacar la info del la DB
-        capitan.setText(StaticUser.jugador..getCapitan().getNombre());
+        capitan.setText(StaticUser.jugador.findEquipo(nombreEquipo).
+                getCapitan().getNombre());
 
-        for (int i = 0; i<StaticUser.jugadores.size();i++){
-            nombreJugadores.add(StaticUser.jugadores.get(i).getNombre());
+        for (int i = 0; i<StaticUser.jugador.findEquipo(nombreEquipo).getIntegrantes().size();i++){
+            nombreJugadores.add(StaticUser.jugador.findEquipo(nombreEquipo).getIntegrantes().get(i).getNombre());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, nombreJugadores);
-
-
 
         listaJugadores.setAdapter(adapter);
 
