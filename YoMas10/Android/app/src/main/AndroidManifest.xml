@@ -53,14 +53,14 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                   IMPORTANT: Change "com.parse.starter" to match your app's package name.
+
                 <category android:name="co.edu.eafit.yomas10" />
             </intent-filter>
         </receiver>
 
         <!-- My notification receiver -->
         <receiver
-            android:name=".ParseReceiver"
+            android:name="co.edu.eafit.yomas10.ParseReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
@@ -115,6 +115,15 @@
         <activity
             android:name=".EquipoActivity"
             android:label="@string/title_activity_equipo" >
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_splash" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

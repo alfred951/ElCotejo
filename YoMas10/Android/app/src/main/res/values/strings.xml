@@ -39,6 +39,7 @@
     <string name="title_activity_equipo">Equipo</string>
 
     <string name="sinEquipos">No estas en ningun equipo</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
 
 </resources>
