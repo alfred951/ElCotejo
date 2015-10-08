@@ -25,20 +25,20 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
 
 
     public void onPushReceive(Context context, Intent intent){
-        Intent in = null;
+        Log.i("Parse Notification", "PUSH RECEIVED!!");
+
+        Intent in = new Intent(context, MainActivity.class);
         try{
             String action = intent.getAction();
 
-            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.data"));
 
-            Iterator itr = json.keys();
-            while (itr.hasNext()){
-                String key = (String) itr.next();
-                if (key.equals("invJuego"))
-                    in = onGameInvitation(json, context);
-                else if (key.equals("invEquipo"))
-                    in = onTeamInvitation(json, context);
-            }
+            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+
+            Log.d("PUSH", json.getString("TIPO"));
+            if (json.getString("TIPO").equals("invJuego"))
+                in = onGameInvitation(json, context);
+            else if (json.getString("TIPO").equals("invEquipo"))
+                in = onTeamInvitation(json, context);
         }catch (JSONException e){
             Log.e("JSON", "no se pudo parsear el JSON");
         }
@@ -60,7 +60,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
             }else if (key.equals("EQUIPO1")){
                 equipo1 = json.getString(key);
             }else if (key.equals("EQUIPO2")){
-                equipo1 = json.getString(key);
+                equipo2 = json.getString(key);
             }
         }
 
@@ -99,13 +99,15 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         bn.putString("MSG", msg);
 
         Intent in = new Intent(context, InvitacionEquipoActivity.class);
+        in.putExtras(bn);
         return in;
 
     }
 
     public void makeNotification(Context ctx, Intent in){
         Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_launcher);
-        PendingIntent pi = PendingIntent.getActivity(ctx, 0, in, 0);
+        PendingIntent pi = PendingIntent.getActivity(ctx, (int)System.currentTimeMillis(), in, 0);
+
 
         Notification noti = new NotificationCompat.Builder(ctx)
                 .setContentTitle("YO+10")

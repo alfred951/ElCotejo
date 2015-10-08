@@ -1,5 +1,6 @@
 package co.edu.eafit.yomas10;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -29,7 +30,7 @@ import co.edu.eafit.yomas10.Helpers.StaticUser;
 public class MainActivity extends FragmentActivity {
 
     //ListView lista;
-    private Jugador user;
+
     //private String arregloCadenas[] = {"Sistemas", "Psicologia"};
     ViewPager viewPager;
     public List<String> fragments = new Vector<>();
@@ -40,6 +41,12 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //final ActionBar actionBar = getActionBar();
+        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+
+
 
         fragments.add(Frag1.class.getName());
         fragments.add(Frag2.class.getName());
@@ -56,11 +63,7 @@ public class MainActivity extends FragmentActivity {
         //canal = (EditText) findViewById(R.id.equipo);
 
 
-        try {
-            Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
-            ParseInstallation.getCurrentInstallation().saveInBackground();
-            ParsePush.subscribeInBackground(user.getUsername());
-        }catch (Exception e){}
+
     }
 
     @Override

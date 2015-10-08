@@ -1,5 +1,6 @@
 package co.edu.eafit.yomas10;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -64,14 +65,18 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
                 new Jugador(this.capitan.getText().toString()));
         StaticUser.jugador.agregarEquipo(equipo);
         //TODO: agregarse al equipo en la base de datos
-        equipo.agregarJugador(StaticUser.jugador);
+        //equipo.agregarJugador(StaticUser.jugador);
         //TODO: Notificar la aceptacion
+        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(in);
         finish();
 
     }
 
     public void rechazarEquipo(View view){
         //TODO notificar el rechazo
+        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(in);
         finish();
     }
 }

@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import co.edu.eafit.yomas10.Helpers.StaticUser;
+
 /**
  * Activity con la informacion del partido que la llamo
  */
@@ -25,7 +27,7 @@ public class InvitacionPartidoActivity extends AppCompatActivity {
         equipo1 = (TextView) findViewById(R.id.equipo1);
         equipo2 = (TextView) findViewById(R.id.equipo2);
 
-        fecha.setText(getIntent().getExtras().getString("FEHCA"));
+        fecha.setText(getIntent().getExtras().getString("FECHA"));
         equipo1.setText(getIntent().getExtras().getString("EQUIPO1"));
         equipo2.setText(getIntent().getExtras().getString("EQUIPO2"));
     }

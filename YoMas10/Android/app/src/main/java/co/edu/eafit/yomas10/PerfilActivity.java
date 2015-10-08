@@ -38,6 +38,7 @@ public class PerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         profilePic = (ImageView)findViewById(R.id.usrPic);
         name       = (TextView) findViewById(R.id.name);
@@ -81,15 +82,7 @@ public class PerfilActivity extends AppCompatActivity {
                     startActivity(in);
                 }
             });
-
-
         }
-
-
-
-
-
-
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data){

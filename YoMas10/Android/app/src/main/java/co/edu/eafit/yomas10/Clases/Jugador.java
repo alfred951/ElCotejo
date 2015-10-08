@@ -22,6 +22,7 @@ public class Jugador {
     protected String correo = null;
     protected Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
     protected LinkedList<Equipo> equipos = null;
+    //TODO LISTA DE PARTIDOS
     protected LinkedList<Jugador> amigos = null;
     protected LinkedList<Cancha> canchasFavoritas = null;
     protected LinkedList<String> canales = null;
@@ -33,6 +34,10 @@ public class Jugador {
      */
     public Jugador(String username){
         this.username = username;
+        equipos = new LinkedList<>();
+        amigos = new LinkedList<>();
+        canchasFavoritas = new LinkedList<>();
+        canales = new LinkedList<>();
 
         //TODO: sacar los datos de la base de datos
     }
