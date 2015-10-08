@@ -19,69 +19,105 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 /**
- * Created by Alejandro on 17/09/2015.
- * Clase que se encarga de recibir las notificaciones que llegan desde parse
+ * Created by Usuario on 06/10/2015.
  */
 public class ParseReceiver extends ParsePushBroadcastReceiver {
 
-    private final String TAG = "Parse Notification";
-    private String msg;
-    private String date;
-    private String nombre;
 
-    /**
-     * Este metodo se invoca cuando llega una notificacion de parse al celular
-     * @param ctx
-     * @param intent
-     */
-    public void onPushReceive(Context ctx, Intent intent){
-        Log.i(TAG, "PUSH RECEIVED!!");
+    public void onPushReceive(Context context, Intent intent){
+        Intent in = null;
         try{
-            // Se descompone el JSON que llego con la notificacion
             String action = intent.getAction();
-            String channel = intent.getExtras().getString("com.parse.Channel");
-            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+
+            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.data"));
 
             Iterator itr = json.keys();
-            while(itr.hasNext()){
+            while (itr.hasNext()){
                 String key = (String) itr.next();
-                if (key.equals("msg")){
-                    msg = json.getString(key);
-                }else if (key.equals("date")){
-                    date = json.getString(key);
-                }else if (key.equals("nombre")){
-                    nombre = json.getString(key);
-                }
-                //aca van otros if con la info del partido
+                if (key.equals("invJuego"))
+                    in = onGameInvitation(json, context);
+                else if (key.equals("invEquipo"))
+                    in = onTeamInvitation(json, context);
             }
-
         }catch (JSONException e){
-            Log.e(TAG, "JSONException: " + e.getMessage());
+            Log.e("JSON", "no se pudo parsear el JSON");
         }
 
-        // Se prepara la notificacion que se mostrara al usuario
+        makeNotification(context,in);
+    }
 
-        Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_launcher);
 
-        Intent lauchActivity = new Intent(ctx, PartidoActivity.class);
+    public Intent onGameInvitation(JSONObject json, Context ctx) throws JSONException{
+        String msg = "", fecha = "", equipo1 = "", equipo2 = "";
+
+        Iterator itr = json.keys();
+        while (itr.hasNext()) {
+            String key = (String) itr.next();
+            if (key.equals("MSG")){
+                msg = json.getString(key);
+            }else if (key.equals("FECHA")){
+                fecha = json.getString(key);
+            }else if (key.equals("EQUIPO1")){
+                equipo1 = json.getString(key);
+            }else if (key.equals("EQUIPO2")){
+                equipo1 = json.getString(key);
+            }
+        }
+
+        Bundle bn = new Bundle();
+        bn.putString("MSG", msg);
+        bn.putString("FECHA", fecha);
+        bn.putString("EQUIPO1", equipo1);
+        bn.putString("EQUIPO2", equipo2);
+
+        Intent in = new Intent(ctx, InvitacionPartidoActivity.class);
+        in.putExtras(bn);
+        return in;
+    }
+
+    /**
+     * Si el primer key del JSON es "invEquipo" este metodo se encarga de la notificacion y del
+     * activity
+     */
+    public Intent onTeamInvitation(JSONObject json, Context context) throws JSONException{
+        String msg = "", nombre = "", capitan = "";
+
+        Iterator itr = json.keys();
+        while (itr.hasNext()){
+            String key = (String)itr.next();
+            if (key.equals("NOMBRE"))
+                nombre = json.getString(key);
+            else if (key.equals("CAPITAN")){
+                capitan = json.getString(key);
+            }else if (key.equals("MSG"))
+                msg = json.getString(key);
+        }
 
         Bundle bn = new Bundle();
         bn.putString("NOMBRE", nombre);
-        bn.putString("FECHA", date);
+        bn.putString("CAPITAN", capitan);
+        bn.putString("MSG", msg);
 
-        lauchActivity.putExtras(bn);
-        PendingIntent pi = PendingIntent.getActivity(ctx, (int)System.currentTimeMillis(), lauchActivity, 0);
+        Intent in = new Intent(context, InvitacionEquipoActivity.class);
+        return in;
 
-        Notification not = new NotificationCompat.Builder(ctx)
-                .setContentTitle("Yo+10")
-                .setContentText(msg)
+    }
+
+    public void makeNotification(Context ctx, Intent in){
+        Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_launcher);
+        PendingIntent pi = PendingIntent.getActivity(ctx, 0, in, 0);
+
+        Notification noti = new NotificationCompat.Builder(ctx)
+                .setContentTitle("YO+10")
+                .setContentText(in.getExtras().getString("MSG"))
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(icon)
                 .setContentIntent(pi)
                 .setAutoCancel(true)
                 .build();
 
-        NotificationManager nm= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(0, not);
+        NotificationManager nm = (NotificationManager)ctx.getSystemService
+                (Context.NOTIFICATION_SERVICE);
+        nm.notify(0, noti);
     }
 }

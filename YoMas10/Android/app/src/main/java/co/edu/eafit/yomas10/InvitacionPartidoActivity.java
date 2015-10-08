@@ -9,28 +9,25 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-import co.edu.eafit.yomas10.Clases.Equipo;
-
 /**
  * Activity con la informacion del partido que la llamo
  */
-public class PartidoActivity extends AppCompatActivity {
+public class InvitacionPartidoActivity extends AppCompatActivity {
 
-    private TextView nPartido;
-    private TextView nDia;
-    
+    private TextView fecha, equipo1, equipo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_partido);
+        setContentView(R.layout.activity_invitacion_partido);
 
-        nPartido = (TextView) findViewById(R.id.nPartido);
-        nDia = (TextView) findViewById(R.id.nDia);
+        fecha = (TextView) findViewById(R.id.fecha);
+        equipo1 = (TextView) findViewById(R.id.equipo1);
+        equipo2 = (TextView) findViewById(R.id.equipo2);
 
-        Bundle bn = this.getIntent().getExtras();
-        nPartido.setText(bn.getString("NOMBRE"));
-        nDia.setText(bn.getString("FECHA"));
+        fecha.setText(getIntent().getExtras().getString("FEHCA"));
+        equipo1.setText(getIntent().getExtras().getString("EQUIPO1"));
+        equipo2.setText(getIntent().getExtras().getString("EQUIPO2"));
     }
 
     @Override

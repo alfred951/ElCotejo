@@ -1,6 +1,14 @@
 {
-	"action": "co.edu.eafit.yomas10.RECEIVE_PUSH",
-	"msg": "Invitacion a partido",
-	"date"  : "19 de Mayo",
-	"nombre": "Delfines vs Leones"
+	"action": "co.edu.eafit.yomas10.RECEIVE",
+	"MSG": "Invitacion a partido",
+	"FECHA"  : "19 de Mayo",
+	"EQUIPO1" : "Leones",
+	"EQUIPO2" : "Delfines"
+}
+
+{
+	"action": "co.edu.eafit.yomas10.RECEIVE",
+	"MSG" : "Invitacion a Equipo",
+	"NOMBRE" :  "Leones",
+	"CAPITAN" : "Alejandro Ochoa"
 }

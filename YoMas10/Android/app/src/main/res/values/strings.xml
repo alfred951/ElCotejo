@@ -3,10 +3,13 @@
     <string name="app_name">Yo+10</string>
 
     <string name="title_activity_editar_perfil">Editar Perfil</string>
-    <string name="title_activity_partido">Informacion del Partido</string>
+    <string name="title_activity_partido">Invitacion a Partido</string>
     <string name="title_activity_create_notificacion">Nueva Notificacion</string>
     <string name="title_activity_perfil">Mi Perfil</string>
     <string name="title_activity_perfil_externo">PerfilExterno</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_invitacion_equipo">Invitacion Equipo</string>
+    <string name="title_activity_equipo">Equipo</string>
 
     <string name="action_settings">Configuracion</string>
     <string name="app_id">pugXkDo33e0MsbWMTsL5EChTBx3jKyWoDYI6ZE40</string>
@@ -35,11 +38,10 @@
 
     <string name="aceptar">Aceptar</string>
     <string name="rechazar">Rechazar</string>
-    <string name="title_activity_invitacion_equipo">Invitacion Equipo</string>
-    <string name="title_activity_equipo">Equipo</string>
+
 
     <string name="sinEquipos">No estas en ningun equipo</string>
-    <string name="title_activity_splash">SplashActivity</string>
+
 
 
 </resources>

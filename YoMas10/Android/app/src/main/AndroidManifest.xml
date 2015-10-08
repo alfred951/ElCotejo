@@ -59,20 +59,32 @@
         </receiver>
 
         <!-- My notification receiver -->
+        <!--
         <receiver
             android:name="co.edu.eafit.yomas10.ParseReceiver"
-            android:exported="false" >
+            android:exported="true" >
             <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.OPEN" />
+                <action android:name="co.edu.eafit.yomas10.ParseReceiver.RECEIVE" />
+                <action android:name="co.edu.eafit.yomas10.ParseReceiver.OPEN" />
                 <action android:name="com.parse.push.intent.DELETE" />
             </intent-filter>
         </receiver>
+        -->
         <!-- End custom notification receiver -->
+
+        <receiver android:name=".ParseReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="co.edu.eafit.yomas10.ParseReceiver.RECEIVE" />
+                <action android:name="co.edu.eafit.yomas10.ParseReceiver.OPEN" />
+                <action android:name="com.parse.push.intent.DELETE" />
+
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.parse.push.notification_icon"
-            android:resource="@drawable/ic_stat_name" />
+            android:resource="@drawable/ic_launcher" />
 
         <activity
             android:name=".MainActivity"
@@ -84,7 +96,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PartidoActivity"
+            android:name=".InvitacionPartidoActivity"
             android:label="@string/title_activity_partido" >
         </activity>
         <activity

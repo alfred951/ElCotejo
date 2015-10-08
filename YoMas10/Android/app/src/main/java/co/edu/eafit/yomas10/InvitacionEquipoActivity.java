@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Clases.Jugador;
-import co.edu.eafit.yomas10.Helpers.NotificationCreator;
 import co.edu.eafit.yomas10.Helpers.StaticUser;
 
 /**
@@ -17,9 +17,7 @@ import co.edu.eafit.yomas10.Helpers.StaticUser;
  */
 public class InvitacionEquipoActivity extends AppCompatActivity {
 
-    private TextView equipoTV;
-    private Equipo equipo;
-
+    private TextView equipo, capitan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +26,13 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
 
         Bundle bn = getIntent().getExtras();
 
-        equipoTV = (TextView) findViewById(R.id.equipo);
-        equipoTV.setText(bn.getString("NOMBRE"));
+        equipo = (TextView) findViewById(R.id.equipo);
+        capitan = (TextView) findViewById(R.id.capitan);
 
-        equipo = new Equipo(bn.getString("NOMBRE"), new Jugador(bn.getString("CAPITAN")));
-        equipo.getInfoDB();
+        equipo.setText(bn.getString("NOMBRE"));
+        capitan.setText(bn.getString("CAPITAN"));
+
+
     }
 
     @Override
@@ -60,14 +60,18 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
     public void aceptarEquipo(View view){
 
         //TODO: Cambiar Todo esto
+        Equipo equipo = new Equipo(this.equipo.getText().toString(),
+                new Jugador(this.capitan.getText().toString()));
         StaticUser.jugador.agregarEquipo(equipo);
         //TODO: agregarse al equipo en la base de datos
         equipo.agregarJugador(StaticUser.jugador);
-        NotificationCreator.sendParseNotification();
+        //TODO: Notificar la aceptacion
+        finish();
 
     }
 
     public void rechazarEquipo(View view){
-        //TODO
+        //TODO notificar el rechazo
+        finish();
     }
 }
