@@ -34,6 +34,12 @@ public class Equipo {
         //TODO: subir a la base de datos
     }
 
+    public void agregarJugadores(LinkedList<Jugador> jugadores){
+        for (int i = 0; i < jugadores.size(); i++){
+            agregarJugador(jugadores.get(i));
+        }
+    }
+
     /**
      * Ir a la base de datos y conseguir el objeto equipo con la informacion actual
      * @return Objeto equipo con toda la informacion lista
