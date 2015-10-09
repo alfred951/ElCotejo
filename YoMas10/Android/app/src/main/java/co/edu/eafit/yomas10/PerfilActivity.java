@@ -57,7 +57,7 @@ public class PerfilActivity extends AppCompatActivity {
 
 
         listaEquipos = (ListView) findViewById(R.id.listaEquipos);
-
+/*
         if (StaticUser.jugador.getEquipos() == null){
             listaEquipos.setVisibility(View.INVISIBLE);
             Toast.makeText(this, getString(R.string.sinEquipos), Toast.LENGTH_SHORT).show();
@@ -82,7 +82,7 @@ public class PerfilActivity extends AppCompatActivity {
                     startActivity(in);
                 }
             });
-        }
+        }*/
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data){

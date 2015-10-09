@@ -1,69 +1,56 @@
 package co.edu.eafit.yomas10;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.support.v4.app.Fragment;
+import android.widget.TextView;
 
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.ParsePush;
-
-import java.util.List;
-import java.util.Vector;
-
-import co.edu.eafit.yomas10.Clases.Jugador;
+import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Helpers.StaticUser;
 
 
 public class MainActivity extends FragmentActivity {
 
-    //ListView lista;
-
-    //private String arregloCadenas[] = {"Sistemas", "Psicologia"};
+    MyPagerAdapter mAdapter;
     ViewPager viewPager;
-    public List<String> fragments = new Vector<>();
-    static MyPagerAdapter myPagerAdapter;
-    final Context ctx = this;
+    Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //final ActionBar actionBar = getActionBar();
-        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        StaticUser.initialize();
+        ctx = this;
 
-
-
-
-        fragments.add(Frag1.class.getName());
-        fragments.add(Frag2.class.getName());
+        mAdapter = new MyPagerAdapter(getSupportFragmentManager());
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-        myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(myPagerAdapter);
+        viewPager.setAdapter(mAdapter);
+
+        //final ActionBar actionBar = getActionBar();
+        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         /*lista = (ListView) findViewById(R.id.pager);
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, arregloCadenas);
         lista.setAdapter(adaptador); */
-        StaticUser.initialize();
+
 
         //canal = (EditText) findViewById(R.id.equipo);
-
-
-
     }
 
     @Override
@@ -90,34 +77,18 @@ public class MainActivity extends FragmentActivity {
             Intent in = new Intent(MainActivity.this, PerfilActivity.class);
             startActivity(in);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    /*public void suscribeNewChannel(View view) {
-        ParsePush.subscribeInBackground(canal.getText().toString().toLowerCase());
-        Toast.makeText(this, getString(R.string.suscripcion) + " " +canal.getText().toString(),Toast.LENGTH_LONG).show();
-    } */
-
     class MyPagerAdapter extends FragmentPagerAdapter {
-
-        public List<String> fragmentsA;
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
-            fragmentsA = fragments;
         }
 
-        @Override
+
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return Fragment.instantiate(ctx, Frag1.class.getName());
-                case 1:
-                    return Fragment.instantiate(ctx, Frag2.class.getName());
-                default:
-                    return null;
-            }
+            return ArrayListFragment.newInstance(position);
         }
 
         @Override
@@ -126,25 +97,45 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    public static class Frag1 extends Fragment {
+    public static class ArrayListFragment extends ListFragment {
+        int nNum;
 
-        public Frag1(){}
+        static ArrayListFragment newInstance(int num){
+            ArrayListFragment f = new ArrayListFragment();
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.frag_one, container, false);
-        }
-    }
+            Bundle args = new Bundle();
+            args.putInt("num", num);
+            f.setArguments(args);
 
-    public static class Frag2 extends Fragment {
-
-        public Frag2(){}
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.frag_two, container, false);
+            return f;
         }
 
+        @Override
+        public void onCreate(Bundle savedInstanceState){
+            super.onCreate(savedInstanceState);
+            nNum = getArguments() != null ? getArguments().getInt("num") : 1;
+            setHasOptionsMenu(true);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View v = inflater.inflate(R.layout.frag_one, container, false);
+            View tv = v.findViewById(R.id.text);
+            ((TextView)tv).setText("Fragment #" + nNum);
+
+            return v;
+        }
+
+        public void onActivityCreated(Bundle savedInstanceState){
+            super.onActivityCreated(savedInstanceState);
+            setListAdapter(new ArrayAdapter<Equipo>(getActivity(),
+                    android.R.layout.simple_list_item_1, StaticUser.jugador.getEquipos()));
+        }
+
+        public void onListItemClick(ListView l, View v, int position, long id){
+            Log.i("FragmentList", "ItemClicked: " + id);
+        }
     }
 }
 
