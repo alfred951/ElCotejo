@@ -1,6 +1,6 @@
 package co.edu.eafit.yomas10.Clases;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * Created by Alejandro on 23/09/2015.
@@ -9,7 +9,7 @@ public class Equipo {
 
     private String nombre;
     private Capitan capitan;
-    private LinkedList<Jugador> integrantes;
+    private ArrayList<Jugador> integrantes;
 
     /**
      * A la hora de crear un equipo, el jugador creador se asciende a capitan del equipo
@@ -34,10 +34,11 @@ public class Equipo {
         //TODO: subir a la base de datos
     }
 
-    public void agregarJugadores(LinkedList<Jugador> jugadores){
+    public void agregarJugadores(ArrayList<Jugador> jugadores){
         for (int i = 0; i < jugadores.size(); i++){
             agregarJugador(jugadores.get(i));
         }
+
     }
 
     /**
@@ -61,7 +62,7 @@ public class Equipo {
         return capitan;
     }
 
-    public LinkedList<Jugador> getIntegrantes() {
+    public ArrayList<Jugador> getIntegrantes() {
         return integrantes;
     }
 }

@@ -14,11 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Clases.Jugador;
-import co.edu.eafit.yomas10.Helpers.StaticUser;
 
 public class PerfilActivity extends AppCompatActivity {
 
@@ -30,7 +29,7 @@ public class PerfilActivity extends AppCompatActivity {
     private TextView userBio;
     private TextView correo;
 
-    private LinkedList<String> nombreEquipos;
+    private ArrayList<String> nombreEquipos;
     private final Context ctx = this;
 
 
@@ -48,16 +47,16 @@ public class PerfilActivity extends AppCompatActivity {
         correo     = (TextView) findViewById(R.id.email);
 
         //TODO: Cargar los atributos del usuario de la base de datos y mostrarlos en el perfil
-        name.setText(StaticUser.jugador.getNombre());
-        username.setText(StaticUser.jugador.getUsername());
-        posicion.setText(StaticUser.jugador.getPosicion());
-        userBio.setText(StaticUser.jugador.getBio());
-        correo.setText(StaticUser.jugador.getCorreo());
-        profilePic.setImageURI(StaticUser.jugador.getProfilePic());
+        name.setText(MainActivity.getUser().getNombre());
+        username.setText(MainActivity.getUser().getUsername());
+        posicion.setText(MainActivity.getUser().getPosicion());
+        userBio.setText(MainActivity.getUser().getBio());
+        correo.setText(MainActivity.getUser().getCorreo());
+        profilePic.setImageURI(MainActivity.getUser().getProfilePic());
 
-
-        listaEquipos = (ListView) findViewById(R.id.listaEquipos);
 /*
+        listaEquipos = (ListView) findViewById(R.id.listaEquipos);
+
         if (StaticUser.jugador.getEquipos() == null){
             listaEquipos.setVisibility(View.INVISIBLE);
             Toast.makeText(this, getString(R.string.sinEquipos), Toast.LENGTH_SHORT).show();
@@ -75,7 +74,7 @@ public class PerfilActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    Intent in = new Intent(ctx, EquipoActivity.class);
+Intent in = new Intent(ctx, EquipoActivity.class);
 
                     in.putExtra("NOMBRE", adapter.getItem(position));
 

@@ -18,12 +18,9 @@ public class StaticUser {
         jugador.setPosicion("Portero");
         jugador.setBio("Mido 1.80, he jugado en el Nacional y tengo 20 años");
         jugador.setCorreo("alejo8a_3@hotmail.com");
-/*
 
-        Equipo equipo = new Equipo("Jaguares", jugador);
-        equipo.agregarJugadores(crearJugadores());
-        jugador.agregarEquipo(equipo);
-*/
+        Equipo equipo = jugador.crearEquipo("Jaguares");
+
     }
 
     public static LinkedList<Jugador> crearJugadores(){

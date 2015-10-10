@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import co.edu.eafit.yomas10.Helpers.StaticUser;
-
 /**
  * Activity para modificar el perfil del usuario, estos datos tambien deben ser guardados en la DB
  */
@@ -95,10 +93,10 @@ public class EditarPerfilActivity extends AppCompatActivity {
         String userBioT  = userBio.getText().toString();
         Uri picture      = dataPic;
 
-        StaticUser.jugador.setNombre(nameT);
-        StaticUser.jugador.setPosicion(posicionT);
-        StaticUser.jugador.setBio(userBioT);
-        StaticUser.jugador.setProfilePic(picture);
+        MainActivity.getUser().setNombre(nameT);
+        MainActivity.getUser().setPosicion(posicionT);
+        MainActivity.getUser().setBio(userBioT);
+        MainActivity.getUser().setProfilePic(picture);
 
         //TODO: Subir los nuevos datos a la base de datos
     }

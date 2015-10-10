@@ -7,10 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import co.edu.eafit.yomas10.Helpers.StaticUser;
-
 /**
  * Activity con la informacion del partido que la llamo
  */

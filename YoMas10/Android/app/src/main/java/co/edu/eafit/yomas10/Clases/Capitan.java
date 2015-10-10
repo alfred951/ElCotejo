@@ -1,6 +1,8 @@
 package co.edu.eafit.yomas10.Clases;
 
-import java.util.LinkedList;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by Alejandro on 23/09/2015.
@@ -34,7 +36,7 @@ public class Capitan extends Jugador{
      * Si se seleccionan varios jugadores a la ves
      * @param jugadores lista de jugadores a invitar.
      */
-    public void invitarJugadores(LinkedList<Jugador> jugadores){
+    public void invitarJugadores(ArrayList<Jugador> jugadores){
         //TODO
     }
 

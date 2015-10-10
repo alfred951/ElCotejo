@@ -8,10 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Clases.Jugador;
-import co.edu.eafit.yomas10.Helpers.StaticUser;
 
 /**
  * Activity que se muestra cuando se recibe una notificacion para unirse a un equipo
@@ -61,9 +61,12 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
     public void aceptarEquipo(View view){
 
         //TODO: Cambiar Todo esto
+        Toast.makeText(this, "Te has inscrito a " + equipo.getText().toString(),Toast.LENGTH_SHORT )
+                .show();
+
         Equipo equipo = new Equipo(this.equipo.getText().toString(),
                 new Jugador(this.capitan.getText().toString()));
-        StaticUser.jugador.agregarEquipo(equipo);
+        MainActivity.getUser().agregarEquipo(equipo);
         //TODO: agregarse al equipo en la base de datos
         //equipo.agregarJugador(StaticUser.jugador);
         //TODO: Notificar la aceptacion

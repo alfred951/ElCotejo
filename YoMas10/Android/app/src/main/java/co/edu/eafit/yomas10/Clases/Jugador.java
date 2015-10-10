@@ -5,9 +5,7 @@ import android.util.Log;
 
 import com.parse.ParsePush;
 
-import java.util.LinkedList;
-
-import co.edu.eafit.yomas10.Helpers.StaticUser;
+import java.util.ArrayList;
 
 
 /**
@@ -21,11 +19,11 @@ public class Jugador {
     protected String posicion = null;
     protected String correo = null;
     protected Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
-    protected LinkedList<Equipo> equipos = null;
-    //TODO LISTA DE PARTIDOS
-    protected LinkedList<Jugador> amigos = null;
-    protected LinkedList<Cancha> canchasFavoritas = null;
-    protected LinkedList<String> canales = null;
+    protected ArrayList<Equipo> equipos = null;
+    protected ArrayList<Partido> partidos = null;
+    protected ArrayList<Jugador> amigos = null;
+    protected ArrayList<Cancha> canchasFavoritas = null;
+    protected ArrayList<String> canales = null;
 
 
     /**
@@ -34,10 +32,11 @@ public class Jugador {
      */
     public Jugador(String username){
         this.username = username;
-        equipos = new LinkedList<>();
-        amigos = new LinkedList<>();
-        canchasFavoritas = new LinkedList<>();
-        canales = new LinkedList<>();
+        equipos = new ArrayList<>();
+        partidos = new ArrayList<>();
+        amigos = new ArrayList<>();
+        canchasFavoritas = new ArrayList<>();
+        canales = new ArrayList<>();
 
         //TODO: sacar los datos de la base de datos
     }
@@ -49,14 +48,7 @@ public class Jugador {
      */
     public Equipo crearEquipo(String nombre){
         Equipo equipo = new Equipo(nombre, this);
-
-        //TODO: provisional
-        LinkedList<Jugador> jugadores = StaticUser.crearJugadores();
-        for (int i = 0;i< jugadores.size();i++){
-            equipo.agregarJugador(jugadores.get(i));
-        }
         agregarEquipo(equipo);
-
         return equipo;
     }
 
@@ -67,11 +59,6 @@ public class Jugador {
             }
         }
         return null;
-    }
-
-
-    public LinkedList getChannels(){
-        return canales;
     }
 
     public void agregarAmigo(Jugador jug){
@@ -117,51 +104,31 @@ public class Jugador {
         }
     }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() { return username; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public ArrayList getChannels(){ return canales; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getNombre() { return nombre; }
 
-    public String getBio() {
-        return bio;
-    }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
+    public String getBio() { return bio; }
 
-    public String getPosicion() {
-        return posicion;
-    }
+    public void setBio(String bio) { this.bio = bio; }
 
-    public void setPosicion(String posicion) {
-        this.posicion = posicion;
-    }
+    public String getPosicion() { return posicion; }
 
-    public Uri getProfilePic(){
-        return profilePic;
-    }
+    public void setPosicion(String posicion) { this.posicion = posicion; }
 
-    public void setProfilePic(Uri profilePic) {
-        this.profilePic = profilePic;
-    }
+    public Uri getProfilePic(){ return profilePic; }
 
-    public String getCorreo() {
-        return correo;
-    }
+    public void setProfilePic(Uri profilePic) { this.profilePic = profilePic; }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+    public String getCorreo() { return correo; }
 
-    public LinkedList<Equipo> getEquipos() {
-        return equipos;
-    }
+    public void setCorreo(String correo) { this.correo = correo; }
+
+    public ArrayList<Equipo> getEquipos() { return equipos; }
+
+    public ArrayList<Partido> getPartidos(){ return partidos; }
 }
