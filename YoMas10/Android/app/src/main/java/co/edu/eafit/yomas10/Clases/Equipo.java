@@ -17,6 +17,7 @@ public class Equipo {
      * @param creador Jugador que va a quedar como capitan
      */
     public Equipo(String nombre, Jugador creador){
+        integrantes = new ArrayList<>();
         this.nombre = nombre;
         this.capitan = new Capitan(creador);
         this.capitan.setEquipo(this);
@@ -65,4 +66,6 @@ public class Equipo {
     public ArrayList<Jugador> getIntegrantes() {
         return integrantes;
     }
+
+
 }

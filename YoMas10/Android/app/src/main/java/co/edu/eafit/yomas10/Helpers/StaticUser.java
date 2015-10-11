@@ -1,6 +1,6 @@
 package co.edu.eafit.yomas10.Helpers;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import co.edu.eafit.yomas10.Clases.Equipo;
 import co.edu.eafit.yomas10.Clases.Jugador;
@@ -20,11 +20,12 @@ public class StaticUser {
         jugador.setCorreo("alejo8a_3@hotmail.com");
 
         Equipo equipo = jugador.crearEquipo("Jaguares");
+        jugador.findEquipo("Jaguares").agregarJugadores(crearJugadores());
 
     }
 
-    public static LinkedList<Jugador> crearJugadores(){
-        LinkedList jugadores = new LinkedList();
+    public static ArrayList<Jugador> crearJugadores(){
+        ArrayList jugadores = new ArrayList();
         Jugador chepe = new Jugador("joseluh");
         chepe.setNombre("Jose Luis");
         Jugador alfred = new Jugador("alfred598");

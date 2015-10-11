@@ -77,12 +77,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         for(int i = 0; i<mAdapter.getCount(); i++){
             actionBar.addTab(actionBar.newTab().setText(mAdapter.getPageTitle(i)).setTabListener(this));
         }
-        /*lista = (ListView) findViewById(R.id.pager);
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, arregloCadenas);
-        lista.setAdapter(adaptador); */
-
-
-        //canal = (EditText) findViewById(R.id.equipo);
     }
 
     @Override
@@ -165,14 +159,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             return f;
         }
-/*
-        @Override
-        public void onCreate(Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            nNum = getArguments() != null ? getArguments().getInt("num") : 1;
-            setHasOptionsMenu(true);
-        }
-*/
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -194,29 +181,39 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                             android.R.layout.simple_list_item_1, nombreEquipos));
                     break;
                 case 1:
-
+                    //TODO cambiar por nombre equipos
                     setListAdapter(new ArrayAdapter<Partido>(getActivity(),
                             android.R.layout.simple_list_item_1, user.getPartidos()));
                     break;
             }
 
-            ListView listView = (ListView)v.findViewById(android.R.id.list);
 
-            /*View tv = v.findViewById(R.id.text);
-            ((TextView)tv).setText("Fragment #" + nNum); */
             return v;
         }
 
 
         public void onListItemClick(ListView l, View v, int position, long id){
-            Log.i("FragmentList", "ItemClicked: " + id);
 
             Bundle bn = getArguments();
 
             switch (bn.getInt(SECTION_NAME)){
                 case 0:
+                    String nombreEquipo = (String) getListView().getItemAtPosition(position);
+                    Equipo equipo = new Equipo(nombreEquipo,user.findEquipo(nombreEquipo).getCapitan());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("NOMBRE", equipo.getNombre());
+                    bundle.putString("CAPITAN", equipo.getCapitan().getNombre());
+
+                    ArrayList<String> nombreJugadores = new ArrayList<>();
+
+                    //TODO pasar los username
+                    for (int i = 0; i<equipo.getIntegrantes().size(); i++){
+                        nombreJugadores.add(equipo.getIntegrantes().get(i).getNombre());
+                    }
+
+                    bundle.putStringArrayList("JUGADORES", nombreJugadores);
                     Intent in = new Intent(ctx, EquipoActivity.class);
-                    in.putExtra("NOMBRE", getListView().getItemIdAtPosition(position));
+                    in.putExtras(bundle);
                     startActivity(in);
                 case 1:
 

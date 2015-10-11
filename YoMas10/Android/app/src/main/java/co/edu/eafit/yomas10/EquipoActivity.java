@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,6 @@ public class EquipoActivity extends AppCompatActivity {
     private final Context ctx = this;
     private TextView capitan;
     private ListView listaJugadores;
-    private ArrayList<String> nombreJugadores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +34,25 @@ public class EquipoActivity extends AppCompatActivity {
 
         setTitle(nombreEquipo);
 
-        capitan = (TextView) findViewById(R.id.capitanTV);
+        capitan = (TextView) findViewById(R.id.capitan);
         listaJugadores = (ListView) findViewById(R.id.listaJugadores);
 
         //TODO: Sacar la info del la DB
-        capitan.setText(MainActivity.getUser().findEquipo(nombreEquipo).
-                getCapitan().getNombre());
+        capitan.setText(getIntent().getExtras().getString("CAPITAN"));
+        /*
 
         for (int i = 0; i<MainActivity.getUser().findEquipo(nombreEquipo).getIntegrantes().size();i++){
             nombreJugadores.add(MainActivity.getUser().findEquipo(nombreEquipo).getIntegrantes().get(i).getNombre());
         }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, nombreJugadores);
+*/
+        if (getIntent().getExtras().getStringArrayList("JUGADORES").isEmpty())
+            Toast.makeText(this,"El equipo esta vacio", Toast.LENGTH_SHORT);
+        for (int i = 0; i<getIntent().getExtras().getStringArrayList("JUGADORES").size(); i++){
+            Log.d("integrantes", getIntent().getExtras().getStringArrayList("JUGADORES").get(i));
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1,
+                        getIntent().getExtras().getStringArrayList("JUGADORES"));
 
         listaJugadores.setAdapter(adapter);
 
