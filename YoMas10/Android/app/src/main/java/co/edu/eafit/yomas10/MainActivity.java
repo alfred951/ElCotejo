@@ -203,18 +203,26 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             ListView listView = (ListView)v.findViewById(android.R.id.list);
 
             /*View tv = v.findViewById(R.id.text);
-            ((TextView)tv).setText("Fragment #" + nNum);
-
-            */return v;
+            ((TextView)tv).setText("Fragment #" + nNum); */
+            return v;
         }
 
 
         public void onListItemClick(ListView l, View v, int position, long id){
             Log.i("FragmentList", "ItemClicked: " + id);
-            Intent in = new Intent(ctx, EquipoActivity.class);
-            in.putExtra("NOMBRE", getListView().getItemIdAtPosition(position));
 
-            startActivity(in);
+            Bundle bn = getArguments();
+
+            switch (bn.getInt(SECTION_NAME)){
+                case 0:
+                    Intent in = new Intent(ctx, EquipoActivity.class);
+                    in.putExtra("NOMBRE", getListView().getItemIdAtPosition(position));
+                    startActivity(in);
+                case 1:
+
+                    // Informacion Partidos
+            }
+
         }
     }
 }
