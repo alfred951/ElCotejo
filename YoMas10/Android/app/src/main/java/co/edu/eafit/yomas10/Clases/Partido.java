@@ -10,6 +10,13 @@ public class Partido {
     private String nombre;
     private String fecha;
     private String hora;
+    private Cancha cancha;
+
+    public Partido(Equipo equipo1, Equipo equipo2, String nombre){
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
+        this.nombre = nombre;
+    }
 
     public Equipo getEquipo1(){
         return equipo1;
