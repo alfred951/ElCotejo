@@ -11,6 +11,7 @@ import android.widget.TextView;
  * Activity con la informacion del partido que la llamo
  */
 public class InvitacionPartidoActivity extends AppCompatActivity {
+    //TODo meter el lugar
 
     private TextView fecha, equipo1, equipo2;
 

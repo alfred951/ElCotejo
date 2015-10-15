@@ -1,12 +1,139 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="co.edu.eafit.yomas10.PerfilExterno">
+    android:columnCount="2"
+    android:rowCount="13">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/name"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:hint="Nombre"
+        android:layout_columnSpan="2"
+        android:layout_margin="10dp"
+        android:textAlignment="gravity"
+        android:layout_gravity="center" />
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/usrPic"
+        android:src="@drawable/no_user_logo"
+        android:layout_gravity="center_horizontal"
+        android:clickable="false"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/infoImagen"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/usernameTV"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:text="@string/username"
+        android:textColor="@color/negro"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/username"
+        android:layout_marginBottom="10dp"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/posTV"
+        android:layout_row="5"
+        android:layout_column="0"
+        android:text="@string/posicion"
+        android:textColor="@color/negro"
+        android:layout_marginLeft="10dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:hint="Posicion"
+        android:id="@+id/posicion"
+        android:layout_row="6"
+        android:layout_column="0"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/about"
+        android:id="@+id/aboutTV"
+        android:layout_row="7"
+        android:layout_column="0"
+        android:textColor="@color/negro"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/userBio"
+        android:layout_row="8"
+        android:layout_column="0"
+        android:hint="Descripción de tí"
+        android:layout_gravity="fill"
+        android:layout_columnSpan="2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/email"
+        android:id="@+id/emailTV"
+        android:layout_row="9"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:textColor="@color/negro"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/email"
+        android:layout_row="10"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp" />
+
+</GridLayout>

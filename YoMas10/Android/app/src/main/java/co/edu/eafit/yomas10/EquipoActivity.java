@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class EquipoActivity extends AppCompatActivity {
 
-    private final Context ctx = this;
+    private Context ctx = this;
     private TextView capitan;
     private ListView listaJugadores;
 
@@ -39,22 +39,22 @@ public class EquipoActivity extends AppCompatActivity {
 
         //TODO: Sacar la info del la DB
         capitan.setText(getIntent().getExtras().getString("CAPITAN"));
-        /*
 
-        for (int i = 0; i<MainActivity.getUser().findEquipo(nombreEquipo).getIntegrantes().size();i++){
-            nombreJugadores.add(MainActivity.getUser().findEquipo(nombreEquipo).getIntegrantes().get(i).getNombre());
-        }
-*/
-        if (getIntent().getExtras().getStringArrayList("JUGADORES").isEmpty())
-            Toast.makeText(this,"El equipo esta vacio", Toast.LENGTH_SHORT);
-        for (int i = 0; i<getIntent().getExtras().getStringArrayList("JUGADORES").size(); i++){
-            Log.d("integrantes", getIntent().getExtras().getStringArrayList("JUGADORES").get(i));
-        }
         ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1,
                         getIntent().getExtras().getStringArrayList("JUGADORES"));
 
         listaJugadores.setAdapter(adapter);
+
+        listaJugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String username = (String) parent.getAdapter().getItem(position);
+                Intent in = new Intent(ctx, PerfilExterno.class);
+                in.putExtra("USERNAME", username);
+                startActivity(in);
+            }
+        });
 
     }
 

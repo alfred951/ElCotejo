@@ -22,7 +22,6 @@ import co.edu.eafit.yomas10.Clases.Jugador;
 public class PerfilActivity extends AppCompatActivity {
 
     private ImageView profilePic;
-    private ListView listaEquipos;
     private TextView name;
     private TextView username;
     private TextView posicion;

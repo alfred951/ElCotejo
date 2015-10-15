@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
             ParseInstallation.getCurrentInstallation().saveInBackground();
             ParsePush.subscribeInBackground(user.getUsername());
+            ParsePush.subscribeInBackground("Jaguares");
         }catch (Exception e){}
 
         StaticUser.initialize();
@@ -199,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             switch (bn.getInt(SECTION_NAME)){
                 case 0:
                     String nombreEquipo = (String) getListView().getItemAtPosition(position);
-                    Equipo equipo = new Equipo(nombreEquipo,user.findEquipo(nombreEquipo).getCapitan());
+                    Equipo equipo = user.findEquipo(nombreEquipo);
                     Bundle bundle = new Bundle();
                     bundle.putString("NOMBRE", equipo.getNombre());
                     bundle.putString("CAPITAN", equipo.getCapitan().getNombre());
@@ -208,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
                     //TODO pasar los username
                     for (int i = 0; i<equipo.getIntegrantes().size(); i++){
-                        nombreJugadores.add(equipo.getIntegrantes().get(i).getNombre());
+                        nombreJugadores.add(equipo.getIntegrantes().get(i).getUsername());
                     }
 
                     bundle.putStringArrayList("JUGADORES", nombreJugadores);
