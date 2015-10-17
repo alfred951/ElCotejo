@@ -52,35 +52,6 @@ public class PerfilActivity extends AppCompatActivity {
         userBio.setText(MainActivity.getUser().getBio());
         correo.setText(MainActivity.getUser().getCorreo());
         profilePic.setImageURI(MainActivity.getUser().getProfilePic());
-
-/*
-        listaEquipos = (ListView) findViewById(R.id.listaEquipos);
-
-        if (StaticUser.jugador.getEquipos() == null){
-            listaEquipos.setVisibility(View.INVISIBLE);
-            Toast.makeText(this, getString(R.string.sinEquipos), Toast.LENGTH_SHORT).show();
-        }else{
-            for (int i = 0; i<StaticUser.jugador.getEquipos().size();i++){
-                nombreEquipos.add(StaticUser.jugador.getEquipos().get(i).getNombre());
-            }
-
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                    (this, android.R.layout.simple_list_item_1, nombreEquipos);
-
-            listaEquipos.setAdapter(adapter);
-
-            listaEquipos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-Intent in = new Intent(ctx, EquipoActivity.class);
-
-                    in.putExtra("NOMBRE", adapter.getItem(position));
-
-                    startActivity(in);
-                }
-            });
-        }*/
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data){
@@ -118,6 +89,8 @@ Intent in = new Intent(ctx, EquipoActivity.class);
             in.putExtras(bn);
             startActivity(in);
             finish();
+        }else if (id == R.id.action_friends) {
+            startActivity(new Intent(this, AmigosActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

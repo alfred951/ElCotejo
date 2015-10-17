@@ -1,5 +1,6 @@
 {
-	"action": "co.edu.eafit.yomas10.RECEIVE",
+	"action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
+	"TIPO" : "invJuego",
 	"MSG": "Invitacion a partido",
 	"FECHA"  : "19 de Mayo",
 	"EQUIPO1" : "Leones",
@@ -7,8 +8,9 @@
 }
 
 {
-	"action": "co.edu.eafit.yomas10.RECEIVE",
+	"action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
+	"TIPO" : "invEquipo",
 	"MSG" : "Invitacion a Equipo",
 	"NOMBRE" :  "Leones",
-	"CAPITAN" : "Alejandro Ochoa"
+	"CAPITAN" : "aleochoam"
 }

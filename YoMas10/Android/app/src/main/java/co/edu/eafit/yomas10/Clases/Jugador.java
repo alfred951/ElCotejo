@@ -131,4 +131,6 @@ public class Jugador {
     public ArrayList<Equipo> getEquipos() { return equipos; }
 
     public ArrayList<Partido> getPartidos(){ return partidos; }
+
+    public ArrayList<Jugador> getAmigos() { return amigos; }
 }

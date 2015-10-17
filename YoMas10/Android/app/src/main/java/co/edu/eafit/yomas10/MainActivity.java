@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.parse.Parse;
@@ -24,6 +26,7 @@ import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import co.edu.eafit.yomas10.Clases.Equipo;
@@ -66,9 +69,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(mAdapter);
 
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
-        public void onPageSelected(int position){
+            public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
             }
         });
@@ -76,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         for(int i = 0; i<mAdapter.getCount(); i++){
             actionBar.addTab(actionBar.newTab().setText(mAdapter.getPageTitle(i)).setTabListener(this));
         }
+
+
     }
 
     @Override
@@ -95,15 +101,18 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }else if (id == R.id.action_newNoti){
-            Intent in = new Intent(MainActivity.this, CreateNotificacionActivity.class);
-            startActivity(in);
         }else if (id == R.id.action_profile){
             Intent in = new Intent(MainActivity.this, PerfilActivity.class);
             startActivity(in);
+        }else if (id == R.id.crearEquipo){
+            Intent in = new Intent(MainActivity.this , CrearEquipoActivity.class);
+            startActivity(in);
+        }else if (id == R.id.crearPartido){
+            //TODO
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
@@ -146,34 +155,34 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     }
 
     public static class ArrayListFragment extends ListFragment {
-        private static final String SECTION_NAME = "section_number";
+        private static final String SECTION_NUMBER = "section_number";
 
 
-        static ArrayListFragment newInstance(int name){
+        static ArrayListFragment newInstance(int number){
             ArrayListFragment f = new ArrayListFragment();
-
             Bundle args = new Bundle();
-            args.putInt(SECTION_NAME, name);
+            args.putInt(SECTION_NUMBER, number);
             f.setArguments(args);
 
             return f;
         }
 
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.frag_one, container, false);
-
             Bundle bn = getArguments();
 
-            switch (bn.getInt(SECTION_NAME)){
+
+            switch (bn.getInt(SECTION_NUMBER)) {
                 //TODO cambiar por la base de datos
                 case 0:
                     ArrayList<Equipo> equipos = user.getEquipos();
                     ArrayList<String> nombreEquipos = new ArrayList<>();
 
 
-                    for (int i = 0; i<equipos.size(); i++){
+                    for (int i = 0; i < equipos.size(); i++) {
                         nombreEquipos.add(equipos.get(i).getNombre());
                     }
                     setListAdapter(new ArrayAdapter<String>(getActivity(),
@@ -185,8 +194,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                             android.R.layout.simple_list_item_1, user.getPartidos()));
                     break;
             }
-
-
             return v;
         }
 
@@ -195,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             Bundle bn = getArguments();
 
-            switch (bn.getInt(SECTION_NAME)){
+            switch (bn.getInt(SECTION_NUMBER)){
                 case 0:
                     String nombreEquipo = (String) getListView().getItemAtPosition(position);
                     Equipo equipo = user.findEquipo(nombreEquipo);
@@ -218,11 +225,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
                     // Informacion Partidos
             }
-
         }
     }
 }
-
-
-
 //clave de Parse LO5XvpbqZL7cLu3vvKWpKZbTr9b3Cc21DU1pd7h3

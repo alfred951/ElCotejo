@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_newNoti" android:title="@string/newNotif"
-        android:orderInCategory="50" app:showAsAction="never" />
     <item android:id="@+id/action_profile" android:icon="@drawable/no_user_logo"
         android:title="Mi Perfil" android:orderInCategory="25" app:showAsAction="always"/>
+    <item android:id="@+id/crearEquipo" android:icon="@android:drawable/ic_input_add"
+        android:title="Crear equipo" android:orderInCategory="70" app:showAsAction="never"/>
+    <item android:id="@+id/crearPartido" android:icon="@android:drawable/ic_input_add"
+        android:title="Crear Partido" android:orderInCategory="80" app:showAsAction="never"/>
 </menu>
