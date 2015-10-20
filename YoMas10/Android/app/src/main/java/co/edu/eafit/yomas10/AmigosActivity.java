@@ -85,9 +85,9 @@ public class AmigosActivity extends AppCompatActivity{
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_invitar:
-                        nr = 0;
-                        mAdapter.clearSelection();
-                        mode.finish();
+                          Intent intent = new Intent(getApplicationContext(), CrearEquipoActivity.class);
+                          startActivity(intent);
+
                 }
                 return false;
             }
@@ -161,6 +161,10 @@ public class AmigosActivity extends AppCompatActivity{
             return mSelection.keySet();
         }
 
+        /*public Set<Jugador> getCurrentCheckedPlayers(){
+            Set set = mSelection
+        }*/
+
         public void removeSelection(int position){
             mSelection.remove(position);
             notifyDataSetChanged();
@@ -174,7 +178,7 @@ public class AmigosActivity extends AppCompatActivity{
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
             View v = super.getView(position, convertView, parent);
-            v.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+            //v.setBackgroundColor(getResources().getColor(android.R.color.background_light));
 
             if (mSelection.get(position) != null){
                 v.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));

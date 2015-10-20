@@ -8,23 +8,27 @@ import co.edu.eafit.yomas10.Clases.Jugador;
 public class StaticUser {
 
     public static Jugador jugador;
+    public static boolean ready = false;
     //public static Equipo equipo;
     //public static LinkedList<Jugador> jugadores;
 
     public static void initialize(){
-        jugador = new Jugador("Aleochoam");
+        if (!ready){
+            ready = true;
+            jugador = new Jugador("Aleochoam");
 
-        jugador.setNombre("Alejandro");
-        jugador.setPosicion("Portero");
-        jugador.setBio("Mido 1.80, he jugado en el Nacional y tengo 20 años");
-        jugador.setCorreo("alejo8a_3@hotmail.com");
+            jugador.setNombre("Alejandro");
+            jugador.setPosicion("Portero");
+            jugador.setBio("Mido 1.80, he jugado en el Nacional y tengo 20 años");
+            jugador.setCorreo("alejo8a_3@hotmail.com");
 
-        Equipo equipo = jugador.crearEquipo("Jaguares");
-        jugador.findEquipo("Jaguares").agregarJugadores(crearJugadores());
+            Equipo equipo = jugador.crearEquipo("Jaguares");
+            jugador.findEquipo("Jaguares").agregarJugadores(crearJugadores());
 
-        ArrayList<Jugador> amigos = crearAmigos();
-        for (int i = 0; i<amigos.size();i++ ){
-            jugador.agregarAmigo(amigos.get(i));
+            ArrayList<Jugador> amigos = crearAmigos();
+            for (int i = 0; i<amigos.size();i++ ){
+                jugador.agregarAmigo(amigos.get(i));
+            }
         }
     }
 
