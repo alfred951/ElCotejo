@@ -10,6 +10,8 @@
     <string name="title_activity_splash">Yo+10</string>
     <string name="title_activity_invitacion_equipo">Invitacion Equipo</string>
     <string name="title_activity_equipo">Equipo</string>
+    <string name="title_activity_crear_equipo">Crear Equipo</string>
+    <string name="title_activity_amigos">Tus Amigos</string>
 
     <string name="action_settings">Configuracion</string>
     <string name="app_id">pugXkDo33e0MsbWMTsL5EChTBx3jKyWoDYI6ZE40</string>
@@ -40,11 +42,5 @@
     <string name="aceptar">Aceptar</string>
     <string name="rechazar">Rechazar</string>
 
-
-    <string name="sinEquipos">No estas en ningun equipo</string>
-    <string name="title_activity_crear_equipo">Crear Equipo</string>
-    <string name="title_activity_amigos">Tus Amigos</string>
-
-
-
+    <string name="sinElementos">No hay elementos para mostrar</string>
 </resources>

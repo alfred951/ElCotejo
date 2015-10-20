@@ -22,6 +22,10 @@ public class StaticUser {
         Equipo equipo = jugador.crearEquipo("Jaguares");
         jugador.findEquipo("Jaguares").agregarJugadores(crearJugadores());
 
+        ArrayList<Jugador> amigos = crearAmigos();
+        for (int i = 0; i<amigos.size();i++ ){
+            jugador.agregarAmigo(amigos.get(i));
+        }
     }
 
     public static ArrayList<Jugador> crearJugadores(){
@@ -38,5 +42,20 @@ public class StaticUser {
 
         return jugadores;
 
+    }
+
+    public static ArrayList<Jugador> crearAmigos(){
+        ArrayList amigos = new ArrayList();
+        Jugador moreno = new Jugador("jpmoreno109");
+        moreno.setNombre("Juan Pablo Moreno");
+        Jugador saravia = new Jugador("ssaravia");
+        saravia.setNombre("Luis Alfredo");
+        Jugador ramos = new Jugador("Ramitos");
+        ramos.setNombre("David Ramos");
+        amigos.add(moreno);
+        amigos.add(saravia);
+        amigos.add(ramos);
+
+        return amigos;
     }
 }
