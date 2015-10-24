@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10;
+package co.edu.eafit.yomas10.Equipos;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import co.edu.eafit.yomas10.R;
 
 public class CrearEquipoActivity extends AppCompatActivity {
 

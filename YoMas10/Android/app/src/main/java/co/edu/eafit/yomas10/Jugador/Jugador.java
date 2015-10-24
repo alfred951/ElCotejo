@@ -1,11 +1,14 @@
-package co.edu.eafit.yomas10.Clases;
+package co.edu.eafit.yomas10.Jugador;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.parse.ParsePush;
 
 import java.util.ArrayList;
+
+import co.edu.eafit.yomas10.Equipos.Equipo;
+import co.edu.eafit.yomas10.Partidos.Cancha;
+import co.edu.eafit.yomas10.Partidos.Partido;
 
 
 /**

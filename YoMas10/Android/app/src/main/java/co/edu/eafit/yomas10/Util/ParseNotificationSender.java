@@ -1,15 +1,9 @@
-package co.edu.eafit.yomas10.Helpers;
-
-import android.view.View;
-import android.widget.Toast;
+package co.edu.eafit.yomas10.Util;
 
 import com.parse.ParsePush;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import co.edu.eafit.yomas10.Clases.Jugador;
-import co.edu.eafit.yomas10.R;
 
 /**
  * Created by alejandro on 22/10/15.
@@ -17,7 +11,7 @@ import co.edu.eafit.yomas10.R;
 public class ParseNotificationSender {
     private static final String INV_GAME = "invJuego";
     private static final String INV_TEAM = "invEquipo";
-    private static final String ACTION = "co.edu.eafit.yomas10.ParseReceiver.RECEIVE";
+    private static final String ACTION = "co.edu.eafit.yomas10.Util.ParseReceiver.RECEIVE";
     private static final String GAME_MESSAGE = "Has sido invitado a un partido!";
     private static final String TEAM_MESSAGE = "Has sido invitado a un equipo!";
 

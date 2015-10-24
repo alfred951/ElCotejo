@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10.Helpers;
+package co.edu.eafit.yomas10.Util;
 
 /**
  * Created by Usuario on 01/10/2015.

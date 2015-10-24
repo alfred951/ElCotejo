@@ -1,6 +1,5 @@
-package co.edu.eafit.yomas10;
+package co.edu.eafit.yomas10.Jugador;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +21,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import co.edu.eafit.yomas10.Clases.Jugador;
+import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
+import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
+import co.edu.eafit.yomas10.R;
 
 public class AmigosActivity extends AppCompatActivity{
 
@@ -84,11 +86,22 @@ public class AmigosActivity extends AppCompatActivity{
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_invitar:
-                          Intent intent = new Intent(getApplicationContext(), CrearEquipoActivity.class);
-                          startActivity(intent);
+                ArrayList<String> jugadores = getCheckedPlayers();
+                Bundle bn = new Bundle();
+                bn.putStringArrayList("JUGADORES", jugadores);
 
+                switch (item.getItemId()) {
+                    case R.id.action_invitarEquipo:
+                        Intent intent = new Intent(getApplicationContext(), CrearEquipoActivity.class);
+                        intent.putExtras(bn);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.action_invitarPartido:
+                        Intent intent1 = new Intent(getApplicationContext(), CrearPartidoActivity.class);
+                        intent1.putExtras(bn);
+                        startActivity(intent1);
+                        break;
                 }
                 return false;
             }

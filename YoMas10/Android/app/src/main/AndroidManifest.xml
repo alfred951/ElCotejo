@@ -61,11 +61,11 @@
         <!-- My notification receiver -->
         <!--
         <receiver
-            android:name="co.edu.eafit.yomas10.ParseReceiver"
+            android:name="co.edu.eafit.yomas10.Util.ParseReceiver"
             android:exported="true" >
             <intent-filter>
-                <action android:name="co.edu.eafit.yomas10.ParseReceiver.RECEIVE" />
-                <action android:name="co.edu.eafit.yomas10.ParseReceiver.OPEN" />
+                <action android:name="co.edu.eafit.yomas10.Util.ParseReceiver.RECEIVE" />
+                <action android:name="co.edu.eafit.yomas10.Util.ParseReceiver.OPEN" />
                 <action android:name="com.parse.push.intent.DELETE" />
             </intent-filter>
         </receiver>
@@ -73,7 +73,7 @@
         <!-- End custom notification receiver -->
 
         <receiver
-            android:name=".ParseReceiver"
+            android:name=".Util.ParseReceiver"
             android:exported="true" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
@@ -96,7 +96,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InvitacionPartidoActivity"
+            android:name=".Partidos.InvitacionPartidoActivity"
             android:label="@string/title_activity_partido" >
         </activity>
         <activity
@@ -104,7 +104,7 @@
             android:label="@string/title_activity_create_notificacion" >
         </activity>
         <activity
-            android:name=".PerfilActivity"
+            android:name=".Jugador.PerfilActivity"
             android:label="@string/title_activity_perfil"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -117,7 +117,7 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name=".EditarPerfilActivity"
+            android:name=".Jugador.EditarPerfilActivity"
             android:label="@string/title_activity_editar_perfil" >
         </activity>
         <activity
@@ -125,11 +125,11 @@
             android:label="@string/title_activity_perfil_externo" >
         </activity>
         <activity
-            android:name=".InvitacionEquipoActivity"
+            android:name=".Equipos.InvitacionEquipoActivity"
             android:label="@string/title_activity_invitacion_equipo" >
         </activity>
         <activity
-            android:name=".EquipoActivity"
+            android:name=".Equipos.EquipoActivity"
             android:label="@string/title_activity_equipo" >
         </activity>
         <activity
@@ -137,12 +137,16 @@
             android:label="@string/title_activity_splash" >
         </activity>
         <activity
-            android:name=".CrearEquipoActivity"
+            android:name=".Equipos.CrearEquipoActivity"
             android:label="@string/title_activity_crear_equipo" >
         </activity>
         <activity
-            android:name=".AmigosActivity"
+            android:name=".Jugador.AmigosActivity"
             android:label="@string/title_activity_amigos" >
+        </activity>
+        <activity
+            android:name=".Partidos.CrearPartidoActivity"
+            android:label="@string/title_activity_crear_partido" >
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10;
+package co.edu.eafit.yomas10.Util;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -17,6 +17,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+
+import co.edu.eafit.yomas10.Equipos.InvitacionEquipoActivity;
+import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Partidos.InvitacionPartidoActivity;
+import co.edu.eafit.yomas10.R;
 
 /**
  * Created by Usuario on 06/10/2015.

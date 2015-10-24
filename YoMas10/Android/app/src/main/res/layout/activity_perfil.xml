@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="co.edu.eafit.yomas10.PerfilActivity"
+    tools:context="co.edu.eafit.yomas10.Jugador.PerfilActivity"
     android:columnCount="2"
     android:rowCount="13">
 

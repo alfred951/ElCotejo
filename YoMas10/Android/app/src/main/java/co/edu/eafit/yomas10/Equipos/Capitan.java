@@ -1,13 +1,13 @@
-package co.edu.eafit.yomas10.Clases;
-
-import android.widget.ArrayAdapter;
+package co.edu.eafit.yomas10.Equipos;
 
 import java.util.ArrayList;
+
+import co.edu.eafit.yomas10.Jugador.Jugador;
 
 /**
  * Created by Alejandro on 23/09/2015.
  */
-public class Capitan extends Jugador{
+public class Capitan extends Jugador {
 
     private Equipo equipo;
 

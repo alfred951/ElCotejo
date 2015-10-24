@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10;
+package co.edu.eafit.yomas10.Jugador;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.R;
 
 /**
  * Activity para modificar el perfil del usuario, estos datos tambien deben ser guardados en la DB

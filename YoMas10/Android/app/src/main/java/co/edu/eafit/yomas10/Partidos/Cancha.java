@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10.Clases;
+package co.edu.eafit.yomas10.Partidos;
 
 /**
  * Created by Alejandro on 23/09/2015.
