@@ -62,4 +62,21 @@ public class StaticUser {
 
         return amigos;
     }
+
+    public static ArrayList<Jugador> crearIntegrantes(){
+        Jugador alejandro = new Jugador("aleochoam");
+        Jugador saravia = new Jugador("ssaravia");
+        Jugador gaxel = new Jugador("harryGaxel");
+
+        alejandro.setNombre("Alejandro");
+        saravia.setNombre("Santiago");
+        gaxel.setNombre("Felipe");
+
+        ArrayList<Jugador> integrantes = new ArrayList<>();
+        integrantes.add(alejandro);
+        integrantes.add(saravia);
+        integrantes.add(gaxel);
+
+        return integrantes;
+    }
 }

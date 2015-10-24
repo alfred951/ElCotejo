@@ -9,34 +9,46 @@
     android:columnCount="1"
     tools:context="co.edu.eafit.yomas10.Equipos.CrearPartidoActivity">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre del Equipo:"
+        android:text="Fecha"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/negro"
-        android:layout_row="1"/>
+        android:layout_row="0"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/nombreEquipo"
-        android:layout_row="2"
-        android:layout_column="0"
-        android:hint="Ejemplo"/>
+        android:id="@+id/fechaPartido"
+        android:layout_row="1"
+        android:hint="1 de Enero"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora"
+        android:textColor="@color/negro"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_row="2"/>
+
+    <EditText
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/negro"
-        android:text="Integrantes"
+        android:hint="19:00"
+        android:id="@+id/horaPartido"
         android:layout_row="3"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Integrantes"
+        android:textColor="@color/negro"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_row="4"/>
 
     <ListView
-        android:id="@+id/listaJugadores"/>
-
-
-
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_row="5"
+        android:id="@+id/jugadores"/>
 </GridLayout>

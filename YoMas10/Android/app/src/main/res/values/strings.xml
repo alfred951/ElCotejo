@@ -47,4 +47,5 @@
 
     <string name="sinElementos">No hay elementos para mostrar</string>
     <string name="title_activity_crear_partido">Crear un Partido</string>
+    <string name="title_activity_seleccionar_amigos">Selecciona Tus Amigos</string>
 </resources>

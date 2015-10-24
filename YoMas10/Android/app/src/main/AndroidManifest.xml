@@ -148,6 +148,10 @@
             android:name=".Partidos.CrearPartidoActivity"
             android:label="@string/title_activity_crear_partido" >
         </activity>
+        <activity
+            android:name=".Jugador.SeleccionarAmigosActivity"
+            android:label="@string/title_activity_seleccionar_amigos" >
+        </activity>
     </application>
 
 </manifest>
