@@ -29,7 +29,7 @@ public class Capitan extends Jugador{
      * @param jug el jugador que se quiere invitar.
      */
     public void invitarJugador(Jugador jug){
-        //TODO
+
     }
 
     /**

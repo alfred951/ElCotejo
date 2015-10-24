@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
 import co.edu.eafit.yomas10.Clases.Jugador;
@@ -26,7 +27,7 @@ import co.edu.eafit.yomas10.Clases.Jugador;
 public class AmigosActivity extends AppCompatActivity{
 
     private ArrayList<Jugador> amigos;
-    private ArrayList<String> nombreAmigos = new ArrayList<>();
+    private ArrayList<String> usernameAmigos = new ArrayList<>();
     private SelectionAdapter mAdapter;
     private ListView amigosLV;
     private TextView noElementsTV;
@@ -39,10 +40,10 @@ public class AmigosActivity extends AppCompatActivity{
 
         amigos = MainActivity.getUser().getAmigos();
         for (int i = 0; i<amigos.size();i++){
-            nombreAmigos.add(amigos.get(i).getNombre());
+            usernameAmigos.add(amigos.get(i).getUsername());
         }
 
-        mAdapter = new SelectionAdapter(this, android.R.layout.simple_list_item_1, nombreAmigos);
+        mAdapter = new SelectionAdapter(this, android.R.layout.simple_list_item_1, usernameAmigos);
 
         amigosLV = (ListView) findViewById(R.id.listaAmigos);
         noElementsTV = (TextView) findViewById(R.id.emptyText);
@@ -139,6 +140,20 @@ public class AmigosActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO cambiar por username
+    public ArrayList<String> getCheckedPlayers(){
+        ArrayList<String> jugadores = new ArrayList<>();
+        Set<Integer> checked = mAdapter.getCurrentCheckedPosition();
+
+        Iterator<Integer> it = checked.iterator();
+        while(it.hasNext()){
+            Integer numPlayer = it.next();
+            String jugador =mAdapter.getItem(numPlayer);
+            jugadores.add(jugador);
+        }
+        return jugadores;
+    }
+
     private class SelectionAdapter extends ArrayAdapter<String>{
         private HashMap<Integer, Boolean> mSelection = new HashMap<>();
 
@@ -160,10 +175,6 @@ public class AmigosActivity extends AppCompatActivity{
         public Set<Integer> getCurrentCheckedPosition(){
             return mSelection.keySet();
         }
-
-        /*public Set<Jugador> getCurrentCheckedPlayers(){
-            Set set = mSelection
-        }*/
 
         public void removeSelection(int position){
             mSelection.remove(position);

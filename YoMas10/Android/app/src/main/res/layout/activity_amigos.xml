@@ -7,14 +7,14 @@
     tools:context="co.edu.eafit.yomas10.AmigosActivity">
 
     <ListView android:id="@+id/listaAmigos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
         android:choiceMode="multipleChoice"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/emptyText"
         android:text="@string/sinElementos"/>
 

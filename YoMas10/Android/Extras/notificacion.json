@@ -1,3 +1,4 @@
+//invitacion a partido
 {
 	"action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
 	"TIPO" : "invJuego",
@@ -7,6 +8,7 @@
 	"EQUIPO2" : "Delfines"
 }
 
+//Invitacion a equipo
 {
 	"action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
 	"TIPO" : "invEquipo",

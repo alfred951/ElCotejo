@@ -25,6 +25,9 @@
     <string name="notificacion">Se ha mandado la notificación exitosamente</string>
     <string name="editado">Se ha editado satisfactoriamente el perfil</string>
 
+    <string name="gameInvitation">Has sido invitado a un partido</string>
+    <string name="teamInvitation">Has sido invitado a un equipo</string>
+
     <string name="newNotif">Nueva Notificación</string>
     <string name="editProfile">Editar Perfil</string>
     <string name="friends">Amigos</string>
