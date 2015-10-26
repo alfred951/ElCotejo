@@ -4,4 +4,7 @@
     tools:context="co.edu.eafit.yomas10.Partidos.CrearPartidoActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/crearPartido" android:title="Crear Partido"
+        android:orderInCategory="101" app:showAsAction="always" />
 </menu>

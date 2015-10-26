@@ -30,6 +30,7 @@ import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Equipos.EquipoActivity;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilActivity;
+import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
@@ -103,11 +104,15 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         }else if (id == R.id.action_profile){
             Intent in = new Intent(MainActivity.this, PerfilActivity.class);
             startActivity(in);
+            finish();
         }else if (id == R.id.crearEquipo){
             Intent in = new Intent(MainActivity.this , CrearEquipoActivity.class);
             startActivity(in);
+            finish();
         }else if (id == R.id.crearPartido){
-            //TODO
+            Intent in = new Intent(MainActivity.this, CrearPartidoActivity.class);
+            startActivity(in);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -172,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                                  Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.frag_one, container, false);
             Bundle bn = getArguments();
-
 
             switch (bn.getInt(SECTION_NUMBER)) {
                 //TODO cambiar por la base de datos

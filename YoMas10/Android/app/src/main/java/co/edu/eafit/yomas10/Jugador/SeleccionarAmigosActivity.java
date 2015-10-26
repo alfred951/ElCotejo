@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amigos);
 
-
+        Toast.makeText(this, "Manten undido para seleccionar", Toast.LENGTH_SHORT).show();
 
         amigos = MainActivity.getUser().getAmigos();
         for (int i = 0; i<amigos.size();i++){
@@ -75,7 +76,7 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 nr = 0;
                 MenuInflater inflater = getMenuInflater();
-                inflater.inflate(R.menu.contextual_menu, menu);
+                inflater.inflate(R.menu.contextual_menu_seleccionar_amigos, menu);
                 return true;
             }
 
@@ -91,16 +92,11 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
                 bn.putStringArrayList("JUGADORES", jugadores);
 
                 switch (item.getItemId()) {
-                    case R.id.action_invitarEquipo:
+                    case R.id.check:
                         Intent intent = new Intent(getApplicationContext(), CrearEquipoActivity.class);
                         intent.putExtras(bn);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.action_invitarPartido:
-                        Intent intent1 = new Intent(getApplicationContext(), CrearPartidoActivity.class);
-                        intent1.putExtras(bn);
-                        startActivity(intent1);
+                        setResult(RESULT_OK, intent);
+                        finish();
                         break;
                 }
                 return false;
@@ -112,14 +108,14 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
             }
         });
 
-        amigosLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+     /*   amigosLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent in = new Intent(getApplicationContext(), PerfilExterno.class);
                 in.putExtra("USERNAME", (String) parent.getAdapter().getItem(position));
                 startActivity(in);
             }
-        });
+        });*/
 
         amigosLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

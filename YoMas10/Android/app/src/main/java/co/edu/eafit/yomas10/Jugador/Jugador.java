@@ -107,6 +107,13 @@ public class Jugador {
         }
     }
 
+    public void agregarPartido(Partido partido){
+        if(!partidos.contains(partido)){
+            partidos.add(partido);
+            ///ParsePush.subscribeInBackground(null) TODO cambiar por el id del partido
+        }
+    }
+
     public String getUsername() { return username; }
 
     public ArrayList getChannels(){ return canales; }
@@ -136,4 +143,8 @@ public class Jugador {
     public ArrayList<Partido> getPartidos(){ return partidos; }
 
     public ArrayList<Jugador> getAmigos() { return amigos; }
+
+    public ArrayList<Cancha> getCanchasFavoritas() {
+        return canchasFavoritas;
+    }
 }

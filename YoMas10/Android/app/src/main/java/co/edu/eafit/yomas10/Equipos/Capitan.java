@@ -19,8 +19,8 @@ public class Capitan extends Jugador {
         correo = jugador.getCorreo();
         profilePic = jugador.getProfilePic();
         equipos = jugador.getEquipos();
-        amigos = jugador.amigos;
-        canchasFavoritas = jugador.canchasFavoritas;
+        amigos = jugador.getAmigos();
+        canchasFavoritas = jugador.getCanchasFavoritas();
         canales = jugador.getChannels();
     }
 

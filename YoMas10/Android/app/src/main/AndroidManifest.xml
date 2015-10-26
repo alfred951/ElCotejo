@@ -121,7 +121,7 @@
             android:label="@string/title_activity_editar_perfil" >
         </activity>
         <activity
-            android:name=".PerfilExterno"
+            android:name=".Jugador.PerfilExterno"
             android:label="@string/title_activity_perfil_externo" >
         </activity>
         <activity

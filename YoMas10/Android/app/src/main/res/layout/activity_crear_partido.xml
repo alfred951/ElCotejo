@@ -38,17 +38,39 @@
         android:hint="19:00"
         android:id="@+id/horaPartido"
         android:layout_row="3"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancha"
+        android:textColor="@color/negro"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_row="4"/>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:hint="El templo del Futbol"
+        android:id="@+id/canchaPartido"
+        android:layout_row="5"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Integrantes"
         android:textColor="@color/negro"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_row="4"/>
+        android:layout_row="6"/>
 
     <ListView
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_row="5"
+        android:layout_row="7"
         android:id="@+id/jugadores"/>
+
+    <!--TextView
+        android:text="@string/sinElementos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyText"/-->
 </GridLayout>
