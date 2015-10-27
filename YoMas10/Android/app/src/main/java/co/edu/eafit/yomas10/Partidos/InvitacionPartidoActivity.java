@@ -7,6 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.parse.ParsePush;
+
+import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
 
 /**
@@ -54,6 +57,7 @@ public class InvitacionPartidoActivity extends AppCompatActivity {
     }
 
     public void aceptarPartido(View view){
+        //Aqui se debe suscribir al canal del partido
         //TODO
     }
 

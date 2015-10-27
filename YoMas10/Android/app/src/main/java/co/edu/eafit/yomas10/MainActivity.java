@@ -32,6 +32,8 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilActivity;
 import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
 import co.edu.eafit.yomas10.Partidos.Partido;
+import co.edu.eafit.yomas10.Partidos.PartidoCasual;
+import co.edu.eafit.yomas10.Partidos.PartidoPorEquipos;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
 
@@ -192,9 +194,20 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                             android.R.layout.simple_list_item_1, nombreEquipos));
                     break;
                 case 1:
+                    ArrayList<String> partidosString = new ArrayList<>();
+                    ArrayList<Partido> partidos = user.getPartidos();
+
+                    for (Partido partido: partidos){
+                        if (partido instanceof PartidoCasual){
+                            partidosString.add("Partido el " + partido.getFecha());
+                        } else {
+                            PartidoPorEquipos partidoPE = (PartidoPorEquipos) partido;
+                            partidosString.add(partidoPE.getOrganizador().getNombre() + "vs" + partidoPE.getContrincante().getNombre());
+                        }
+                    }
                     //TODO cambiar por nombre equipos
-                    setListAdapter(new ArrayAdapter<Partido>(getActivity(),
-                            android.R.layout.simple_list_item_1, user.getPartidos()));
+                    setListAdapter(new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_list_item_1, partidosString));
                     break;
             }
             return v;

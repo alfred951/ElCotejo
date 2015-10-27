@@ -1,5 +1,7 @@
 package co.edu.eafit.yomas10.Partidos;
 
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 
@@ -98,5 +101,19 @@ public class CrearPartidoActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void elegirFecha(View view){
+
+    }
+
+    public void elegirHora(View view){
+
+    }
+
+    //Clases para elegir fecha y hora
+
+    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+        //TODO http://developer.android.com/intl/es/guide/topics/ui/controls/pickers.html
     }
 }

@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/fechaPartido"
         android:layout_row="1"
+        android:onClick="elegirFecha"
         android:hint="1 de Enero"/>
 
     <TextView
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:hint="19:00"
+        android:onClick="elegirHora"
         android:id="@+id/horaPartido"
         android:layout_row="3"/>
 
