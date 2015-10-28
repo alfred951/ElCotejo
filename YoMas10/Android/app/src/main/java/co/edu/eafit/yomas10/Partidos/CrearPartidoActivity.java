@@ -1,21 +1,26 @@
 package co.edu.eafit.yomas10.Partidos;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
@@ -24,7 +29,9 @@ import co.edu.eafit.yomas10.R;
 
 public class CrearPartidoActivity extends AppCompatActivity {
 
-    private EditText fechaPartido, horaPartido, canchaPartido;
+    private static TextView fechaPartido, horaPartido;
+    private Button cambiarFecha, cambiarHora;
+    private EditText canchaPartido;
     private ListView jugadoresLV;
     private ArrayList<String> jugadores;
     private ArrayAdapter<String> mAdapter;
@@ -35,9 +42,13 @@ public class CrearPartidoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_partido);
 
-        fechaPartido = (EditText) findViewById(R.id.fechaPartido);
-        horaPartido = (EditText) findViewById(R.id.horaPartido);
+        fechaPartido = (TextView) findViewById(R.id.fechaPartido);
+        horaPartido = (TextView) findViewById(R.id.horaPartido);
         canchaPartido = (EditText) findViewById(R.id.canchaPartido);
+
+        cambiarFecha = (Button) findViewById(R.id.cambiarFecha);
+        cambiarHora = (Button) findViewById(R.id.cambiarHora);
+
         jugadoresLV = (ListView) findViewById(R.id.jugadores);
 
         jugadores = new ArrayList<>();
@@ -95,6 +106,7 @@ public class CrearPartidoActivity extends AppCompatActivity {
         }else if (id == R.id.crearPartido){
             Partido partido = new PartidoCasual(fechaPartido.getText().toString(),
                     horaPartido.getText().toString(), canchaPartido.getText().toString());
+
             MainActivity.getUser().agregarPartido(partido);
             startActivity(new Intent(this, MainActivity.class));
             finish();
@@ -104,16 +116,78 @@ public class CrearPartidoActivity extends AppCompatActivity {
     }
 
     public void elegirFecha(View view){
-
+        DialogFragment selFecha = new DatePickerFragment();
+        selFecha.show(getFragmentManager(), "datePicker");
     }
 
     public void elegirHora(View view){
-
+        DialogFragment selHora = new TimePickerFragment();
+        selHora.show(getFragmentManager(), "timePicker");
     }
 
     //Clases para elegir fecha y hora
 
     public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-        //TODO http://developer.android.com/intl/es/guide/topics/ui/controls/pickers.html
+
+        private int hora, minuto;
+
+        @Override
+        public TimePickerDialog onCreateDialog(Bundle savedInstace){
+            final Calendar calendar = Calendar.getInstance();
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int minutes = calendar.get(Calendar.MINUTE);
+
+            return new TimePickerDialog(getActivity(), this, hour, minutes, DateFormat.is24HourFormat(getActivity()));
+        }
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            horaPartido.setText(hourOfDay + ":" + minute);
+            hora = hourOfDay;
+            minuto = minute;
+        }
+
+        public int getHora() {
+            return hora;
+        }
+
+        public int getMinuto(){
+            return minuto;
+        }
+    }
+
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+
+        private int year, month, day;
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstance){
+            final Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            fechaPartido.setText(dayOfMonth + "/" + monthOfYear + "/" +  year);
+            this.year = year;
+            this.month = monthOfYear;
+            this.day = dayOfMonth;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public int getDay() {
+            return day;
+        }
     }
 }
