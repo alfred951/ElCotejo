@@ -1,68 +1,85 @@
 package co.edu.eafit.yomas10;
 
-import android.util.Log;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import android.accounts.NetworkErrorException;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Http{
 
-   static StringBuffer makeGetRequest(String url){
-       StringBuffer result = new StringBuffer();
-        try {
+    String url = "www.yomasdiez.com/index.php/api/Usuario/Jugadores";
 
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet(url);
+   private String makeGetRequest(String uname) throws IOException, JSONException, NetworkErrorException{
 
-            HttpResponse response = client.execute(request);
+       StringBuffer urlS = new StringBuffer();
+       urlS.append(this.url);
+       urlS.append(uname);
+       URL url = new URL(urlS.toString());
+       HttpURLConnection con = (HttpURLConnection)url.openConnection();
+       String response;
 
-            // receive response as inputStream
-            BufferedReader rd = new BufferedReader(
-                    new InputStreamReader(response.getEntity().getContent()));
+       // Request Header
+       con.setRequestMethod("GET");
+       con.setRequestProperty("Accept", "application/json");
+       con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+       con.setRequestProperty("http.agent", "");
 
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
+       int responseCode = con.getResponseCode();
 
-            System.out.println(result.toString());
-            return result;
+       // Parse JSON
+       if(responseCode == 200 || responseCode == 201){
+           String json = getJSON(con.getInputStream());
+           JSONObject obj = new JSONObject(json);
+           response = obj.getString("user_t");
+       }
+       else{
+           NetworkErrorException e = new NetworkErrorException("Could not get JSON");
+           throw e;
+       }
 
-        } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
-        }
-        return result;
+       return response;
     }
 
-    static void makePostRequest(String url, List<NameValuePair> urlParameters) throws Exception{
-        try {
-            HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost(url);
+    private boolean makePostRequest(String urlParams) throws Exception{
 
-            post.setEntity(new UrlEncodedFormEntity(urlParameters));
+        URL url = new URL(this.url.toString());
+        HttpURLConnection con = (HttpURLConnection)url.openConnection();
 
-            HttpResponse response = client.execute(post);
+        // Request Header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("http.agent", "");
 
-            BufferedReader rd = new BufferedReader(
-                    new InputStreamReader(response.getEntity().getContent()));
+        //Send post request
+        con.setDoOutput(true);
+        DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+        dos.writeBytes(urlParams);
+        dos.flush();
+        dos.close();
 
-            StringBuffer result = new StringBuffer();
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
-            System.out.println(result.toString());
+        int responseCode = con.getResponseCode();
+
+        // Return true if request was done successfully
+        return responseCode == 200 || responseCode == 201;
+    }
+
+    private String getJSON(InputStream inputStream) throws IOException {
+        StringBuffer json = new StringBuffer();
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(inputStream));
+
+        String input;
+        while ((input = in.readLine()) != null){
+            json.append(input);
         }
-        catch (Exception e){
-            Log.d("InputStream", e.getLocalizedMessage());
-        }
+        in.close();
+
+        return json.toString();
     }
 }
