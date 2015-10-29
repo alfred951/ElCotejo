@@ -152,6 +152,10 @@
             android:name=".Jugador.SeleccionarAmigosActivity"
             android:label="@string/title_activity_seleccionar_amigos" >
         </activity>
+        <activity
+            android:name=".Partidos.PartidoCasualActivity"
+            android:label="@string/title_activity_partido_casual" >
+        </activity>
     </application>
 
 </manifest>

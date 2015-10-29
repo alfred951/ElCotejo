@@ -24,4 +24,8 @@ public abstract class Partido {
     public String getHora(){
         return hora;
     }
+
+    public String getCancha() {
+        return cancha;
+    }
 }

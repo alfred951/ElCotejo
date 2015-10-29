@@ -33,6 +33,7 @@ import co.edu.eafit.yomas10.Jugador.PerfilActivity;
 import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.Partidos.PartidoCasual;
+import co.edu.eafit.yomas10.Partidos.PartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.PartidoPorEquipos;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
@@ -194,20 +195,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                             android.R.layout.simple_list_item_1, nombreEquipos));
                     break;
                 case 1:
-                    ArrayList<String> partidosString = new ArrayList<>();
-                    ArrayList<Partido> partidos = user.getPartidos();
 
-                    for (Partido partido: partidos){
-                        if (partido instanceof PartidoCasual){
-                            partidosString.add("Partido el " + partido.getFecha());
-                        } else {
-                            PartidoPorEquipos partidoPE = (PartidoPorEquipos) partido;
-                            partidosString.add(partidoPE.getOrganizador().getNombre() + "vs" + partidoPE.getContrincante().getNombre());
-                        }
-                    }
-                    //TODO cambiar por nombre equipos
-                    setListAdapter(new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_list_item_1, partidosString));
+                    ArrayList<Partido> partidos = user.getPartidos();
+                    setListAdapter(new ArrayAdapter<Partido>(getActivity(),
+                            android.R.layout.simple_list_item_1, partidos));
                     break;
             }
             return v;
@@ -237,9 +228,29 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     Intent in = new Intent(ctx, EquipoActivity.class);
                     in.putExtras(bundle);
                     startActivity(in);
+                    break;
                 case 1:
+                    Partido partido= (Partido) getListView().getItemAtPosition(position);
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("horaPartido", partido.getHora());
+                    bundle1.putString("fechaPartido", partido.getFecha());
+                    bundle1.putString("cancha", partido.getCancha());
+                    if (partido instanceof PartidoCasual){
+                        ArrayList<Jugador> jugadores= ((PartidoCasual) partido).getIntegrantes();
+                        ArrayList<String> nameJugadores = new ArrayList<>();
+                        for(Jugador jugador: jugadores){
+                            nameJugadores.add(jugador.getNombre());
+                        }
+                        bundle1.putStringArrayList("jugadores", nameJugadores);
 
-                    // Informacion Partidos
+                        Intent intent = new Intent(getContext(), PartidoCasualActivity.class);
+                        intent.putExtras(bundle1);
+                        startActivity(intent);
+                    }else{
+
+                        //TODO partido por equipos
+                    }
+                    break;
             }
         }
     }

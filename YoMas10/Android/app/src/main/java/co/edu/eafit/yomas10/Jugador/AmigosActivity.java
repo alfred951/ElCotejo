@@ -39,7 +39,6 @@ public class AmigosActivity extends AppCompatActivity{
         setContentView(R.layout.activity_amigos);
 
 
-
         amigos = MainActivity.getUser().getAmigos();
         for (int i = 0; i<amigos.size();i++){
             usernameAmigos.add(amigos.get(i).getUsername());

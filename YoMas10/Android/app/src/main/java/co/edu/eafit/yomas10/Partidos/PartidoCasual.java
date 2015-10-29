@@ -31,4 +31,9 @@ public class PartidoCasual extends Partido {
     public ArrayList<Jugador> getIntegrantes() {
         return integrantes;
     }
+
+    @Override
+    public String toString() {
+        return "Partido el " + fecha + "\nHora: " + hora;
+    }
 }

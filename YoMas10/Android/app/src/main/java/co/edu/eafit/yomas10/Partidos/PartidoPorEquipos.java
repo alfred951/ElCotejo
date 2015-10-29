@@ -23,4 +23,9 @@ public class PartidoPorEquipos extends Partido {
     public Equipo getContrincante() {
         return contrincante;
     }
+
+    @Override
+    public String toString() {
+        return organizador.getNombre() + "vs " + contrincante.getNombre();
+    }
 }
