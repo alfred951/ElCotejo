@@ -49,4 +49,6 @@
     <string name="title_activity_crear_partido">Crear un Partido</string>
     <string name="title_activity_seleccionar_amigos">Selecciona Tus Amigos</string>
     <string name="title_activity_partido_casual">Informacion del Partido</string>
+    <string name="title_activity_amigos_n">AmigosNActivity</string>
+    <string name="title_activity_partido_por_equipos">Informacion del Partido</string>
 </resources>

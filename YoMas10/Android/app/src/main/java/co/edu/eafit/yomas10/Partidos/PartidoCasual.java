@@ -11,10 +11,10 @@ public class PartidoCasual extends Partido {
 
     private ArrayList<Jugador> integrantes;
 
-    public PartidoCasual(String fecha, String hora, String cancha){
-        super(fecha, hora, cancha);
-        integrantes = new ArrayList<>();
-    }
+//    public PartidoCasual(String fecha, String hora, String cancha){
+//        super(fecha, hora, cancha);
+//        integrantes = new ArrayList<>();
+//    }
 
     public PartidoCasual(String fecha, String hora, String cancha, ArrayList<Jugador> integrantes){
         super(fecha, hora, cancha);

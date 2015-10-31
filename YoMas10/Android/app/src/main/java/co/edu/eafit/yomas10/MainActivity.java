@@ -1,5 +1,6 @@
 package co.edu.eafit.yomas10;
 
+import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -35,6 +39,7 @@ import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.Partidos.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.PartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.PartidoPorEquipos;
+import co.edu.eafit.yomas10.Partidos.PartidoPorEquiposActivity;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
 
@@ -191,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     for (int i = 0; i < equipos.size(); i++) {
                         nombreEquipos.add(equipos.get(i).getNombre());
                     }
-                    setListAdapter(new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_list_item_1, nombreEquipos));
+                    setListAdapter(new ArrayAdapter<Equipo>(getActivity(),
+                            android.R.layout.simple_list_item_1, equipos));
                     break;
                 case 1:
 
@@ -211,43 +216,46 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             switch (bn.getInt(SECTION_NUMBER)){
                 case 0:
-                    String nombreEquipo = (String) getListView().getItemAtPosition(position);
-                    Equipo equipo = user.findEquipo(nombreEquipo);
+                    Serializable equipo = (Serializable) getListView().getItemAtPosition(position);
                     Bundle bundle = new Bundle();
-                    bundle.putString("NOMBRE", equipo.getNombre());
-                    bundle.putString("CAPITAN", equipo.getCapitan().getNombre());
-
-                    ArrayList<String> nombreJugadores = new ArrayList<>();
-
-                    //TODO pasar los username
-                    for (int i = 0; i<equipo.getIntegrantes().size(); i++){
-                        nombreJugadores.add(equipo.getIntegrantes().get(i).getUsername());
-                    }
-
-                    bundle.putStringArrayList("JUGADORES", nombreJugadores);
+                    bundle.putSerializable("EQUIPO", equipo);
+//                    bundle.putString("NOMBRE", equipo.getNombre());
+//                    bundle.putString("CAPITAN", equipo.getCapitan().getNombre());
+//
+//                    ArrayList<String> nombreJugadores = new ArrayList<>();
+//
+//                    //TODO pasar los username
+//                    for (int i = 0; i<equipo.getIntegrantes().size(); i++){
+//                        nombreJugadores.add(equipo.getIntegrantes().get(i).getUsername());
+//                    }
+//
+//                    bundle.putStringArrayList("JUGADORES", nombreJugadores);
                     Intent in = new Intent(ctx, EquipoActivity.class);
-                    in.putExtras(bundle);
+                    in.putExtra("EQUIPO", equipo);
                     startActivity(in);
                     break;
                 case 1:
                     Partido partido= (Partido) getListView().getItemAtPosition(position);
                     Bundle bundle1 = new Bundle();
-                    bundle1.putString("horaPartido", partido.getHora());
-                    bundle1.putString("fechaPartido", partido.getFecha());
-                    bundle1.putString("cancha", partido.getCancha());
+                    bundle1.putSerializable("PARTIDO", partido);
+//                    bundle1.putString("horaPartido", partido.getHora());
+//                    bundle1.putString("fechaPartido", partido.getFecha());
+//                    bundle1.putString("cancha", partido.getCancha());
                     if (partido instanceof PartidoCasual){
-                        ArrayList<Jugador> jugadores= ((PartidoCasual) partido).getIntegrantes();
-                        ArrayList<String> nameJugadores = new ArrayList<>();
-                        for(Jugador jugador: jugadores){
-                            nameJugadores.add(jugador.getNombre());
-                        }
-                        bundle1.putStringArrayList("jugadores", nameJugadores);
+//                        ArrayList<Jugador> jugadores= ((PartidoCasual) partido).getIntegrantes();
+//                        ArrayList<String> nameJugadores = new ArrayList<>();
+//                        for(int i= 0; i<jugadores.size(); i++){
+//                            nameJugadores.add(jugadores.get(i).getUsername());
+//                        }
+//                        bundle1.putStringArrayList("jugadores", nameJugadores);
 
                         Intent intent = new Intent(getContext(), PartidoCasualActivity.class);
                         intent.putExtras(bundle1);
                         startActivity(intent);
                     }else{
-
+                        Intent intent = new Intent(getContext(), PartidoPorEquiposActivity.class);
+                        intent.putExtras(bundle1);
+                        startActivity(intent);
                         //TODO partido por equipos
                     }
                     break;

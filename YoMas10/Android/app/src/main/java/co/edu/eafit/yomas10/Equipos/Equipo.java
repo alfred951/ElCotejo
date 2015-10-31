@@ -2,6 +2,7 @@ package co.edu.eafit.yomas10.Equipos;
 
 import com.parse.ParsePush;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
@@ -9,7 +10,7 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 /**
  * Created by Alejandro on 23/09/2015.
  */
-public class Equipo {
+public class Equipo implements Serializable {
 
     private String nombre;
     private Capitan capitan;
@@ -71,5 +72,8 @@ public class Equipo {
         return integrantes;
     }
 
-
+    @Override
+    public String toString() {
+        return getNombre();
+    }
 }

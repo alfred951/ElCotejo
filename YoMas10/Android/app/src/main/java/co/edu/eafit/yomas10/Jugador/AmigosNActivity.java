@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10.Partidos;
+package co.edu.eafit.yomas10.Jugador;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,64 +10,58 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import co.edu.eafit.yomas10.Jugador.Jugador;
-import co.edu.eafit.yomas10.Jugador.PerfilExterno;
+import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
 
-public class PartidoCasualActivity extends AppCompatActivity {
+public class AmigosNActivity extends AppCompatActivity {
 
-    private TextView horaPartido, fechaPartido, cancha;
-    private ListView participantesLV;
+    private ArrayList<Jugador> amigos;
+    private ArrayAdapter<Jugador> mAdapter;
+    private ListView amigosLV;
+    private TextView noElementsTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_partido_casual);
+        setContentView(R.layout.activity_amigos_n);
 
-        horaPartido = (TextView) findViewById(R.id.horaPartido);
-        fechaPartido = (TextView) findViewById(R.id.fechaPartido);
-        cancha = (TextView) findViewById(R.id.canchaPartido);
-        participantesLV = (ListView) findViewById(R.id.integrantes);
+        amigos = MainActivity.getUser().getAmigos();
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, amigos);
 
-        PartidoCasual partido = (PartidoCasual) getIntent().getExtras().getSerializable("PARTIDO");
-        horaPartido.setText(partido.getHora());
-        fechaPartido.setText(partido.getFecha());
-        cancha.setText(partido.getCancha());
+        amigosLV = (ListView) findViewById(R.id.listaAmigos);
+        noElementsTV = (TextView) findViewById(R.id.emptyText);
 
-        participantesLV.setAdapter(new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, partido.getIntegrantes()));
+        amigosLV.setEmptyView(noElementsTV);
 
-        participantesLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        amigosLV.setAdapter(mAdapter);
+
+        amigosLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Jugador jugador = (Jugador) parent.getItemAtPosition(position);
-                //Jugador amigo = (Jugador) parent.getItemAtPosition(position); //cambiar
+                Jugador amigo = (Jugador) parent.getItemAtPosition(position);
                 Bundle bn = new Bundle();
-                bn.putSerializable("Jugador", jugador);
+                bn.putSerializable("Jugador", amigo);
 //                bn.putString("USERNAME", amigo.toString());
 //                bn.putString("NOMBRE", amigo.getNombre());
 //                bn.putString("POSICION", amigo.getPosicion());
 //                bn.putString("BIO", amigo.getBio());
 //                bn.putString("CORREO", amigo.getCorreo());
 
-
                 Intent in = new Intent(getApplicationContext(), PerfilExterno.class);
                 in.putExtras(bn);
                 startActivity(in);
             }
         });
-        //TODO setOnListItemClick
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_partido_casual, menu);
+        getMenuInflater().inflate(R.menu.menu_amigos_n, menu);
         return true;
     }
 

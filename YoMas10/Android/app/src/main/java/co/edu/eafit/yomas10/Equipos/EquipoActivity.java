@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
 import co.edu.eafit.yomas10.R;
 
@@ -29,28 +30,30 @@ public class EquipoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo);
 
-        String nombreEquipo = getIntent().getExtras().getString("NOMBRE");
-
-        setTitle(nombreEquipo);
-
         capitan = (TextView) findViewById(R.id.capitan);
         listaJugadores = (ListView) findViewById(R.id.listaJugadores);
 
         //TODO: Sacar la info del la DB
-        capitan.setText(getIntent().getExtras().getString("CAPITAN"));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1,
-                        getIntent().getExtras().getStringArrayList("JUGADORES"));
+        Equipo equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
+        setTitle(equipo.getNombre());
+        capitan.setText(equipo.getCapitan().getNombre());
+
+        ArrayAdapter<Jugador> adapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, equipo.getIntegrantes());
 
         listaJugadores.setAdapter(adapter);
 
         listaJugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String username = (String) parent.getAdapter().getItem(position);
+                Jugador jugador = (Jugador) parent.getAdapter().getItem(position);
+
+                Bundle bn = new Bundle();
+                bn.putSerializable("JUGADOR", jugador);
+
                 Intent in = new Intent(ctx, PerfilExterno.class);
-                in.putExtra("USERNAME", username);
+                in.putExtras(bn);
                 startActivity(in);
             }
         });

@@ -156,6 +156,14 @@
             android:name=".Partidos.PartidoCasualActivity"
             android:label="@string/title_activity_partido_casual" >
         </activity>
+        <activity
+            android:name=".Jugador.AmigosNActivity"
+            android:label="@string/title_activity_amigos_n" >
+        </activity>
+        <activity
+            android:name=".Partidos.PartidoPorEquiposActivity"
+            android:label="@string/title_activity_partido_por_equipos" >
+        </activity>
     </application>
 
 </manifest>

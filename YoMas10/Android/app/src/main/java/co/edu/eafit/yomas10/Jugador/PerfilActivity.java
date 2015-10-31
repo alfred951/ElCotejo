@@ -48,7 +48,7 @@ public class PerfilActivity extends AppCompatActivity {
         posicion.setText(MainActivity.getUser().getPosicion());
         userBio.setText(MainActivity.getUser().getBio());
         correo.setText(MainActivity.getUser().getCorreo());
-        profilePic.setImageURI(MainActivity.getUser().getProfilePic());
+        //profilePic.setImageURI(MainActivity.getUser().getProfilePic());
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data){
@@ -87,7 +87,7 @@ public class PerfilActivity extends AppCompatActivity {
             startActivity(in);
             finish();
         }else if (id == R.id.action_friends) {
-            startActivity(new Intent(this, AmigosActivity.class));
+            startActivity(new Intent(this, AmigosNActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

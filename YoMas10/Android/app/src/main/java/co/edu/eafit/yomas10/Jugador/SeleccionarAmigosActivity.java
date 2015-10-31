@@ -30,7 +30,7 @@ import co.edu.eafit.yomas10.R;
 public class SeleccionarAmigosActivity extends AppCompatActivity {
 
     private ArrayList<Jugador> amigos;
-    private ArrayList<String> usernameAmigos = new ArrayList<>();
+    //private ArrayList<String> usernameAmigos = new ArrayList<>();
     private SelectionAdapter mAdapter;
     private ListView amigosLV;
     private TextView noElementsTV;
@@ -42,11 +42,11 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
         Toast.makeText(this, "Manten undido para seleccionar", Toast.LENGTH_LONG).show();
 
         amigos = MainActivity.getUser().getAmigos();
-        for (int i = 0; i<amigos.size();i++){
-            usernameAmigos.add(amigos.get(i).getUsername());
-        }
+//        for (int i = 0; i<amigos.size();i++){
+//            usernameAmigos.add(amigos.get(i).getUsername());
+//        }
 
-        mAdapter = new SelectionAdapter(this, android.R.layout.simple_list_item_1, usernameAmigos);
+        mAdapter = new SelectionAdapter(this, android.R.layout.simple_list_item_1, amigos);
 
         amigosLV = (ListView) findViewById(R.id.listaAmigos);
         noElementsTV = (TextView) findViewById(R.id.emptyText);
@@ -87,9 +87,15 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                ArrayList<String> jugadores = getCheckedPlayers();
+                ArrayList<Jugador> jugadores = getCheckedPlayers();
+                ArrayList<String> usernameJugadores = new ArrayList<String>();
+
+                for (int i = 0; i < jugadores.size(); i++) {
+                    usernameJugadores.add(jugadores.get(i).getUsername());
+                }
+
                 Bundle bn = new Bundle();
-                bn.putStringArrayList("JUGADORES", jugadores);
+                bn.putStringArrayList("JUGADORES", usernameJugadores);
 
                 switch (item.getItemId()) {
                     case R.id.check:
@@ -150,24 +156,24 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
     }
 
     //TODO cambiar por username
-    public ArrayList<String> getCheckedPlayers(){
-        ArrayList<String> jugadores = new ArrayList<>();
+    public ArrayList<Jugador> getCheckedPlayers(){
+        ArrayList<Jugador> jugadores = new ArrayList<>();
         Set<Integer> checked = mAdapter.getCurrentCheckedPosition();
 
         Iterator<Integer> it = checked.iterator();
         while(it.hasNext()){
             Integer numPlayer = it.next();
-            String jugador = mAdapter.getItem(numPlayer);
+            Jugador jugador = mAdapter.getItem(numPlayer);
             jugadores.add(jugador);
         }
         return jugadores;
     }
 
-    private class SelectionAdapter extends ArrayAdapter<String> {
+    private class SelectionAdapter extends ArrayAdapter<Jugador> {
         private HashMap<Integer, Boolean> mSelection = new HashMap<>();
 
         public SelectionAdapter
-                (Context context, int resource, ArrayList<String> objects){
+                (Context context, int resource, ArrayList<Jugador> objects){
             super(context, resource, objects);
         }
 

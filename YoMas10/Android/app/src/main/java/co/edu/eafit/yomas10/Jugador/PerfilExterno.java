@@ -36,13 +36,14 @@ public class PerfilExterno extends AppCompatActivity {
         correo     = (TextView) findViewById(R.id.email);
 
         //TODO sacar los atributos con el username
+        Jugador jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
 
-//        name.setText()
-        username.setText(getIntent().getExtras().getString("USERNAME"));
-//        posicion.setText();
-//        userBio.setText();
-//        correo.setText();
-//        profilePic.setImageURI();
+        name.setText(jugador.getNombre());
+        username.setText(jugador.getUsername());
+        posicion.setText(jugador.getPosicion());
+        userBio.setText(jugador.getBio());
+        correo.setText(jugador.getCorreo());
+        //profilePic.setImageURI(bn.getString("USERNAME"));
     }
 
     @Override

@@ -99,7 +99,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
         MainActivity.getUser().setNombre(nameT);
         MainActivity.getUser().setPosicion(posicionT);
         MainActivity.getUser().setBio(userBioT);
-        MainActivity.getUser().setProfilePic(picture);
+        //MainActivity.getUser().setProfilePic(picture);
 
         //TODO: Subir los nuevos datos a la base de datos
     }

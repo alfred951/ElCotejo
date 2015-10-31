@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
@@ -40,8 +41,10 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
             Log.d("PUSH", json.getString("TIPO"));
-            if (json.getString("TIPO").equals("invJuego"))
-                in = onGameInvitation(json, context);
+            if (json.getString("TIPO").equals("invJuegoEquipos"))
+                in = onTeamInvitation(json, context);
+            else if (json.getString("TIPO").equals("invJuegoCasual"))
+                in = onCasualGameInvitation(json, context);
             else if (json.getString("TIPO").equals("invEquipo"))
                 in = onTeamInvitation(json, context);
         }catch (JSONException e){
@@ -52,8 +55,11 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
     }
 
 
-    public Intent onGameInvitation(JSONObject json, Context ctx) throws JSONException{
+    public Intent onCasualGameInvitation(JSONObject json, Context ctx) throws JSONException{
         String msg = "", fecha = "", equipo1 = "", equipo2 = "";
+
+        msg = json.getString("MSG");
+        fecha = json.getString()
 
         Iterator itr = json.keys();
         while (itr.hasNext()) {
@@ -78,6 +84,10 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         Intent in = new Intent(ctx, InvitacionPartidoActivity.class);
         in.putExtras(bn);
         return in;
+    }
+
+    public Intent onTeamGameInvitation(JSONObject json, Context ctx) throws JSONException{
+        S
     }
 
     /**
@@ -111,8 +121,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
 
     public void makeNotification(Context ctx, Intent in){
         Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_launcher);
-        PendingIntent pi = PendingIntent.getActivity(ctx, (int)System.currentTimeMillis(), in, 0);
-
+        PendingIntent pi = PendingIntent.getActivity(ctx, (int) System.currentTimeMillis(), in, 0);
 
         Notification noti = new NotificationCompat.Builder(ctx)
                 .setContentTitle("YO+10")
@@ -121,7 +130,10 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
                 .setLargeIcon(icon)
                 .setContentIntent(pi)
                 .setAutoCancel(true)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setVibrate((new Notification()).vibrate)
                 .build();
+
 
         NotificationManager nm = (NotificationManager)ctx.getSystemService
                 (Context.NOTIFICATION_SERVICE);

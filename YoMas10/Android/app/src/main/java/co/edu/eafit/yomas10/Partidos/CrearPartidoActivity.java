@@ -30,11 +30,10 @@ import co.edu.eafit.yomas10.R;
 public class CrearPartidoActivity extends AppCompatActivity {
 
     private static TextView fechaPartido, horaPartido;
-    private Button cambiarFecha, cambiarHora;
     private EditText canchaPartido;
     private ListView jugadoresLV;
-    private ArrayList<String> jugadores;
-    private ArrayAdapter<String> mAdapter;
+    private ArrayList<Jugador> jugadores;
+    private ArrayAdapter<Jugador> mAdapter;
     private final static int REQUEST_AMIGOS = 1;
 
     @Override
@@ -45,9 +44,6 @@ public class CrearPartidoActivity extends AppCompatActivity {
         fechaPartido = (TextView) findViewById(R.id.fechaPartido);
         horaPartido = (TextView) findViewById(R.id.horaPartido);
         canchaPartido = (EditText) findViewById(R.id.canchaPartido);
-
-        cambiarFecha = (Button) findViewById(R.id.cambiarFecha);
-        cambiarHora = (Button) findViewById(R.id.cambiarHora);
 
         jugadoresLV = (ListView) findViewById(R.id.jugadores);
 
@@ -78,9 +74,14 @@ public class CrearPartidoActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK){
             ArrayList<String> nuevosJugadores = data.getExtras().getStringArrayList("JUGADORES");
 
-            for (int i = 0; i<nuevosJugadores.size();i++){
-                mAdapter.add(nuevosJugadores.get(i));
+            for (String jugador: nuevosJugadores){
+                jugadores.add(MainActivity.getUser().findAmigo(jugador));
+                //mAdapter.add(MainActivity.getUser().findAmigo(jugador));
             }
+//            for (int i = 0; i<nuevosJugadores.size();i++){
+//                jugadores.add(nuevosJugadores.get(i));
+//                //mAdapter.add(nuevosJugadores.get(i));
+//            }
 
             mAdapter.notifyDataSetChanged();
         }
@@ -105,7 +106,7 @@ public class CrearPartidoActivity extends AppCompatActivity {
             return true;
         }else if (id == R.id.crearPartido){
             Partido partido = new PartidoCasual(fechaPartido.getText().toString(),
-                    horaPartido.getText().toString(), canchaPartido.getText().toString());
+                    horaPartido.getText().toString(), canchaPartido.getText().toString(), jugadores);
 
             MainActivity.getUser().agregarPartido(partido);
             startActivity(new Intent(this, MainActivity.class));

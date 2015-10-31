@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.parse.ParsePush;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import co.edu.eafit.yomas10.Equipos.Equipo;
@@ -14,14 +15,14 @@ import co.edu.eafit.yomas10.Partidos.Partido;
 /**
  * Created by Alejandro on 23/09/2015.
  */
-public class Jugador {
+public class Jugador implements Serializable {
 
     protected String username;
     protected String nombre = null;
     protected String bio = null;
     protected String posicion = null;
     protected String correo = null;
-    protected Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
+    //protected Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
     protected ArrayList<Equipo> equipos = null;
     protected ArrayList<Partido> partidos = null;
     protected ArrayList<Jugador> amigos = null;
@@ -60,6 +61,14 @@ public class Jugador {
             if (equipos.get(i).getNombre().equals(nombre)){
                 return equipos.get(i);
             }
+        }
+        return null;
+    }
+
+    public Jugador findAmigo(String username){
+        for (Jugador jugador: amigos) {
+            if (jugador.getUsername().equals(username))
+                return jugador;
         }
         return null;
     }
@@ -114,6 +123,11 @@ public class Jugador {
         }
     }
 
+    @Override
+    public String toString() {
+        return getUsername();
+    }
+
     public String getUsername() { return username; }
 
     public ArrayList getChannels(){ return canales; }
@@ -130,9 +144,9 @@ public class Jugador {
 
     public void setPosicion(String posicion) { this.posicion = posicion; }
 
-    public Uri getProfilePic(){ return profilePic; }
+    //public Uri getProfilePic(){ return profilePic; }
 
-    public void setProfilePic(Uri profilePic) { this.profilePic = profilePic; }
+    //public void setProfilePic(Uri profilePic) { this.profilePic = profilePic; }
 
     public String getCorreo() { return correo; }
 

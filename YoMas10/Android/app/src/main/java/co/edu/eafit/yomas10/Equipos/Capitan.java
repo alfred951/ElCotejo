@@ -1,5 +1,6 @@
 package co.edu.eafit.yomas10.Equipos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
@@ -7,7 +8,7 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 /**
  * Created by Alejandro on 23/09/2015.
  */
-public class Capitan extends Jugador {
+public class Capitan extends Jugador implements Serializable{
 
     private Equipo equipo;
 
@@ -17,7 +18,7 @@ public class Capitan extends Jugador {
         bio = jugador.getBio();
         posicion = jugador.getPosicion();
         correo = jugador.getCorreo();
-        profilePic = jugador.getProfilePic();
+        //profilePic = jugador.getProfilePic();
         equipos = jugador.getEquipos();
         amigos = jugador.getAmigos();
         canchasFavoritas = jugador.getCanchasFavoritas();
@@ -44,5 +45,8 @@ public class Capitan extends Jugador {
         this.equipo = equipo;
     }
 
-
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

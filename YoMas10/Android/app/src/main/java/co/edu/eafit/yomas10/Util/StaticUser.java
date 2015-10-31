@@ -53,7 +53,7 @@ public class StaticUser {
         Jugador moreno = new Jugador("jpmoreno109");
         moreno.setNombre("Juan Pablo Moreno");
         Jugador saravia = new Jugador("ssaravia");
-        saravia.setNombre("Luis Alfredo");
+        saravia.setNombre("Santiago Saravia");
         Jugador ramos = new Jugador("Ramitos");
         ramos.setNombre("David Ramos");
         amigos.add(moreno);
