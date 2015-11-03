@@ -74,7 +74,10 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
                     new Jugador(this.capitan.getText().toString()));
             MainActivity.getUser().agregarEquipo(equipo);
             HashMap<String, String> jugador = new HashMap<>();
-            jugador.put("name", "ssaravia");
+            jugador.put("nickname", "aleochoam");
+            jugador.put("nombre","Santiago Saravia");
+            jugador.put("posicion","Arquero");
+            jugador.put("bio","Lo que sea");
             this.http.makePostRequest(jugador, urljugador);
             //TODO: agregarse al equipo en la base de datos
             //equipo.agregarJugador(StaticUser.jugador);
