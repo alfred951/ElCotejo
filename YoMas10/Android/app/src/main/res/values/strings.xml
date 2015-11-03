@@ -51,4 +51,5 @@
     <string name="title_activity_partido_casual">Informacion del Partido</string>
     <string name="title_activity_amigos_n">AmigosNActivity</string>
     <string name="title_activity_partido_por_equipos">Informacion del Partido</string>
+    <string name="title_activity_invitacion_partido_casual">Invitacion a Partido</string>
 </resources>

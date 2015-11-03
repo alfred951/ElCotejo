@@ -1,6 +1,5 @@
 package co.edu.eafit.yomas10;
 
-import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
@@ -36,10 +33,9 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilActivity;
 import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
 import co.edu.eafit.yomas10.Partidos.Partido;
-import co.edu.eafit.yomas10.Partidos.PartidoCasual;
-import co.edu.eafit.yomas10.Partidos.PartidoCasualActivity;
-import co.edu.eafit.yomas10.Partidos.PartidoPorEquipos;
-import co.edu.eafit.yomas10.Partidos.PartidoPorEquiposActivity;
+import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
+import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasualActivity;
+import co.edu.eafit.yomas10.Partidos.Equipos.PartidoPorEquiposActivity;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
 

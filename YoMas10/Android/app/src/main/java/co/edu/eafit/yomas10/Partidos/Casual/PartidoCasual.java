@@ -1,8 +1,9 @@
-package co.edu.eafit.yomas10.Partidos;
+package co.edu.eafit.yomas10.Partidos.Casual;
 
 import java.util.ArrayList;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
+import co.edu.eafit.yomas10.Partidos.Partido;
 
 /**
  * Created by Usuario on 24/10/2015.

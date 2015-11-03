@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10.Partidos;
+package co.edu.eafit.yomas10.Partidos.Equipos;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import co.edu.eafit.yomas10.R;
 /**
  * Activity con la informacion del partido que la llamo
  */
-public class InvitacionPartidoActivity extends AppCompatActivity {
+public class InvitacionPartidoEquiposActivity extends AppCompatActivity {
     //TODo meter el lugar
 
     private TextView fecha, equipo1, equipo2;

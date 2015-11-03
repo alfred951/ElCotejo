@@ -14,14 +14,21 @@ import android.util.Log;
 
 import com.parse.ParsePushBroadcastReceiver;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
+import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Equipos.InvitacionEquipoActivity;
+import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.MainActivity;
-import co.edu.eafit.yomas10.Partidos.InvitacionPartidoActivity;
+import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
+import co.edu.eafit.yomas10.Partidos.Casual.InvitacionPartidoCasualActivity;
+import co.edu.eafit.yomas10.Partidos.Equipos.PartidoPorEquipos;
+import co.edu.eafit.yomas10.Partidos.Equipos.InvitacionPartidoEquiposActivity;
 import co.edu.eafit.yomas10.R;
 
 /**
@@ -56,38 +63,77 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
 
 
     public Intent onCasualGameInvitation(JSONObject json, Context ctx) throws JSONException{
-        String msg = "", fecha = "", equipo1 = "", equipo2 = "";
+        String msg = "", fecha = "", hora = "", cancha = "";
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+
+        JSONArray integrantesJSON = json.getJSONArray("INTEGRANTES");
 
         msg = json.getString("MSG");
-        fecha = json.getString()
+        fecha = json.getString("FECHA");
+        hora = json.getString("HORA");
+        cancha = json.getString("CANCHA");
 
-        Iterator itr = json.keys();
-        while (itr.hasNext()) {
-            String key = (String) itr.next();
-            if (key.equals("MSG")){
-                msg = json.getString(key);
-            }else if (key.equals("FECHA")){
-                fecha = json.getString(key);
-            }else if (key.equals("EQUIPO1")){
-                equipo1 = json.getString(key);
-            }else if (key.equals("EQUIPO2")){
-                equipo2 = json.getString(key);
-            }
+        for (int i = 0; i < integrantesJSON.length(); i++) {
+            //TODO sacar los datos de la db
+            JSONObject jugador = integrantesJSON.getJSONObject(i);
+            String username = jugador.getString("username");
+            jugadores.add(new Jugador(username));
         }
 
+        PartidoCasual partido = new PartidoCasual(fecha, hora, cancha, jugadores);
         Bundle bn = new Bundle();
         bn.putString("MSG", msg);
-        bn.putString("FECHA", fecha);
-        bn.putString("EQUIPO1", equipo1);
-        bn.putString("EQUIPO2", equipo2);
+        bn.putSerializable("PARTIDO", partido);
 
-        Intent in = new Intent(ctx, InvitacionPartidoActivity.class);
+        Intent in = new Intent(ctx, InvitacionPartidoCasualActivity.class);
         in.putExtras(bn);
         return in;
     }
 
     public Intent onTeamGameInvitation(JSONObject json, Context ctx) throws JSONException{
-        S
+        String msg = "", fecha = "", hora = "", cancha = "";
+
+        msg = json.getString("MSG");
+        fecha = json.getString("FECHA");
+        hora = json.getString("HORA");
+        cancha = json.getString("CANCHA");
+
+        JSONArray equipo1JSON = json.getJSONArray("EQUIPO1");
+        Jugador capitanE1 = new Jugador(json.getString("CAPITANEQUPO1"));
+        ArrayList<Jugador> jugadoresE1 = new ArrayList<>();
+
+        for (int i = 0; i < equipo1JSON.length(); i++) {
+            JSONObject jugador = equipo1JSON.getJSONObject(i);
+            String username = jugador.getString("username");
+            jugadoresE1.add(new Jugador(username));
+        }
+
+        Equipo equipo1 = new Equipo(json.getString("NOMBREEQUIPO1"), capitanE1);
+        equipo1.agregarJugadores(jugadoresE1);
+
+
+        JSONArray equipo2JSON = json.getJSONArray("EQUIPO2");
+        Jugador capitanE2 = new Jugador(json.getString("CAPITANEQUPO2"));
+        ArrayList<Jugador> jugadoresE2 = new ArrayList<>();
+
+        for (int i = 0; i < equipo2JSON.length(); i++) {
+            JSONObject jugador = equipo2JSON.getJSONObject(i);
+            String username = jugador.getString("username");
+            jugadoresE2.add(new Jugador(username));
+        }
+
+
+        Equipo equipo2 = new Equipo(json.getString("NOMBREEQUIPO2"), capitanE2);
+        equipo1.agregarJugadores(jugadoresE2);
+
+
+        PartidoPorEquipos partido = new PartidoPorEquipos(fecha, hora, cancha, equipo1, equipo2);
+
+        Bundle bn = new Bundle();
+        bn.putString("MSG", msg);
+        bn.putSerializable("PARTIDO", partido);
+        Intent in = new Intent(ctx, InvitacionPartidoEquiposActivity.class);
+        return in;
     }
 
     /**

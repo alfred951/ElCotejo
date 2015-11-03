@@ -1,6 +1,9 @@
-package co.edu.eafit.yomas10.Partidos;
+package co.edu.eafit.yomas10.Partidos.Equipos;
+
+import java.io.Serializable;
 
 import co.edu.eafit.yomas10.Equipos.Equipo;
+import co.edu.eafit.yomas10.Partidos.Partido;
 
 
 public class PartidoPorEquipos extends Partido {

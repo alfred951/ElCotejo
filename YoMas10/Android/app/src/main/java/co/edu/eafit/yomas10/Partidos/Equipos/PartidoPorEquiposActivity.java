@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10.Partidos;
+package co.edu.eafit.yomas10.Partidos.Equipos;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10.Partidos;
+package co.edu.eafit.yomas10.Partidos.Casual;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -25,9 +25,11 @@ import java.util.Calendar;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
 import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
+import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.R;
 
-public class CrearPartidoActivity extends AppCompatActivity {
+public class CrearPartidoCasualActivity extends AppCompatActivity {
 
     private static TextView fechaPartido, horaPartido;
     private EditText canchaPartido;

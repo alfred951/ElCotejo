@@ -1,18 +1,50 @@
-//invitacion a partido
+//invitacion a partido casual
 {
-	"action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
-	"TIPO" : "invJuego",
-	"MSG": "Invitacion a partido",
-	"FECHA"  : "19 de Mayo",
-	"EQUIPO1" : "Leones",
-	"EQUIPO2" : "Delfines"
+    "action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
+    "TIPO" : "invJuegoCasual",
+    "MSG": "Invitacion a partido",
+    "FECHA"  : "4/5/15",
+    "HORA" : "19:00", 
+    "CANCHA" : "Templo del futbol",
+    "INTEGRANTES" : [
+        {"username" : "aleochoam"},
+        {"username" : "ssaravia"},
+        {"username" : "jpmoreno"}
+    ]   
+}
+
+//invitacion a partido por equipos
+{
+    "action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
+    "TIPO" : "invJuegoEquipos",
+    "MSG": "Invitacion a partido",
+    "FECHA"  : "19 de Mayo",
+    "HORA" : "19:00",
+    "CANCHA" : "Templo del futbol",
+    
+    "NOMBREEQUIPO1" : "Leones",
+    "CAPITANEQUPO1" : "jalvar18",
+    
+    "NOMBREEQUIPO2" : "Delfines",
+    "CAPITANEQUPO2" : "ramitos",
+    
+    "EQUIPO1" : [
+        {"username" : "alfred76"},
+        {"username" : "aleochoam"}
+    ],
+    
+    "EQUIPO2" : [
+        {"capitan" : "jalvar18"},
+        {"username" : "ssaravia"},
+        {"username" : "jpmoreno"},
+    ]
 }
 
 //Invitacion a equipo
 {
-	"action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
-	"TIPO" : "invEquipo",
-	"MSG" : "Invitacion a Equipo",
-	"NOMBRE" :  "Leones",
-	"CAPITAN" : "aleochoam"
+    "action": "co.edu.eafit.yomas10.ParseReceiver.RECEIVE",
+    "TIPO" : "invEquipo",
+    "MSG" : "Invitacion a Equipo",
+    "NOMBRE" :  "Leones",
+    "CAPITAN" : "aleochoam"
 }

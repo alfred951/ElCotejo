@@ -153,7 +153,7 @@
             android:label="@string/title_activity_seleccionar_amigos" >
         </activity>
         <activity
-            android:name=".Partidos.PartidoCasualActivity"
+            android:name=".Partidos.Casual.PartidoCasualActivity"
             android:label="@string/title_activity_partido_casual" >
         </activity>
         <activity
@@ -161,8 +161,12 @@
             android:label="@string/title_activity_amigos_n" >
         </activity>
         <activity
-            android:name=".Partidos.PartidoPorEquiposActivity"
+            android:name=".Partidos.Equipos.PartidoPorEquiposActivity"
             android:label="@string/title_activity_partido_por_equipos" >
+        </activity>
+        <activity
+            android:name=".Partidos.Casual.InvitacionPartidoCasualActivity"
+            android:label="@string/title_activity_invitacion_partido_casual" >
         </activity>
     </application>
 
