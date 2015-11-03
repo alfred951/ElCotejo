@@ -30,7 +30,7 @@ import co.edu.eafit.yomas10.R;
 public class ParseReceiver extends ParsePushBroadcastReceiver {
 
 
-    public void onPushReceive(Context context, Intent intent){
+    /*public void onPushReceive(Context context, Intent intent){
         Log.i("Parse Notification", "PUSH RECEIVED!!");
 
         Intent in = new Intent(context, MainActivity.class);
@@ -52,14 +52,14 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         }
 
         makeNotification(context,in);
-    }
+    } */
 
 
-    public Intent onCasualGameInvitation(JSONObject json, Context ctx) throws JSONException{
+   /* public Intent onCasualGameInvitation(JSONObject json, Context ctx) throws JSONException{
         String msg = "", fecha = "", equipo1 = "", equipo2 = "";
 
         msg = json.getString("MSG");
-        fecha = json.getString()
+        fecha = json.getString();
 
         Iterator itr = json.keys();
         while (itr.hasNext()) {
@@ -84,17 +84,17 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         Intent in = new Intent(ctx, InvitacionPartidoActivity.class);
         in.putExtras(bn);
         return in;
-    }
+    }*/
 
-    public Intent onTeamGameInvitation(JSONObject json, Context ctx) throws JSONException{
-        S
-    }
+    //public Intent onTeamGameInvitation(JSONObject json, Context ctx) throws JSONException{
+    //    S
+  //  }
 
     /**
      * Si el primer key del JSON es "invEquipo" este metodo se encarga de la notificacion y del
      * activity
      */
-    public Intent onTeamInvitation(JSONObject json, Context context) throws JSONException{
+    /*public Intent onTeamInvitation(JSONObject json, Context context) throws JSONException{
         String msg = "", nombre = "", capitan = "";
 
         Iterator itr = json.keys();
@@ -117,7 +117,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         in.putExtras(bn);
         return in;
 
-    }
+    }*/
 
     public void makeNotification(Context ctx, Intent in){
         Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_launcher);

@@ -3,6 +3,7 @@ package co.edu.eafit.yomas10.Equipos;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import co.edu.eafit.yomas10.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 
 /**
@@ -11,6 +12,7 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 public class Capitan extends Jugador implements Serializable{
 
     private Equipo equipo;
+    private Http http;
 
     public Capitan(Jugador jugador){
         super(jugador.getUsername());
