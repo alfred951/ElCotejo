@@ -31,7 +31,7 @@ import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Equipos.EquipoActivity;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilActivity;
-import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
+import co.edu.eafit.yomas10.Partidos.Casual.CrearPartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasualActivity;
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             startActivity(in);
             finish();
         }else if (id == R.id.crearPartido){
-            Intent in = new Intent(MainActivity.this, CrearPartidoActivity.class);
+            Intent in = new Intent(MainActivity.this, CrearPartidoCasualActivity.class);
             startActivity(in);
             finish();
         }

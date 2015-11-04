@@ -92,7 +92,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
 
     public Intent onTeamGameInvitation(JSONObject json, Context ctx) throws JSONException{
         String msg = "", fecha = "", hora = "", cancha = "";
-        
+
 
         msg = json.getString("MSG");
         fecha = json.getString("FECHA");

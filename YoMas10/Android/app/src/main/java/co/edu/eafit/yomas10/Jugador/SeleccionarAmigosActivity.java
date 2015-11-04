@@ -24,7 +24,7 @@ import java.util.Set;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
 import co.edu.eafit.yomas10.MainActivity;
-import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
+import co.edu.eafit.yomas10.Partidos.Casual.CrearPartidoCasualActivity;
 import co.edu.eafit.yomas10.R;
 
 public class SeleccionarAmigosActivity extends AppCompatActivity {

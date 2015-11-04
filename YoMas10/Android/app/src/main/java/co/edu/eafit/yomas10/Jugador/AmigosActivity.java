@@ -23,7 +23,7 @@ import java.util.Set;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
 import co.edu.eafit.yomas10.MainActivity;
-import co.edu.eafit.yomas10.Partidos.CrearPartidoActivity;
+import co.edu.eafit.yomas10.Partidos.Casual.CrearPartidoCasualActivity;
 import co.edu.eafit.yomas10.R;
 
 public class AmigosActivity extends AppCompatActivity{
@@ -96,7 +96,7 @@ public class AmigosActivity extends AppCompatActivity{
                         break;
 
                     case R.id.action_invitarPartido:
-                        Intent intent1 = new Intent(getApplicationContext(), CrearPartidoActivity.class);
+                        Intent intent1 = new Intent(getApplicationContext(), CrearPartidoCasualActivity.class);
                         intent1.putExtras(bn);
                         startActivity(intent1);
                         break;
