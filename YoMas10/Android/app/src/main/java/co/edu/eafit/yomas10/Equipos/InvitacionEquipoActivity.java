@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import co.edu.eafit.yomas10.Equipos.Equipo;
+import co.edu.eafit.yomas10.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
@@ -20,6 +23,8 @@ import co.edu.eafit.yomas10.R;
 public class InvitacionEquipoActivity extends AppCompatActivity {
 
     private TextView equipo, capitan;
+    public Http http;
+    String urljugador = "www.yomasdiez.com/index.php/api/Usuario/Jugadores";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +66,23 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
 
     public void aceptarEquipo(View view){
 
-        //TODO: Cambiar Todo esto
-        Toast.makeText(this, "Te has inscrito a " + equipo.getText().toString(),Toast.LENGTH_SHORT )
-                .show();
+        try {
+            //TODO: Cambiar Todo esto
+            Toast.makeText(this, "Te has inscrito a " + equipo.getText().toString(), Toast.LENGTH_SHORT)
+                    .show();
+            Equipo equipo = new Equipo(this.equipo.getText().toString(),
+                    new Jugador(this.capitan.getText().toString()));
+            MainActivity.getUser().agregarEquipo(equipo);
+            HashMap<String, String> jugador = new HashMap<>();
+            jugador.put("name", "ssaravia");
+            this.http.makePostRequest(jugador, urljugador);
+            //TODO: agregarse al equipo en la base de datos
+            //equipo.agregarJugador(StaticUser.jugador);
+            //TODO: Notificar la aceptacion
+        }
+        catch(Exception e) {
 
-        Equipo equipo = new Equipo(this.equipo.getText().toString(),
-                new Jugador(this.capitan.getText().toString()));
-        MainActivity.getUser().agregarEquipo(equipo);
-        //TODO: agregarse al equipo en la base de datos
-        //equipo.agregarJugador(StaticUser.jugador);
-        //TODO: Notificar la aceptacion
+        }
         Intent in = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(in);
         finish();

@@ -3,18 +3,32 @@ package co.edu.eafit.yomas10;
 
 import android.accounts.NetworkErrorException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class Http{
 
-    String url = "www.yomasdiez.com/index.php/api/Usuario/Jugadores";
+   String url = "www.yomasdiez.com/index.php/api/Usuario/Jugadores";
 
    private String makeGetRequest(String uname) throws IOException, JSONException, NetworkErrorException{
 
@@ -46,27 +60,46 @@ public class Http{
 
        return response;
     }
+    public String makePostRequest(HashMap<String, String> postDataParams, String stringURL) throws Exception{
 
-    private boolean makePostRequest(String urlParams) throws Exception{
+        URL url;
+        String response = "";
+        try {
+            url = new URL(stringURL);
 
-        URL url = new URL(this.url.toString());
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
 
-        // Request Header
-        con.setRequestMethod("POST");
-        con.setRequestProperty("http.agent", "");
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getPostDataString(postDataParams));
 
-        //Send post request
-        con.setDoOutput(true);
-        DataOutputStream dos = new DataOutputStream(con.getOutputStream());
-        dos.writeBytes(urlParams);
-        dos.flush();
-        dos.close();
+            writer.flush();
+            writer.close();
+            os.close();
+            int responseCode=conn.getResponseCode();
 
-        int responseCode = con.getResponseCode();
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                String line;
+                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line=br.readLine()) != null) {
+                    response+=line;
+                }
+            }
+            else {
+                response="";
 
-        // Return true if request was done successfully
-        return responseCode == 200 || responseCode == 201;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
     }
 
     private String getJSON(InputStream inputStream) throws IOException {
@@ -81,5 +114,21 @@ public class Http{
         in.close();
 
         return json.toString();
+    }
+
+    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String, String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
     }
 }
