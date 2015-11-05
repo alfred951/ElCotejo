@@ -34,8 +34,7 @@ public class StaticUser {
 
     public static ArrayList<Jugador> crearJugadores(){
         ArrayList jugadores = new ArrayList();
-        Jugador yo = new Jugador("Aleochoam");
-        yo.setNombre("Alejandro");
+
         Jugador chepe = new Jugador("joseluh");
         chepe.setNombre("Jose Luis");
         Jugador alfred = new Jugador("alfred598");
@@ -52,12 +51,16 @@ public class StaticUser {
 
     public static ArrayList<Jugador> crearAmigos(){
         ArrayList amigos = new ArrayList();
+        Jugador yo = new Jugador("Aleochoam");
+        yo.setNombre("Alejandro");
         Jugador moreno = new Jugador("jpmoreno109");
         moreno.setNombre("Juan Pablo Moreno");
         Jugador saravia = new Jugador("ssaravia");
         saravia.setNombre("Santiago Saravia");
         Jugador ramos = new Jugador("Ramitos");
         ramos.setNombre("David Ramos");
+
+        amigos.add(yo);
         amigos.add(moreno);
         amigos.add(saravia);
         amigos.add(ramos);

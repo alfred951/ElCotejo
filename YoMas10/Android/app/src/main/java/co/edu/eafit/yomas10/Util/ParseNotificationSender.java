@@ -38,7 +38,17 @@ public class ParseNotificationSender {
         json.put("FECHA", fecha);
         json.put("HORA", hora);
         json.put("CANCHA", cancha);
-        json.put("INTEGRANTES", new JSONArray(jugadores));
+
+        JSONArray jsonArray = new JSONArray();
+
+        for (int i = 0; i < jugadores.size(); i++) {
+            JSONObject jo = new JSONObject();
+            jo.put("username", jugadores.get(i));
+            jsonArray.put(jo);
+        }
+
+        json.put("INTEGRANTES", jsonArray);
+
 
         ParsePush push = new ParsePush();
         push.setChannel(username);

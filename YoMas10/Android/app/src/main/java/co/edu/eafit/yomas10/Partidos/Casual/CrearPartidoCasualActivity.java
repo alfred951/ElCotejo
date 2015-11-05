@@ -43,6 +43,8 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
     private ArrayAdapter<Jugador> mAdapter;
     private final static int REQUEST_AMIGOS = 1;
 
+    private ArrayList<String> nuevosJugadores;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,19 +81,11 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
-            ArrayList<String> nuevosJugadores = data.getExtras().getStringArrayList("JUGADORES");
+            nuevosJugadores = data.getExtras().getStringArrayList("JUGADORES");
 
             for (String jugador: nuevosJugadores){
                 jugadores.add(MainActivity.getUser().findAmigo(jugador));
-                try {
-                    ParseNotificationSender.sendCasualGameInvitation(jugador,
-                    fechaPartido.getText().toString(), horaPartido.getText().toString(),
-                    canchaPartido.getText().toString(), nuevosJugadores);
-                }catch (JSONException e){
-                    Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
-                }
             }
-            Toast.makeText(getApplicationContext(),"Se han invitado los jugadores", Toast.LENGTH_LONG).show();
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -116,6 +110,18 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
         }else if (id == R.id.crearPartido){
             Partido partido = new PartidoCasual(fechaPartido.getText().toString(),
                     horaPartido.getText().toString(), canchaPartido.getText().toString(), jugadores);
+
+            for (String jugador: nuevosJugadores){
+                try {
+                    ParseNotificationSender.sendCasualGameInvitation(jugador,
+                            fechaPartido.getText().toString(), horaPartido.getText().toString(),
+                            canchaPartido.getText().toString(), nuevosJugadores);
+                }catch (JSONException e){
+                    Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
+                }
+            }
+            Toast.makeText(getApplicationContext(),"Se han invitado los jugadores", Toast.LENGTH_LONG).show();
+
 
             MainActivity.getUser().agregarPartido(partido);
             startActivity(new Intent(this, MainActivity.class));

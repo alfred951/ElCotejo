@@ -57,12 +57,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         try {
             Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
             ParseInstallation.getCurrentInstallation().saveInBackground();
-            ParsePush.subscribeInBackground(user.getUsername());
-            ParsePush.subscribeInBackground("Jaguares");
         }catch (Exception e){}
 
         StaticUser.initialize();
         user = StaticUser.jugador;
+        ParsePush.subscribeInBackground(user.getUsername());
 
         ctx = this;
         final ActionBar actionBar = getSupportActionBar();

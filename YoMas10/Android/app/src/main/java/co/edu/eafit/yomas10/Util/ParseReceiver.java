@@ -44,7 +44,6 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         try{
             String action = intent.getAction();
 
-
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
             Log.d("PUSH", json.getString("TIPO"));
@@ -56,6 +55,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
                 in = onTeamInvitation(json, context);
         }catch (JSONException e){
             Log.e("JSON", "no se pudo parsear el JSON");
+            Log.e("JSON ERROR", e.getMessage());
         }
 
         makeNotification(context,in);
@@ -75,7 +75,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
 
         for (int i = 0; i < integrantesJSON.length(); i++) {
             //TODO sacar los datos de la db
-            JSONObject jugador = integrantesJSON.getJSONObject(i);
+            JSONObject jugador = integrantesJSON.getJSONObject(i); //TIRA ERROR
             String username = jugador.getString("username");
             jugadores.add(new Jugador(username));
         }
