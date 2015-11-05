@@ -44,7 +44,7 @@ public class PartidoCasualActivity extends AppCompatActivity {
                 Jugador jugador = (Jugador) parent.getItemAtPosition(position);
                 //Jugador amigo = (Jugador) parent.getItemAtPosition(position); //cambiar
                 Bundle bn = new Bundle();
-                bn.putSerializable("Jugador", jugador);
+                bn.putSerializable("JUGADOR", jugador);
 //                bn.putString("USERNAME", amigo.toString());
 //                bn.putString("NOMBRE", amigo.getNombre());
 //                bn.putString("POSICION", amigo.getPosicion());
@@ -57,8 +57,6 @@ public class PartidoCasualActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
-        //TODO setOnListItemClick
-
     }
 
     @Override

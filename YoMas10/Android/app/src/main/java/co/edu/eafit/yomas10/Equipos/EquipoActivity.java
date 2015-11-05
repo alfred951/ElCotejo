@@ -35,9 +35,18 @@ public class EquipoActivity extends AppCompatActivity {
 
         //TODO: Sacar la info del la DB
 
-        Equipo equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
+        final Equipo equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
         setTitle(equipo.getNombre());
+
         capitan.setText(equipo.getCapitan().getNombre());
+        capitan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), PerfilExterno.class);
+                in.putExtra("JUGADOR", equipo.getCapitan());
+                startActivity(in);
+            }
+        });
 
         ArrayAdapter<Jugador> adapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, equipo.getIntegrantes());

@@ -43,7 +43,7 @@ public class AmigosNActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Jugador amigo = (Jugador) parent.getItemAtPosition(position);
                 Bundle bn = new Bundle();
-                bn.putSerializable("Jugador", amigo);
+                bn.putSerializable("JUGADOR", amigo);
 //                bn.putString("USERNAME", amigo.toString());
 //                bn.putString("NOMBRE", amigo.getNombre());
 //                bn.putString("POSICION", amigo.getPosicion());

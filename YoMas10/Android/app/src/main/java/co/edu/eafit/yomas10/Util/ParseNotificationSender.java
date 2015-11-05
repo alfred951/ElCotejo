@@ -2,14 +2,18 @@ package co.edu.eafit.yomas10.Util;
 
 import com.parse.ParsePush;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by alejandro on 22/10/15.
  */
 public class ParseNotificationSender {
-    private static final String INV_GAME = "invJuego";
+    private static final String INV_CASUAL_GAME = "invJuegoCasual";
+    private static final String INV_TEAM_GAME = "invJuegoEquipos";
     private static final String INV_TEAM = "invEquipo";
     private static final String ACTION = "co.edu.eafit.yomas10.Util.ParseReceiver.RECEIVE";
     private static final String GAME_MESSAGE = "Has sido invitado a un partido!";
@@ -25,12 +29,16 @@ public class ParseNotificationSender {
      * Se manda la notificacion
      * @String username el ususername del destinatario
      */
-    public static void sendGameInvitation(String username) throws JSONException {
+    public static void sendCasualGameInvitation(String username, String fecha, String hora, String cancha,
+                                                ArrayList<String> jugadores) throws JSONException {
         JSONObject json = new JSONObject();
         json.put("action", ACTION);
-        json.put("TIPO", INV_GAME);
-        json.put("msg", GAME_MESSAGE);
-        //TODO json.put("date", fecha.getText().toString());
+        json.put("TIPO", INV_CASUAL_GAME);
+        json.put("MSG", GAME_MESSAGE);
+        json.put("FECHA", fecha);
+        json.put("HORA", hora);
+        json.put("CANCHA", cancha);
+        json.put("INTEGRANTES", new JSONArray(jugadores));
 
         ParsePush push = new ParsePush();
         push.setChannel(username);

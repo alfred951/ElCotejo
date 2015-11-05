@@ -12,6 +12,12 @@
     <string name="title_activity_equipo">Equipo</string>
     <string name="title_activity_crear_equipo">Crear Equipo</string>
     <string name="title_activity_amigos">Tus Amigos</string>
+    <string name="title_activity_crear_partido">Crear un Partido</string>
+    <string name="title_activity_seleccionar_amigos">Selecciona Tus Amigos</string>
+    <string name="title_activity_partido_casual">Informacion del Partido</string>
+    <string name="title_activity_amigos_n">Tus Amigos</string>
+    <string name="title_activity_partido_por_equipos">Informacion del Partido</string>
+    <string name="title_activity_invitacion_partido_casual">Invitacion a Partido</string>
 
     <string name="action_settings">Configuracion</string>
     <string name="app_id">pugXkDo33e0MsbWMTsL5EChTBx3jKyWoDYI6ZE40</string>
@@ -46,10 +52,4 @@
     <string name="rechazar">Rechazar</string>
 
     <string name="sinElementos">No hay elementos para mostrar</string>
-    <string name="title_activity_crear_partido">Crear un Partido</string>
-    <string name="title_activity_seleccionar_amigos">Selecciona Tus Amigos</string>
-    <string name="title_activity_partido_casual">Informacion del Partido</string>
-    <string name="title_activity_amigos_n">AmigosNActivity</string>
-    <string name="title_activity_partido_por_equipos">Informacion del Partido</string>
-    <string name="title_activity_invitacion_partido_casual">Invitacion a Partido</string>
 </resources>

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import co.edu.eafit.yomas10.Jugador.AmigosActivity;
 import co.edu.eafit.yomas10.Jugador.EditarPerfilActivity;
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;

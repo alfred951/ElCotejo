@@ -37,7 +37,7 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_amigos);
+        setContentView(R.layout.activity_seleccionar_amigos);
 
         Toast.makeText(this, "Manten undido para seleccionar", Toast.LENGTH_LONG).show();
 
@@ -136,7 +136,7 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_amigos, menu);
+        getMenuInflater().inflate(R.menu.menu_seleccionar_amigos, menu);
         return true;
     }
 

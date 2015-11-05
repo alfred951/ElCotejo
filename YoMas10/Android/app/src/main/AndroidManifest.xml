@@ -96,14 +96,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Partidos.InvitacionPartidoActivity"
-            android:label="@string/title_activity_partido" >
-        </activity>
-        <activity
-            android:name=".CreateNotificacionActivity"
-            android:label="@string/title_activity_create_notificacion" >
-        </activity>
-        <activity
             android:name=".Jugador.PerfilActivity"
             android:label="@string/title_activity_perfil"
             android:parentActivityName=".MainActivity" >
@@ -121,52 +113,59 @@
             android:label="@string/title_activity_editar_perfil" >
         </activity>
         <activity
-            android:name=".Jugador.PerfilExterno"
-            android:label="@string/title_activity_perfil_externo" >
-        </activity>
-        <activity
-            android:name=".Equipos.InvitacionEquipoActivity"
-            android:label="@string/title_activity_invitacion_equipo" >
-        </activity>
-        <activity
-            android:name=".Equipos.EquipoActivity"
-            android:label="@string/title_activity_equipo" >
-        </activity>
-        <activity
-            android:name=".Splash"
-            android:label="@string/title_activity_splash" >
-        </activity>
-        <activity
-            android:name=".Equipos.CrearEquipoActivity"
-            android:label="@string/title_activity_crear_equipo" >
-        </activity>
-        <activity
-            android:name=".Jugador.AmigosActivity"
-            android:label="@string/title_activity_amigos" >
-        </activity>
-        <activity
-            android:name=".Partidos.CrearPartidoActivity"
-            android:label="@string/title_activity_crear_partido" >
+            android:name=".Jugador.AmigosNActivity"
+            android:label="@string/title_activity_amigos_n" >
         </activity>
         <activity
             android:name=".Jugador.SeleccionarAmigosActivity"
             android:label="@string/title_activity_seleccionar_amigos" >
         </activity>
         <activity
+            android:name=".Jugador.PerfilExterno"
+            android:label="@string/title_activity_perfil_externo" >
+        </activity>
+        <activity
+            android:name=".Equipos.EquipoActivity"
+            android:label="@string/title_activity_equipo" >
+        </activity>
+        <activity
+            android:name=".Equipos.InvitacionEquipoActivity"
+            android:label="@string/title_activity_invitacion_equipo" >
+        </activity>
+        <activity
+            android:name=".Equipos.CrearEquipoActivity"
+            android:label="@string/title_activity_crear_equipo" >
+        </activity>
+
+        <activity
             android:name=".Partidos.Casual.PartidoCasualActivity"
             android:label="@string/title_activity_partido_casual" >
         </activity>
         <activity
-            android:name=".Jugador.AmigosNActivity"
-            android:label="@string/title_activity_amigos_n" >
-        </activity>
-        <activity
-            android:name=".Partidos.Equipos.PartidoPorEquiposActivity"
-            android:label="@string/title_activity_partido_por_equipos" >
+            android:name=".Partidos.Casual.CrearPartidoCasualActivity"
+            android:label="@string/title_activity_crear_partido" >
         </activity>
         <activity
             android:name=".Partidos.Casual.InvitacionPartidoCasualActivity"
             android:label="@string/title_activity_invitacion_partido_casual" >
+        </activity>
+
+        <activity
+        android:name=".Partidos.Equipos.InvitacionPartidoEquiposActivity"
+        android:label="@string/title_activity_partido" >
+        </activity>
+        <activity
+        android:name=".Partidos.Equipos.PartidoPorEquiposActivity"
+        android:label="@string/title_activity_partido_por_equipos" >
+        </activity>
+
+        <activity
+            android:name=".CreateNotificacionActivity"
+            android:label="@string/title_activity_create_notificacion" >
+        </activity>
+        <activity
+            android:name=".Splash"
+            android:label="@string/title_activity_splash" >
         </activity>
     </application>
 

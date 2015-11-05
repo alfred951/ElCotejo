@@ -33,10 +33,11 @@ public class Capitan extends Jugador implements Serializable{
      */
     public void invitarJugador(Jugador jug){
 
+
     }
 
     /**
-     * Si se seleccionan varios jugadores a la ves
+     * Si se seleccionan varios jugadores a la vez
      * @param jugadores lista de jugadores a invitar.
      */
     public void invitarJugadores(ArrayList<Jugador> jugadores){
