@@ -142,22 +142,18 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
      * activity
      */
     public Intent onTeamInvitation(JSONObject json, Context context) throws JSONException{
-        String msg = "", nombre = "", capitan = "";
+        String msg = "", nombre = "", nameCapitan = "";
 
-        Iterator itr = json.keys();
-        while (itr.hasNext()){
-            String key = (String)itr.next();
-            if (key.equals("NOMBRE"))
-                nombre = json.getString(key);
-            else if (key.equals("CAPITAN")){
-                capitan = json.getString(key);
-            }else if (key.equals("MSG"))
-                msg = json.getString(key);
-        }
+        msg = json.getString("MSG");
+        nombre = json.getString("NOMBRE");
+        nameCapitan = json.getString("CAPITAN");
 
+        Jugador capitan = new Jugador(nameCapitan);
+        //TODO sacar los datos del capitan de la DB
+
+        Equipo equipo = capitan.crearEquipo(nombre);
+        equipo.agregarJugadores();
         Bundle bn = new Bundle();
-        bn.putString("NOMBRE", nombre);
-        bn.putString("CAPITAN", capitan);
         bn.putString("MSG", msg);
 
         Intent in = new Intent(context, InvitacionEquipoActivity.class);

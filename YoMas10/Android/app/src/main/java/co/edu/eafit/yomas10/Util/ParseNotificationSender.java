@@ -63,10 +63,12 @@ public class ParseNotificationSender {
      * Se setea el canal de la notificacion
      * Se setea la informacion de la notificacion, en este caso, el JSON
      * Se manda la notificacion
-     * @String username el usuario al que se le va a mandar la notificacion
+     * @param username el usuario al que se le va a mandar la notificacion
+     * @param nombreEquipo el nombre del equipo
+     * @param capitan username del capitan
      */
-    public static void sendTeamInvitation(String username, String nombreEquipo, String capitan)
-            throws JSONException{
+    public static void sendTeamInvitation(String username, String nombreEquipo, String capitan,
+                                          ArrayList<String> jugadores)  throws JSONException{
         JSONObject json = new JSONObject();
         json.put("action", ACTION);
         json.put("TIPO", INV_TEAM);
