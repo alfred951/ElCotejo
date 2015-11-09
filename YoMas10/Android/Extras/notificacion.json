@@ -4,13 +4,13 @@
     "TIPO" : "invJuegoCasual",
     "MSG": "Invitacion a partido",
     "FECHA"  : "4/5/15",
-    "HORA" : "19:00", 
+    "HORA" : "19:00",
     "CANCHA" : "Templo del futbol",
     "INTEGRANTES" : [
         {"username" : "aleochoam"},
         {"username" : "ssaravia"},
         {"username" : "jpmoreno"}
-    ]   
+    ]
 }
 
 //invitacion a partido por equipos
@@ -21,20 +21,19 @@
     "FECHA"  : "19 de Mayo",
     "HORA" : "19:00",
     "CANCHA" : "Templo del futbol",
-    
+
     "NOMBREEQUIPO1" : "Leones",
     "CAPITANEQUPO1" : "jalvar18",
-    
+
     "NOMBREEQUIPO2" : "Delfines",
     "CAPITANEQUPO2" : "ramitos",
-    
+
     "EQUIPO1" : [
         {"username" : "alfred76"},
         {"username" : "aleochoam"}
     ],
-    
+
     "EQUIPO2" : [
-        {"capitan" : "jalvar18"},
         {"username" : "ssaravia"},
         {"username" : "jpmoreno"},
     ]
@@ -47,4 +46,8 @@
     "MSG" : "Invitacion a Equipo",
     "NOMBRE" :  "Leones",
     "CAPITAN" : "aleochoam"
+    "JUGADORES" : [
+    	{"username" : "jalvar18"}
+    	{"username  : "}
+    ]
 }
