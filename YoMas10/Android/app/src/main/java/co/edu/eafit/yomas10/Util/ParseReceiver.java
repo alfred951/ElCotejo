@@ -148,18 +148,27 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
         nombre = json.getString("NOMBRE");
         nameCapitan = json.getString("CAPITAN");
 
-        Jugador capitan = new Jugador(nameCapitan);
         //TODO sacar los datos del capitan de la DB
 
+        Jugador capitan = new Jugador(nameCapitan);
+        JSONArray integrantes = json.getJSONArray("JUGADORES");
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+
+        for (int i = 0; i < integrantes.length(); i++) {
+            JSONObject jugador = integrantes.getJSONObject(i);
+            String username = jugador.getString("username");
+            jugadores.add(new Jugador(username));
+        }
+
         Equipo equipo = capitan.crearEquipo(nombre);
-        equipo.agregarJugadores();
+        equipo.agregarJugadores(jugadores);
         Bundle bn = new Bundle();
         bn.putString("MSG", msg);
+        bn.putSerializable("EQUIPO", equipo);
 
         Intent in = new Intent(context, InvitacionEquipoActivity.class);
         in.putExtras(bn);
         return in;
-
     }
 
     public void makeNotification(Context ctx, Intent in){

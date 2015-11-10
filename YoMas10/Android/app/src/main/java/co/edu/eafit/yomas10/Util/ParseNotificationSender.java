@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import co.edu.eafit.yomas10.Jugador.Jugador;
+
 /**
  * Created by alejandro on 22/10/15.
  */
@@ -30,7 +32,7 @@ public class ParseNotificationSender {
      * @String username el ususername del destinatario
      */
     public static void sendCasualGameInvitation(String username, String fecha, String hora, String cancha,
-                                                ArrayList<String> jugadores) throws JSONException {
+                                                ArrayList<Jugador> jugadores) throws JSONException {
         JSONObject json = new JSONObject();
         json.put("action", ACTION);
         json.put("TIPO", INV_CASUAL_GAME);
@@ -43,7 +45,7 @@ public class ParseNotificationSender {
 
         for (int i = 0; i < jugadores.size(); i++) {
             JSONObject jo = new JSONObject();
-            jo.put("username", jugadores.get(i));
+            jo.put("username", jugadores.get(i).getUsername());
             jsonArray.put(jo);
         }
 
@@ -68,13 +70,25 @@ public class ParseNotificationSender {
      * @param capitan username del capitan
      */
     public static void sendTeamInvitation(String username, String nombreEquipo, String capitan,
-                                          ArrayList<String> jugadores)  throws JSONException{
+                                          ArrayList<Jugador> jugadores)  throws JSONException{
         JSONObject json = new JSONObject();
         json.put("action", ACTION);
         json.put("TIPO", INV_TEAM);
         json.put("MSG", TEAM_MESSAGE);
         json.put("NOMBRE", nombreEquipo);
         json.put("CAPITAN", capitan);
+
+
+        JSONArray jsonArray = new JSONArray();
+
+        for (int i = 0; i < jugadores.size(); i++) {
+            JSONObject jo = new JSONObject();
+            jo.put("username", jugadores.get(i).getUsername());
+            jsonArray.put(jo);
+        }
+
+        json.put("JUGADORES", jsonArray);
+
 
         ParsePush push = new ParsePush();
         push.setChannel(username);

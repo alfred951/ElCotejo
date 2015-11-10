@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         setContentView(R.layout.activity_main);
 
         try {
-            Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_key));
+            Parse.initialize(getApplicationContext());
             ParseInstallation.getCurrentInstallation().saveInBackground();
         }catch (Exception e){}
 
@@ -214,17 +214,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     Serializable equipo = (Serializable) getListView().getItemAtPosition(position);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("EQUIPO", equipo);
-//                    bundle.putString("NOMBRE", equipo.getNombre());
-//                    bundle.putString("CAPITAN", equipo.getCapitan().getNombre());
-//
-//                    ArrayList<String> nombreJugadores = new ArrayList<>();
-//
-//                    //TODO pasar los username
-//                    for (int i = 0; i<equipo.getIntegrantes().size(); i++){
-//                        nombreJugadores.add(equipo.getIntegrantes().get(i).getUsername());
-//                    }
-//
-//                    bundle.putStringArrayList("JUGADORES", nombreJugadores);
                     Intent in = new Intent(ctx, EquipoActivity.class);
                     in.putExtra("EQUIPO", equipo);
                     startActivity(in);
@@ -233,17 +222,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     Partido partido= (Partido) getListView().getItemAtPosition(position);
                     Bundle bundle1 = new Bundle();
                     bundle1.putSerializable("PARTIDO", partido);
-//                    bundle1.putString("horaPartido", partido.getHora());
-//                    bundle1.putString("fechaPartido", partido.getFecha());
-//                    bundle1.putString("cancha", partido.getCancha());
                     if (partido instanceof PartidoCasual){
-//                        ArrayList<Jugador> jugadores= ((PartidoCasual) partido).getIntegrantes();
-//                        ArrayList<String> nameJugadores = new ArrayList<>();
-//                        for(int i= 0; i<jugadores.size(); i++){
-//                            nameJugadores.add(jugadores.get(i).getUsername());
-//                        }
-//                        bundle1.putStringArrayList("jugadores", nameJugadores);
-
                         Intent intent = new Intent(getContext(), PartidoCasualActivity.class);
                         intent.putExtras(bundle1);
                         startActivity(intent);

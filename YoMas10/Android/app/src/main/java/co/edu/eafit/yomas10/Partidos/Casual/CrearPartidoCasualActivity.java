@@ -40,10 +40,10 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
     private EditText canchaPartido;
     private ListView jugadoresLV;
     private ArrayList<Jugador> jugadores;
+    private ArrayList<String> nuevosJugadores;
     private ArrayAdapter<Jugador> mAdapter;
     private final static int REQUEST_AMIGOS = 1;
 
-    private ArrayList<String> nuevosJugadores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,11 +111,11 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
             Partido partido = new PartidoCasual(fechaPartido.getText().toString(),
                     horaPartido.getText().toString(), canchaPartido.getText().toString(), jugadores);
 
-            for (String jugador: nuevosJugadores){
+            for (Jugador jugador: jugadores){
                 try {
-                    ParseNotificationSender.sendCasualGameInvitation(jugador,
+                    ParseNotificationSender.sendCasualGameInvitation(jugador.getUsername(),
                             fechaPartido.getText().toString(), horaPartido.getText().toString(),
-                            canchaPartido.getText().toString(), nuevosJugadores);
+                            canchaPartido.getText().toString(), jugadores);
                 }catch (JSONException e){
                     Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
                 }

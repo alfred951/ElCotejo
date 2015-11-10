@@ -53,7 +53,6 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Jugador jugador = (Jugador) parent.getItemAtPosition(position);
-                //Jugador amigo = (Jugador) parent.getItemAtPosition(position); //cambiar
                 Bundle bn = new Bundle();
                 bn.putSerializable("JUGADOR", jugador);
 

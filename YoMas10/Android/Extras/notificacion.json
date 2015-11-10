@@ -45,9 +45,9 @@
     "TIPO" : "invEquipo",
     "MSG" : "Invitacion a Equipo",
     "NOMBRE" :  "Leones",
-    "CAPITAN" : "aleochoam"
+    "CAPITAN" : "aleochoam",
     "JUGADORES" : [
     	{"username" : "jalvar18"}
-    	{"username  : "}
+    	{"username"  : "ssaravia"}
     ]
 }
