@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 
+import com.parse.Parse;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -27,21 +29,37 @@ import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class Http{
+public class Http extends IntentService{
 
-   public static String makeGetRequest(HashMap<String, String> map) {
+   String urlget;
+   String type;
+   Bundle bundle;
+   static StringBuilder urlbase;
+   String urlapi =  "http://www.yomasdiez.com/index.php/api/Usuario/Jugador";
+
+   public Http() throws UnsupportedEncodingException {
+       super(Http.class.getName());
+
+       urlbase = new StringBuilder();
+       urlget = new String();
+       type = new String();
+       bundle = new Bundle();
+
+   }
+
+   public static String makeGetRequest(String stringurl) {
        String response = "";
-       StringBuffer urlS = new StringBuffer();
-       urlS.append("http://www.yomasdiez.com/index.php/api/Usuario/Jugador");
+       StringBuilder urlS = new StringBuilder();
+       urlS.append(stringurl);
        try {
            Log.d("Hola", "1");
            URL url = new URL(urlS.toString());
-           urlS.append(getGetDataString(map));
            HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
            Log.d("Hola", "2");
@@ -52,16 +70,24 @@ public class Http{
            con.setRequestProperty("http.agent", "");
 
            Log.d("Hola", "3");
-           int responseCode = con.getResponseCode();
-
            Log.d("Hola", "4");
-           // Parse JSON
-           if (responseCode == 200 || responseCode == 201) {
-               String json = getJSON(con.getInputStream());
-               JSONObject obj = new JSONObject(json);
-               response = obj.getString("user_t");
+           //Parse JSON
+           if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+              String json = getJSON(con.getInputStream());
+              JSONArray obj = new JSONArray(json);
+              for(int i=0; i < obj.length(); ++i) {
+                  JSONObject jsonobject = obj.getJSONObject(i);
+                  String nickname       = jsonobject.getString("nickname");
+                  String nombre    = jsonobject.getString("nombre");
+                  String clave  = jsonobject.getString("clave");
+                  String imagen = null;
+                  String bio = jsonobject.getString("bio");
+                  String correo = jsonobject.getString("correo");
+                  String posicion = jsonobject.getString("posicion");
+                  String timestamp = jsonobject.getString("timestamp");
+              }
            }
-           Log.d("Hola", "5");
+           Log.d("Hola", "8");
        }
        catch (Exception e){
            Log.e("ErrorConnection", e.getMessage());
@@ -93,7 +119,7 @@ public class Http{
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
                 String line;
-                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 while ((line=br.readLine()) != null) {
                     response+=line;
                 }
@@ -109,8 +135,8 @@ public class Http{
         return response;
     }
 
-    private static String getJSON(InputStream inputStream) throws IOException {
-        StringBuffer json = new StringBuffer();
+    public static String getJSON(InputStream inputStream) throws IOException {
+        StringBuilder json = new StringBuilder();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(inputStream));
 
@@ -123,7 +149,7 @@ public class Http{
         return json.toString();
     }
 
-    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+    public String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
         StringBuilder result = new StringBuilder();
         boolean first = true;
         for(Map.Entry<String, String> entry : params.entrySet()){
@@ -141,7 +167,7 @@ public class Http{
         return result.toString();
     }
 
-    private static String getGetDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+    public static String getGetDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
         StringBuilder result = new StringBuilder();
         boolean first = true;
         for(Map.Entry<String, String> entry : params.entrySet()) {
@@ -157,5 +183,23 @@ public class Http{
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
         return result.toString();
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        final ResultReceiver receiver = intent.getParcelableExtra("mReceiver");
+        urlbase.append(this.urlapi);
+        urlbase.append(intent.getStringExtra("urlget"));
+        type = intent.getStringExtra("type");
+
+        try{
+            if(type.equals("GET")){
+                String getResult = makeGetRequest(urlbase.toString());
+                bundle.putString("GetResponse", getResult);
+                receiver.send(0, bundle);
+            }
+        }catch (Exception e){
+            Log.e("ErrorIntent", e.getMessage());
+        }
     }
 }

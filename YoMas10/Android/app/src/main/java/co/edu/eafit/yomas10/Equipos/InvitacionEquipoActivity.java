@@ -97,8 +97,8 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
                     new Jugador(this.capitanTV.getText().toString()));
             MainActivity.getUser().agregarEquipo(equipo);
             HashMap<String, String> jugador = new HashMap<>();
-            jugador.put("nickname", "aleochoam");
-            Log.d("try", this.http.makeGetRequest(jugador));
+            jugador.put("nickname", "Aleochoam");
+            //Log.d("try", this.http.makeGetRequest(jugador));
             //TODO: agregarse al equipo en la base de datos
             //equipo.agregarJugador(StaticUser.jugador);
             //TODO: Notificar la aceptacion

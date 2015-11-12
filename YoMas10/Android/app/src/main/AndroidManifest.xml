@@ -32,6 +32,9 @@
         android:theme="@style/AppTheme" >
         <service android:name="com.parse.PushService" />
 
+        <service android:name=".Http"
+            android:exported="false" />
+
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

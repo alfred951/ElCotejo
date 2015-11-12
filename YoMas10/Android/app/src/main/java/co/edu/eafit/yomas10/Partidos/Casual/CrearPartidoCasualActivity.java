@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,8 +37,9 @@ import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.ParseNotificationSender;
+import co.edu.eafit.yomas10.Util.Receiver;
 
-public class CrearPartidoCasualActivity extends AppCompatActivity {
+public class CrearPartidoCasualActivity extends AppCompatActivity implements Receiver {
 
     private static TextView fechaPartido, horaPartido;
     private EditText canchaPartido;
@@ -45,7 +48,6 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
     private ArrayList<String> nuevosJugadores;
     private ArrayAdapter<Jugador> mAdapter;
     private final static int REQUEST_AMIGOS = 1;
-    Http http;
 
 
     @Override
@@ -137,26 +139,26 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
     public void elegirFecha(View view){
         DialogFragment selFecha = new DatePickerFragment();
         selFecha.show(getFragmentManager(), "datePicker");
-        HashMap<String, String> jugador = new HashMap<>();
-        jugador.put("nickname", "aleochoam");
-        try {
-            Log.d("try", http.makeGetRequest(jugador));
-        }
-        catch (Exception e){
-            Log.d("ErrorConnection", "" + e.getMessage());
-        }
     }
 
-    public void elegirHora(View view){
+    public void elegirHora(View view) throws UnsupportedEncodingException {
         DialogFragment selHora = new TimePickerFragment();
         selHora.show(getFragmentManager(), "timePicker");
         HashMap<String, String> jugador = new HashMap<>();
-        jugador.put("nickname", "aleochoam");
-        try {
-            Log.d("try", this.http.makeGetRequest(jugador));
-        }
-        catch (Exception e){
-            Log.d("ErrorConnection", "" + e.getMessage());
+        jugador.put("nickname", "Aleochoam");
+        Intent intent = new Intent(Intent.ACTION_SYNC, null, this, Http.class);
+        intent.putExtra("type", "GET");
+        intent.putExtra("urlget", Http.getGetDataString(jugador));
+        startService(intent);
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode){
+            case 0:
+                Log.d("Ensayo", resultData.getString("GetResponse"));
+            case 1:
+                Log.d("Ensayo", "Nada");
         }
     }
 
