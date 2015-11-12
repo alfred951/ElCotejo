@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -36,6 +37,7 @@ import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.OwnResultReceiver;
 import co.edu.eafit.yomas10.Util.ParseNotificationSender;
 import co.edu.eafit.yomas10.Util.Receiver;
 
@@ -144,10 +146,13 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
     public void elegirHora(View view) throws UnsupportedEncodingException {
         DialogFragment selHora = new TimePickerFragment();
         selHora.show(getFragmentManager(), "timePicker");
+        OwnResultReceiver mReceiver = new OwnResultReceiver(new Handler());
         HashMap<String, String> jugador = new HashMap<>();
         jugador.put("nickname", "Aleochoam");
         Intent intent = new Intent(Intent.ACTION_SYNC, null, this, Http.class);
         intent.putExtra("type", "GET");
+
+        intent.putExtra("mReceiver", mReceiver);
         intent.putExtra("urlget", Http.getGetDataString(jugador));
         startService(intent);
     }
