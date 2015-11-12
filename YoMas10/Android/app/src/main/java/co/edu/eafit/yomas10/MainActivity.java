@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
@@ -24,6 +26,7 @@ import com.parse.ParsePush;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
@@ -163,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     public static class ArrayListFragment extends ListFragment {
         private static final String SECTION_NUMBER = "section_number";
+        Http http;
 
 
         static ArrayListFragment newInstance(int number){
@@ -186,8 +190,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 case 0:
                     ArrayList<Equipo> equipos = user.getEquipos();
                     ArrayList<String> nombreEquipos = new ArrayList<>();
-
-
                     for (int i = 0; i < equipos.size(); i++) {
                         nombreEquipos.add(equipos.get(i).getNombre());
                     }

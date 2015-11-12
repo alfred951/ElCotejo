@@ -25,7 +25,9 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
+import co.edu.eafit.yomas10.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
 import co.edu.eafit.yomas10.MainActivity;
@@ -43,6 +45,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
     private ArrayList<String> nuevosJugadores;
     private ArrayAdapter<Jugador> mAdapter;
     private final static int REQUEST_AMIGOS = 1;
+    Http http;
 
 
     @Override
@@ -134,11 +137,27 @@ public class CrearPartidoCasualActivity extends AppCompatActivity {
     public void elegirFecha(View view){
         DialogFragment selFecha = new DatePickerFragment();
         selFecha.show(getFragmentManager(), "datePicker");
+        HashMap<String, String> jugador = new HashMap<>();
+        jugador.put("nickname", "aleochoam");
+        try {
+            Log.d("try", http.makeGetRequest(jugador));
+        }
+        catch (Exception e){
+            Log.d("ErrorConnection", "" + e.getMessage());
+        }
     }
 
     public void elegirHora(View view){
         DialogFragment selHora = new TimePickerFragment();
         selHora.show(getFragmentManager(), "timePicker");
+        HashMap<String, String> jugador = new HashMap<>();
+        jugador.put("nickname", "aleochoam");
+        try {
+            Log.d("try", this.http.makeGetRequest(jugador));
+        }
+        catch (Exception e){
+            Log.d("ErrorConnection", "" + e.getMessage());
+        }
     }
 
     //Clases para elegir fecha y hora

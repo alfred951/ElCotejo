@@ -1,8 +1,10 @@
 package co.edu.eafit.yomas10.Equipos;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +33,7 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
     private Equipo equipo;
 
     public Http http;
-    String urljugador = "www.yomasdiez.com/index.php/api/Usuario/Jugadores";
+    String urljugador = "www.yomasdiez.com/index.php/api/Usuario/Jugador";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,16 +98,13 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
             MainActivity.getUser().agregarEquipo(equipo);
             HashMap<String, String> jugador = new HashMap<>();
             jugador.put("nickname", "aleochoam");
-            jugador.put("nombre","Santiago Saravia");
-            jugador.put("posicion","Arquero");
-            jugador.put("bio","Lo que sea");
-            this.http.makePostRequest(jugador, urljugador);
+            Log.d("try", this.http.makeGetRequest(jugador));
             //TODO: agregarse al equipo en la base de datos
             //equipo.agregarJugador(StaticUser.jugador);
             //TODO: Notificar la aceptacion
         }
         catch(Exception e) {
-
+            Log.e("Error", e.getMessage());
         }
         Intent in = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(in);

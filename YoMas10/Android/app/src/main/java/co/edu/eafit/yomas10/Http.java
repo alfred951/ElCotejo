@@ -2,6 +2,12 @@ package co.edu.eafit.yomas10;
 
 
 import android.accounts.NetworkErrorException;
+import android.app.IntentService;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.ResultReceiver;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -28,38 +34,41 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Http{
 
-   String url = "www.yomasdiez.com/index.php/api/Usuario/Jugadores";
-
-   private String makeGetRequest(String uname) throws IOException, JSONException, NetworkErrorException{
-
+   public static String makeGetRequest(HashMap<String, String> map) {
+       String response = "";
        StringBuffer urlS = new StringBuffer();
-       urlS.append(this.url);
-       urlS.append(uname);
-       URL url = new URL(urlS.toString());
-       HttpURLConnection con = (HttpURLConnection)url.openConnection();
-       String response;
+       urlS.append("http://www.yomasdiez.com/index.php/api/Usuario/Jugador");
+       try {
+           Log.d("Hola", "1");
+           URL url = new URL(urlS.toString());
+           urlS.append(getGetDataString(map));
+           HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-       // Request Header
-       con.setRequestMethod("GET");
-       con.setRequestProperty("Accept", "application/json");
-       con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-       con.setRequestProperty("http.agent", "");
+           Log.d("Hola", "2");
+           // Request Header
+           con.setRequestMethod("GET");
+           con.setRequestProperty("Accept", "application/json");
+           con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+           con.setRequestProperty("http.agent", "");
 
-       int responseCode = con.getResponseCode();
+           Log.d("Hola", "3");
+           int responseCode = con.getResponseCode();
 
-       // Parse JSON
-       if(responseCode == 200 || responseCode == 201){
-           String json = getJSON(con.getInputStream());
-           JSONObject obj = new JSONObject(json);
-           response = obj.getString("user_t");
+           Log.d("Hola", "4");
+           // Parse JSON
+           if (responseCode == 200 || responseCode == 201) {
+               String json = getJSON(con.getInputStream());
+               JSONObject obj = new JSONObject(json);
+               response = obj.getString("user_t");
+           }
+           Log.d("Hola", "5");
        }
-       else{
-           NetworkErrorException e = new NetworkErrorException("Could not get JSON");
-           throw e;
+       catch (Exception e){
+           Log.e("ErrorConnection", e.getMessage());
        }
-
        return response;
-    }
+   }
+
     public String makePostRequest(HashMap<String, String> postDataParams, String stringURL) throws Exception{
 
         URL url;
@@ -68,10 +77,8 @@ public class Http{
             url = new URL(stringURL);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(15000);
-            conn.setConnectTimeout(15000);
             conn.setRequestMethod("POST");
-            conn.setDoInput(true);
+            conn.setRequestProperty("http.agent", "");
             conn.setDoOutput(true);
 
             OutputStream os = conn.getOutputStream();
@@ -102,7 +109,7 @@ public class Http{
         return response;
     }
 
-    private String getJSON(InputStream inputStream) throws IOException {
+    private static String getJSON(InputStream inputStream) throws IOException {
         StringBuffer json = new StringBuffer();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(inputStream));
@@ -120,15 +127,35 @@ public class Http{
         StringBuilder result = new StringBuilder();
         boolean first = true;
         for(Map.Entry<String, String> entry : params.entrySet()){
-            if (first)
+            if (first) {
                 first = false;
-            else
+            }
+            else {
                 result.append("&");
+            }
             result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
             result.append("=");
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
 
+        return result.toString();
+    }
+
+    private static String getGetDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String, String> entry : params.entrySet()) {
+            if (first){
+                first = false;
+                result.append("?");
+            }
+            else{
+                result.append("&");
+            }
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
         return result.toString();
     }
 }
