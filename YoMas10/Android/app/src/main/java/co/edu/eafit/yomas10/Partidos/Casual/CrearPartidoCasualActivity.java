@@ -146,17 +146,31 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
     public void elegirHora(View view) throws UnsupportedEncodingException {
         DialogFragment selHora = new TimePickerFragment();
         selHora.show(getFragmentManager(), "timePicker");
+
+        /*
+            Se crea un receiver para enviar mensajes al Thread, se quema
+            un mapa para probar el GET: nickname=Aleochoam,
+            en un intent de agregan el tipo del Http Request, el receiver
+            y el url con el mapa parseado para estar en el formato de la
+            consulta. Este intent lo recibe la clase Http.
+         */
         OwnResultReceiver mReceiver = new OwnResultReceiver(new Handler());
         HashMap<String, String> jugador = new HashMap<>();
         jugador.put("nickname", "Aleochoam");
         Intent intent = new Intent(Intent.ACTION_SYNC, null, this, Http.class);
         intent.putExtra("type", "GET");
-
         intent.putExtra("mReceiver", mReceiver);
         intent.putExtra("urlget", Http.getGetDataString(jugador));
         startService(intent);
     }
 
+    /*
+        Metodo que recibe el bundle y el codigo de mensaje
+        Puede cambiarse y ponerse sin codigo de mensaje
+        Que solo llegue el Bundle y haga lo suyo.
+        Por el momento, recibe el bundle y saca el String
+        que devolvio la respuesta el bundle sobre el GET.
+     */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode){

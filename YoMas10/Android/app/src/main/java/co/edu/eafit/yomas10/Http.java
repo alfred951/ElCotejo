@@ -185,17 +185,43 @@ public class Http extends IntentService{
         return result.toString();
     }
 
+
+    /* Metodo de la interfaz de Servicio, crea un Thread para
+    trabajar con la red
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
+        //Objeto ResultReceiver que se encarga de
+        // enviar y recibir mensajes de un Thread al otro.
+        //
         final ResultReceiver receiver = intent.getParcelableExtra("mReceiver");
+        /*Se llena este String con la primera parte
+         del URL (Hasta el controlador)
+         "http://www.yomasdiez.com/index.php/api/Usuario/Jugador"
+        */
         urlbase.append(this.urlapi);
+        /*Se recibe el resto del URL de la consulta con el formato del GET
+          Y se le hace agrega al link del controlador
+          "?nickname=Aleochoam&edad=19"
+        */
         urlbase.append(intent.getStringExtra("urlget"));
+        /*
+            Se recibe el tipo de Http Request que se va a hacer
+         */
         type = intent.getStringExtra("type");
 
+        /*
+            Dependiendo del tipo del Http Request que llegue
+            Se hace la operacion respectiva.
+         */
         try{
             if(type.equals("GET")){
                 String getResult = makeGetRequest(urlbase.toString());
                 bundle.putString("GetResponse", getResult);
+                /*
+                    El método send devuelve al thread principal el
+                    resultado del Get en un bundle.
+                 */
                 receiver.send(0, bundle);
             }
         }catch (Exception e){
