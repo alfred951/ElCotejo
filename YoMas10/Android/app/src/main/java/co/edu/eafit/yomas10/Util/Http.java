@@ -176,7 +176,9 @@ public class Http extends IntentService{
         try{
             JSONObject getResult = makeGetRequest(urlbase.toString());
             bundle.putString("GetResponse", getResult.toString());
+            Log.d("Estoy en HandleIntent", "1");
             receiver.send(0, bundle);
+            Log.d("Hice el send", "3");
         }catch (Exception e){
             Log.e("ErrorIntent", e.getMessage());
         }

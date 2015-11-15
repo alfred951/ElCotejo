@@ -10,10 +10,11 @@ import java.util.HashMap;
 /**
  * Created by jalvar53 on 11/15/15.
  */
-public class HttpBridge {
+public class HttpBridge{
 
-    public static Intent startWorking(Context ctx, HashMap<String, String> mapa) throws UnsupportedEncodingException {
+    public static Intent startWorking(Context ctx, HashMap<String, String> mapa, Receiver receiver) throws UnsupportedEncodingException {
         OwnResultReceiver mReceiver = new OwnResultReceiver(new Handler());
+        mReceiver.setmReceiver(receiver);
         Intent intent = new Intent(Intent.ACTION_SYNC, null, ctx, Http.class);
         intent.putExtra("mReceiver", mReceiver);
         intent.putExtra("urlget", Http.getGetDataString(mapa));

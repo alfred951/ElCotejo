@@ -146,28 +146,17 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
         DialogFragment selHora = new TimePickerFragment();
         selHora.show(getFragmentManager(), "timePicker");
 
-        /*
-            Se crea un receiver para enviar mensajes al Thread, se quema
-            un mapa para probar el GET: nickname=Aleochoam,
-            en un intent de agregan el tipo del Http Request, el receiver
-            y el url con el mapa parseado para estar en el formato de la
-            consulta. Este intent lo recibe la clase Http.
-         */
-        //OwnResultReceiver mReceiver = new OwnResultReceiver(new Handler());
         HashMap<String, String> jugador = new HashMap<>();
         jugador.put("nickname", "Chepesonsito");
-        /*
-        Intent intent = new Intent(Intent.ACTION_SYNC, null, this, Http.class);
-        intent.putExtra("mReceiver", mReceiver);
-        intent.putExtra("urlget", Http.getGetDataString(jugador));
-        */
-        startService(HttpBridge.startWorking(this, jugador));
+
+        startService(HttpBridge.startWorking(this, jugador, this));
     }
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode){
             case 0:
+                Log.d("Llegue al OnReceive", "2");
                 Log.d("Ensayo", resultData.getString("GetResponse"));
         }
     }
