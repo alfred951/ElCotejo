@@ -8,6 +8,7 @@ import android.os.Handler;
  * Created by jalvar53 on 11/12/15.
  */
 public class OwnResultReceiver extends ResultReceiver {
+
     private Receiver mReceiver;
 
     public OwnResultReceiver(Handler handler){
@@ -18,7 +19,7 @@ public class OwnResultReceiver extends ResultReceiver {
         mReceiver = receiver;
     }
 
-     @Override
+    @Override
     protected void onReceiveResult(int resultCode, Bundle resultData){
          if(mReceiver != null){
             mReceiver.onReceiveResult(resultCode, resultData);

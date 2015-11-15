@@ -1,7 +1,6 @@
 package co.edu.eafit.yomas10.Equipos;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +15,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import co.edu.eafit.yomas10.Equipos.Equipo;
-import co.edu.eafit.yomas10.Http;
+import co.edu.eafit.yomas10.Util.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
 import co.edu.eafit.yomas10.MainActivity;

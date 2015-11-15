@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -30,13 +29,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import co.edu.eafit.yomas10.Http;
+import co.edu.eafit.yomas10.Util.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
 import co.edu.eafit.yomas10.MainActivity;
-import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.HttpBridge;
 import co.edu.eafit.yomas10.Util.OwnResultReceiver;
 import co.edu.eafit.yomas10.Util.ParseNotificationSender;
 import co.edu.eafit.yomas10.Util.Receiver;
@@ -154,30 +153,22 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
             y el url con el mapa parseado para estar en el formato de la
             consulta. Este intent lo recibe la clase Http.
          */
-        OwnResultReceiver mReceiver = new OwnResultReceiver(new Handler());
+        //OwnResultReceiver mReceiver = new OwnResultReceiver(new Handler());
         HashMap<String, String> jugador = new HashMap<>();
-        jugador.put("nickname", "Aleochoam");
+        jugador.put("nickname", "Chepesonsito");
+        /*
         Intent intent = new Intent(Intent.ACTION_SYNC, null, this, Http.class);
-        intent.putExtra("type", "GET");
         intent.putExtra("mReceiver", mReceiver);
         intent.putExtra("urlget", Http.getGetDataString(jugador));
-        startService(intent);
+        */
+        startService(HttpBridge.startWorking(this, jugador));
     }
 
-    /*
-        Metodo que recibe el bundle y el codigo de mensaje
-        Puede cambiarse y ponerse sin codigo de mensaje
-        Que solo llegue el Bundle y haga lo suyo.
-        Por el momento, recibe el bundle y saca el String
-        que devolvio la respuesta el bundle sobre el GET.
-     */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode){
             case 0:
                 Log.d("Ensayo", resultData.getString("GetResponse"));
-            case 1:
-                Log.d("Ensayo", "Nada");
         }
     }
 

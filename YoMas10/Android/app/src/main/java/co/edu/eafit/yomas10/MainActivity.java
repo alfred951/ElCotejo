@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
@@ -26,7 +24,6 @@ import com.parse.ParsePush;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
@@ -39,6 +36,7 @@ import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.Equipos.PartidoPorEquiposActivity;
+import co.edu.eafit.yomas10.Util.Http;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
 
