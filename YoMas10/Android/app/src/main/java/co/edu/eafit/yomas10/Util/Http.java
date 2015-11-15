@@ -32,7 +32,7 @@ public class Http extends IntentService{
    String type;
    Bundle bundle;
    static StringBuilder urlbase;
-   String urlapi =  "http://www.yomasdiez.com/index.php/api/Usuario/";
+   String urlapi =  "http://www.yomasdiez.com/index.php/api/";
 
    public Http() throws UnsupportedEncodingException {
        super(Http.class.getName());
@@ -148,13 +148,23 @@ public class Http extends IntentService{
         boolean first = true;
         switch (type){
             case "Jugador":
-                result.append("Jugador");
-            case "Equipo":
-                result.append("Equipo");
-            case "Partido":
-                result.append("Partido");
+                result.append("Usuario/Jugador");
+                break;
             case "Amigos":
-                result.append("Amigos");
+                result.append("Usuario/Amigos");
+                break;
+            case "Partido":
+                result.append("Partido/Partido");
+                break;
+            case "Participantes":
+                result.append("Partido/Participantes");
+                break;
+            case "Integrantes":
+                result.append("Equipo/Integrantes");
+                break;
+            case "Equipo":
+                result.append("Equipo/Equipo");
+                break;
         }
         for(Map.Entry<String, String> entry : params.entrySet()) {
             if (first){
