@@ -2,6 +2,7 @@ package co.edu.eafit.yomas10.Jugador;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -10,16 +11,22 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.Connection.Http2;
+import co.edu.eafit.yomas10.Util.HttpBridge;
+import co.edu.eafit.yomas10.Util.Receiver;
 
 /**
  * Perfil de una persona diferente al usuario mismo
  */
 
 //TODO
-public class PerfilExterno extends AppCompatActivity {
+public class PerfilExterno extends AppCompatActivity implements Receiver{
 
+    Jugador jugador;
     private ImageView profilePic;
     private TextView name;
     private TextView username;
@@ -40,24 +47,17 @@ public class PerfilExterno extends AppCompatActivity {
         correo     = (TextView) findViewById(R.id.email);
 
         //TODO sacar los atributos con el username
-        Jugador jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
-        JSONObject json = (new Http2()).getUserMethod(jugador.getUsername(), this);
+        jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
+        //JSONObject json = (new Http2()).getUserMethod(jugador.getUsername(), this);
 
+        HashMap<String, String> map = new HashMap<>();
+        map.put("nickname", jugador.getUsername());
         try {
-            jugador.setNombre(json.getString("nombre"));
-            jugador.setBio(json.getString("bio"));
-            jugador.setCorreo(json.getString("correo"));
-            jugador.setPosicion(json.getString("portero"));
-        } catch (JSONException e) {
+            startService(HttpBridge.startWorking(this, map, this));
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-
-        name.setText(jugador.getNombre());
-        username.setText(jugador.getUsername());
-        posicion.setText(jugador.getPosicion());
-        userBio.setText(jugador.getBio());
-        correo.setText(jugador.getCorreo());
         //profilePic.setImageURI(bn.getString("USERNAME"));
     }
 
@@ -81,5 +81,34 @@ public class PerfilExterno extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode){
+            case 0:
+                try {
+                    JSONObject json = new JSONObject(resultData.getString("GetResponse"));
+
+                    try {
+                        jugador.setNombre(json.getString("nombre"));
+                        jugador.setBio(json.getString("bio"));
+                        jugador.setCorreo(json.getString("correo"));
+                        jugador.setPosicion(json.getString("portero"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    name.setText(jugador.getNombre());
+                    username.setText(jugador.getUsername());
+                    posicion.setText(jugador.getPosicion());
+                    userBio.setText(jugador.getBio());
+                    correo.setText(jugador.getCorreo());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+        }
     }
 }
