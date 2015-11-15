@@ -32,7 +32,7 @@ public class Http extends IntentService{
    String type;
    Bundle bundle;
    static StringBuilder urlbase;
-   String urlapi =  "http://www.yomasdiez.com/index.php/api/Usuario/Jugador";
+   String urlapi =  "http://www.yomasdiez.com/index.php/api/Usuario/";
 
    public Http() throws UnsupportedEncodingException {
        super(Http.class.getName());
@@ -143,9 +143,19 @@ public class Http extends IntentService{
         return result.toString();
     }
 
-    public static String getGetDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+    public static String getGetDataString(String type, HashMap<String, String> params) throws UnsupportedEncodingException{
         StringBuilder result = new StringBuilder();
         boolean first = true;
+        switch (type){
+            case "Jugador":
+                result.append("Jugador");
+            case "Equipo":
+                result.append("Equipo");
+            case "Partido":
+                result.append("Partido");
+            case "Amigos":
+                result.append("Amigos");
+        }
         for(Map.Entry<String, String> entry : params.entrySet()) {
             if (first){
                 first = false;
@@ -176,9 +186,7 @@ public class Http extends IntentService{
         try{
             JSONObject getResult = makeGetRequest(urlbase.toString());
             bundle.putString("GetResponse", getResult.toString());
-            Log.d("Estoy en HandleIntent", "1");
             receiver.send(0, bundle);
-            Log.d("Hice el send", "3");
         }catch (Exception e){
             Log.e("ErrorIntent", e.getMessage());
         }

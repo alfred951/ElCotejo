@@ -53,7 +53,7 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
         HashMap<String, String> map = new HashMap<>();
         map.put("nickname", jugador.getUsername());
         try {
-            startService(HttpBridge.startWorking(this, map, this));
+            startService(HttpBridge.startWorking(this, map, this, "Jugador"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -95,7 +95,7 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
                         jugador.setNombre(json.getString("nombre"));
                         jugador.setBio(json.getString("bio"));
                         jugador.setCorreo(json.getString("correo"));
-                        jugador.setPosicion(json.getString("portero"));
+                        jugador.setPosicion(json.getString("posicion"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

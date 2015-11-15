@@ -4,19 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.JsonWriter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Jugador.EditarPerfilActivity;
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.HttpBridge;
+import co.edu.eafit.yomas10.Util.Receiver;
 
-public class PerfilActivity extends AppCompatActivity {
+public class PerfilActivity extends AppCompatActivity implements Receiver{
 
+    Jugador jugador;
     private ImageView profilePic;
     private TextView name;
     private TextView username;
@@ -41,13 +50,15 @@ public class PerfilActivity extends AppCompatActivity {
         userBio    = (TextView) findViewById(R.id.userBio);
         correo     = (TextView) findViewById(R.id.email);
 
-        //TODO: Cargar los atributos del usuario de la base de datos y mostrarlos en el perfil
-        name.setText(MainActivity.getUser().getNombre());
-        username.setText(MainActivity.getUser().getUsername());
-        posicion.setText(MainActivity.getUser().getPosicion());
-        userBio.setText(MainActivity.getUser().getBio());
-        correo.setText(MainActivity.getUser().getCorreo());
-        //profilePic.setImageURI(MainActivity.getUser().getProfilePic());
+        jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("nickname", jugador.getUsername());
+        try{
+            startService(HttpBridge.startWorking(this, map, this, "Jugador"));
+        }
+        catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data){
@@ -96,4 +107,35 @@ public class PerfilActivity extends AppCompatActivity {
     public void onBackPressed(){
         startActivity(new Intent(this, MainActivity.class));
     }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode){
+            case 0:
+                try{
+                    JSONObject json = new JSONObject(resultData.getString("GetResponse"));
+
+                    try{
+                        jugador.setNombre(json.getString("nombre"));
+                        jugador.setBio(json.getString("bio"));
+                        jugador.setCorreo(json.getString("correo"));
+                        jugador.setPosicion(json.getString("posicion"));
+                    }
+                    catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    name.setText(jugador.getNombre());
+                    username.setText(jugador.getUsername());
+                    posicion.setText(jugador.getPosicion());
+                    userBio.setText(jugador.getBio());
+                    correo.setText(jugador.getCorreo());
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                }
+
+        }
+    }
 }
+
