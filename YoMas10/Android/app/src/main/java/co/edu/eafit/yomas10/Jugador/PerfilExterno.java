@@ -7,7 +7,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.Http2;
 
 /**
  * Perfil de una persona diferente al usuario mismo
@@ -37,6 +41,17 @@ public class PerfilExterno extends AppCompatActivity {
 
         //TODO sacar los atributos con el username
         Jugador jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
+        JSONObject json = (new Http2()).getUserMethod(jugador.getUsername(), this);
+
+        try {
+            jugador.setNombre(json.getString("nombre"));
+            jugador.setBio(json.getString("bio"));
+            jugador.setCorreo(json.getString("correo"));
+            jugador.setPosicion(json.getString("portero"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         name.setText(jugador.getNombre());
         username.setText(jugador.getUsername());

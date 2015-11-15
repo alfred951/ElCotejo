@@ -59,11 +59,14 @@ public class StaticUser {
         saravia.setNombre("Santiago Saravia");
         Jugador ramos = new Jugador("Ramitos");
         ramos.setNombre("David Ramos");
+        Jugador jalvar = new Jugador("jalvar");
+        jalvar.setNombre("Jose Luis");
 
         amigos.add(yo);
         amigos.add(moreno);
         amigos.add(saravia);
         amigos.add(ramos);
+        amigos.add(jalvar);
 
         return amigos;
     }
