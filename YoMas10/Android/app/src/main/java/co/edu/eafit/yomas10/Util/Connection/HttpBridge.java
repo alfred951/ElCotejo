@@ -22,5 +22,4 @@ public class HttpBridge{
         return intent;
     }
 
-    public static Intent startWorking2(Context ctx, HashMap<String, String>, )
 }

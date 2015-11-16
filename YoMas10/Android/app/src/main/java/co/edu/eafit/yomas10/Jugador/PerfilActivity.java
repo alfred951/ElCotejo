@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -115,7 +116,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
         switch (resultCode){
             case 0:
                 try{
-                    JSONObject json = new JSONObject(resultData.getString("GetResponse"));
+                    JSONObject json = (new JSONArray(resultData.getString("GetResponse"))).getJSONObject(0);
 
                     try{
                         jugador.setNombre(json.getString("nombre"));

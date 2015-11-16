@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.parse.ParsePush;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +26,7 @@ import co.edu.eafit.yomas10.Util.Connection.Receiver;
 /**
  * Created by Alejandro on 23/09/2015.
  */
-public class Jugador implements Serializable, Receiver {
+public class Jugador implements Serializable {
 
     protected String username;
     protected String nombre = null;
@@ -45,7 +46,7 @@ public class Jugador implements Serializable, Receiver {
      * Constructor del jugador
      * @param username el usuario del jugador, debe ser unico y sera la llave primaria en la DB
      */
-    public Jugador(String username, Context context){
+    public Jugador(String username){
         this.username = username;
         equipos = new ArrayList<>();
         partidos = new ArrayList<>();
@@ -53,44 +54,6 @@ public class Jugador implements Serializable, Receiver {
         canchasFavoritas = new ArrayList<>();
         canales = new ArrayList<>();
 
-        getInfoDB(context);
-    }
-
-    public void getInfoDB(Context context){
-        getAmigosDB(context);
-        getPartidosDB(context);
-        getEquiposDB(context);
-    }
-
-    private void getAmigosDB(Context context){
-        HashMap<String, String> map = new HashMap<>();
-        map.put("nickname", username);
-
-        try {
-            HttpBridge.startWorking(context, map, this, Http.AMIGOS);
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-        }
-    }
-
-    private void getPartidosDB(Context context){
-
-    }
-
-    private void getEquiposDB(Context context){
-
-    }
-
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-        try {
-            JSONObject json = new JSONObject(resultData.getString("GetResponse"));
-            if (json.getString("amigo") != null){
-              //TODO
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

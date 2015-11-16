@@ -92,12 +92,6 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity {
             Toast.makeText(this, "Te has inscrito al partido", Toast.LENGTH_SHORT)
                     .show();
             ((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
-            HashMap<String, String> jugador = new HashMap<>();
-            jugador.put("nickname", "aleochoam");
-            jugador.put("nombre","Santiago Saravia");
-            jugador.put("posicion","Arquero");
-            jugador.put("bio","Lo que sea");
-            this.http.makePostRequest(jugador, urljugador);
             //TODO: agregarse al equipo en la base de datos
             //equipo.agregarJugador(StaticUser.jugador);
             //TODO: Notificar la aceptacion

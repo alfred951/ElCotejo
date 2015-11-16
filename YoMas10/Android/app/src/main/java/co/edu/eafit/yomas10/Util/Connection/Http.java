@@ -40,6 +40,7 @@ public class Http extends IntentService{
     public static final String PARTIDO = "Partido";
     public static final String EQUIPO = "Equipo";
     public static final String INTEGRANTES = "Integrantes";
+    public static final String EQUIPO_JUGADOR = "Equipo_Jugador";
 
    public Http() throws UnsupportedEncodingException {
        super(Http.class.getName());
@@ -114,6 +115,9 @@ public class Http extends IntentService{
                 break;
             case EQUIPO:
                 result.append("Equipo/Equipo");
+                break;
+            case EQUIPO_JUGADOR:
+                result.append("Usuario/Equipo");
                 break;
         }
         for(Map.Entry<String, String> entry : params.entrySet()) {

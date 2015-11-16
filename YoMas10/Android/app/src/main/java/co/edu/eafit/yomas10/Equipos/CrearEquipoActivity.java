@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,6 +50,7 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
 
         ListView integrantesLV = (ListView) findViewById(R.id.listaJugadores);
         jugadores = new ArrayList<>();
+        jugadores.add(((MyApplication)getApplicationContext()).getUser());
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, jugadores);
 
         Button btn = new Button(getApplicationContext());
@@ -165,7 +167,7 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         try {
-            JSONObject json = new JSONObject(resultData.getString("GetResponse"));
+            JSONObject json = (new JSONArray(resultData.getString("GetResponse"))).getJSONObject(0);
             int id = json.getInt("idEquipo");
             equipo.setId(id);
         } catch (JSONException e) {
