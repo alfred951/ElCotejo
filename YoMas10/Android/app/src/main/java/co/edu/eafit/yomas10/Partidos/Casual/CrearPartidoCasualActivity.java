@@ -145,15 +145,16 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
 
         HashMap<String, String> jugador = new HashMap<>();
         jugador.put("nickname", "Chepesonsito");
+        jugador.put("correo", "chepebueno@eafit.edu.co");
+        String tipo = "Jugador";
 
-        startService(HttpBridge.startWorking(this, jugador, this));
+        startService(HttpBridge.startWorking(this, jugador, this, tipo));
     }
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode){
             case 0:
-                Log.d("Llegue al OnReceive", "2");
                 Log.d("Ensayo", resultData.getString("GetResponse"));
         }
     }

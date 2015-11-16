@@ -50,7 +50,7 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
         HashMap<String, String> map = new HashMap<>();
         map.put("nickname", jugador.getUsername());
         try {
-            startService(HttpBridge.startWorking(this, map, this));
+            startService(HttpBridge.startWorking(this, map, this, "Jugador"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
