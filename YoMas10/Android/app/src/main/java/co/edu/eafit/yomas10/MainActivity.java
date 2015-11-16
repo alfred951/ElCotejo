@@ -44,27 +44,20 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     MyPagerAdapter mAdapter;
     ViewPager viewPager;
-    static Context ctx;
 
     private static Jugador user;
 
-    public static Jugador getUser(){ return user; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            Parse.initialize(getApplicationContext());
-            ParseInstallation.getCurrentInstallation().saveInBackground();
-        }catch (Exception e){}
 
-        StaticUser.initialize(ctx);
-        user = StaticUser.jugador;
-        ParsePush.subscribeInBackground(user.getUsername());
+        MyApplication myApp = (MyApplication)getApplicationContext();
 
-        ctx = this;
+        user = myApp.getUser();
+
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -214,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     Serializable equipo = (Serializable) getListView().getItemAtPosition(position);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("EQUIPO", equipo);
-                    Intent in = new Intent(ctx, EquipoActivity.class);
+                    Intent in = new Intent(getContext(), EquipoActivity.class);
                     in.putExtra("EQUIPO", equipo);
                     startActivity(in);
                     break;

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
 
 /**
@@ -96,9 +97,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
         String userBioT  = userBio.getText().toString();
         Uri picture      = dataPic;
 
-        MainActivity.getUser().setNombre(nameT);
-        MainActivity.getUser().setPosicion(posicionT);
-        MainActivity.getUser().setBio(userBioT);
+        ((MyApplication)getApplicationContext()).getUser().setNombre(nameT);
+        ((MyApplication)getApplicationContext()).getUser().setPosicion(posicionT);
+        ((MyApplication)getApplicationContext()).getUser().setBio(userBioT);
         //MainActivity.getUser().setProfilePic(picture);
 
         //TODO: Subir los nuevos datos a la base de datos

@@ -15,7 +15,7 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
-public class StaticUser implements Receiver{
+public class StaticUser{
 
     public static Jugador jugador;
     public static boolean ready = false;
@@ -26,15 +26,6 @@ public class StaticUser implements Receiver{
         if (!ready){
             ready = true;
             jugador = new Jugador("Aleochoam");
-
-
-            HashMap<String, String> map = new HashMap<>();
-            map.put("nickname", jugador.getUsername());
-            try {
-                ctx.startService(HttpBridge.startWorking(ctx, map, this));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
 
             jugador.setNombre("Alejandro");
             jugador.setPosicion("Portero");
@@ -105,19 +96,5 @@ public class StaticUser implements Receiver{
         integrantes.add(gaxel);
 
         return integrantes;
-    }
-
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-         try{
-            JSONObject json = new JSONObject(resultData.getString("GetResponse"));
-
-            jugador.setNombre(json.getString("nombre"));
-            jugador.setBio(json.getString("bio"));
-            jugador.setCorreo(json.getString("correo"));
-            jugador.setPosicion(json.getString("posicion"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 }

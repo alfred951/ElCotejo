@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
 import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.ParseNotificationSender;
 
@@ -67,7 +68,7 @@ public class CrearEquipoActivity extends AppCompatActivity {
             nuevosJugadores = data.getExtras().getStringArrayList("JUGADORES");
 
             for (String jugador: nuevosJugadores){
-                jugadores.add(MainActivity.getUser().findAmigo(jugador));
+                jugadores.add(((MyApplication)getApplicationContext()).getUser().findAmigo(jugador));
             }
             mAdapter.notifyDataSetChanged();
         }
@@ -107,7 +108,7 @@ public class CrearEquipoActivity extends AppCompatActivity {
             return;
         }
         else {
-            Jugador user = MainActivity.getUser();
+            Jugador user = ((MyApplication)getApplicationContext()).getUser();
             Equipo equipo = user.crearEquipo(nombreEquipo.getText().toString());
             equipo.agregarJugadores(jugadores);
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
@@ -93,7 +94,7 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
                     .show();
             Equipo equipo = new Equipo(this.equipoTV.getText().toString(),
                     new Jugador(this.capitanTV.getText().toString()));
-            MainActivity.getUser().agregarEquipo(equipo);
+            ((MyApplication)getApplicationContext()).getUser().agregarEquipo(equipo);
             HashMap<String, String> jugador = new HashMap<>();
             jugador.put("nickname", "Aleochoam");
             //Log.d("try", this.http.makeGetRequest(jugador));

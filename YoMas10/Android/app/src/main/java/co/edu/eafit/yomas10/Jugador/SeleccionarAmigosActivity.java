@@ -24,6 +24,7 @@ import java.util.Set;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
 import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Partidos.Casual.CrearPartidoCasualActivity;
 import co.edu.eafit.yomas10.R;
 
@@ -41,7 +42,7 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Manten undido para seleccionar", Toast.LENGTH_LONG).show();
 
-        amigos = MainActivity.getUser().getAmigos();
+        amigos = ((MyApplication)getApplicationContext()).getUser().getAmigos();
 //        for (int i = 0; i<amigos.size();i++){
 //            usernameAmigos.add(amigos.get(i).getUsername());
 //        }

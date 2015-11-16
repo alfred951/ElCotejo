@@ -31,6 +31,7 @@ import java.util.HashMap;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
 import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
@@ -87,7 +88,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
             nuevosJugadores = data.getExtras().getStringArrayList("JUGADORES");
 
             for (String jugador: nuevosJugadores){
-                jugadores.add(MainActivity.getUser().findAmigo(jugador));
+                jugadores.add(((MyApplication)getApplicationContext()).getUser().findAmigo(jugador));
             }
             mAdapter.notifyDataSetChanged();
         }
@@ -126,7 +127,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
             Toast.makeText(getApplicationContext(),"Se han invitado los jugadores", Toast.LENGTH_LONG).show();
 
 
-            MainActivity.getUser().agregarPartido(partido);
+            ((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }

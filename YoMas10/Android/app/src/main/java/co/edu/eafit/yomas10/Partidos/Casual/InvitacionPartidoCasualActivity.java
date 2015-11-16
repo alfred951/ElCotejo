@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
@@ -90,7 +91,7 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity {
             //TODO: Cambiar Todo esto
             Toast.makeText(this, "Te has inscrito al partido", Toast.LENGTH_SHORT)
                     .show();
-            MainActivity.getUser().agregarPartido(partido);
+            ((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
             HashMap<String, String> jugador = new HashMap<>();
             jugador.put("nickname", "aleochoam");
             jugador.put("nombre","Santiago Saravia");

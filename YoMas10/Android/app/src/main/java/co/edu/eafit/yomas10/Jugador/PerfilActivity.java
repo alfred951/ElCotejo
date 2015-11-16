@@ -19,9 +19,10 @@ import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Jugador.EditarPerfilActivity;
 import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
-import co.edu.eafit.yomas10.Util.HttpBridge;
-import co.edu.eafit.yomas10.Util.Receiver;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 public class PerfilActivity extends AppCompatActivity implements Receiver{
 
@@ -50,7 +51,8 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
         userBio    = (TextView) findViewById(R.id.userBio);
         correo     = (TextView) findViewById(R.id.email);
 
-        jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
+        //jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
+        jugador = ((MyApplication)getApplicationContext()).getUser();
         HashMap<String, String> map = new HashMap<>();
         map.put("nickname", jugador.getUsername());
         try{

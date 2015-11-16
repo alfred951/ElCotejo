@@ -22,6 +22,7 @@ public class Jugador implements Serializable {
     protected String bio = null;
     protected String posicion = null;
     protected String correo = null;
+    protected int edad = 0;
     //protected Uri profilePic = Uri.parse("android.resource://co.edu.eafit.yomas10/drawable/no_user_logo");
     protected ArrayList<Equipo> equipos = null;
     protected ArrayList<Partido> partidos = null;
@@ -44,8 +45,6 @@ public class Jugador implements Serializable {
 
         //TODO: sacar los datos de la base de datos
     }
-
-    public void initialize()
 
     /**
      * Metodo para crear un equipo, en dicho equipo quedara como capitan
@@ -145,6 +144,14 @@ public class Jugador implements Serializable {
     public String getPosicion() { return posicion; }
 
     public void setPosicion(String posicion) { this.posicion = posicion; }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
 
     //public Uri getProfilePic(){ return profilePic; }
 

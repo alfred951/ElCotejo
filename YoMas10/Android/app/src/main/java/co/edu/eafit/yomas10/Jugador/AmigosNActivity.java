@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
 
 public class AmigosNActivity extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class AmigosNActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amigos_n);
 
-        amigos = MainActivity.getUser().getAmigos();
+        amigos = ((MyApplication)getApplicationContext()).getUser().getAmigos();
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, amigos);
 
         amigosLV = (ListView) findViewById(R.id.listaAmigos);
