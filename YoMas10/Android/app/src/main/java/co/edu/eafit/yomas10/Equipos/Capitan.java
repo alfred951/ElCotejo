@@ -3,7 +3,7 @@ package co.edu.eafit.yomas10.Equipos;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import co.edu.eafit.yomas10.Util.Http;
+import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 
 /**

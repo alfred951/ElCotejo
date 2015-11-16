@@ -2,7 +2,6 @@ package co.edu.eafit.yomas10.Jugador;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,9 +14,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import co.edu.eafit.yomas10.R;
-import co.edu.eafit.yomas10.Util.Connection.Http2;
-import co.edu.eafit.yomas10.Util.HttpBridge;
-import co.edu.eafit.yomas10.Util.Receiver;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 /**
  * Perfil de una persona diferente al usuario mismo
@@ -48,7 +46,6 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
 
         //TODO sacar los atributos con el username
         jugador = (Jugador) getIntent().getExtras().getSerializable("JUGADOR");
-        //JSONObject json = (new Http2()).getUserMethod(jugador.getUsername(), this);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("nickname", jugador.getUsername());
@@ -95,7 +92,7 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
                         jugador.setNombre(json.getString("nombre"));
                         jugador.setBio(json.getString("bio"));
                         jugador.setCorreo(json.getString("correo"));
-                        jugador.setPosicion(json.getString("portero"));
+                        jugador.setPosicion(json.getString("posicion"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

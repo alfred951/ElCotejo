@@ -36,7 +36,7 @@ import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.Equipos.PartidoPorEquiposActivity;
-import co.edu.eafit.yomas10.Util.Http;
+import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             ParseInstallation.getCurrentInstallation().saveInBackground();
         }catch (Exception e){}
 
-        StaticUser.initialize();
+        StaticUser.initialize(ctx);
         user = StaticUser.jugador;
         ParsePush.subscribeInBackground(user.getUsername());
 

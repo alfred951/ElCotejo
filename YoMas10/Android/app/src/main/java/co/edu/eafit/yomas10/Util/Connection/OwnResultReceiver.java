@@ -1,4 +1,4 @@
-package co.edu.eafit.yomas10.Util;
+package co.edu.eafit.yomas10.Util.Connection;
 
 import android.os.Bundle;
 import android.os.ResultReceiver;

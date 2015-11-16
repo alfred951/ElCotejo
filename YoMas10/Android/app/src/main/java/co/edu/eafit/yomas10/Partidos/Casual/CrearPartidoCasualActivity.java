@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -29,16 +28,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import co.edu.eafit.yomas10.Util.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.R;
-import co.edu.eafit.yomas10.Util.HttpBridge;
-import co.edu.eafit.yomas10.Util.OwnResultReceiver;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.ParseNotificationSender;
-import co.edu.eafit.yomas10.Util.Receiver;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 public class CrearPartidoCasualActivity extends AppCompatActivity implements Receiver {
 

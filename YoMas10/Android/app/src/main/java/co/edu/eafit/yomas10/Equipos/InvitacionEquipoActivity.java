@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import co.edu.eafit.yomas10.Util.Http;
+import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
 import co.edu.eafit.yomas10.MainActivity;

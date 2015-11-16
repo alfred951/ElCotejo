@@ -32,7 +32,7 @@
         android:theme="@style/AppTheme" >
         <service android:name="com.parse.PushService" />
 
-        <service android:name=".Util.Http"
+        <service android:name=".Util.Connection.Http"
             android:exported="false" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >

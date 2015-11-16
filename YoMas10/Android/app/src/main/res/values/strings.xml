@@ -6,7 +6,7 @@
     <string name="title_activity_partido">Invitacion a Partido</string>
     <string name="title_activity_create_notificacion">Nueva Notificacion</string>
     <string name="title_activity_perfil">Mi Perfil</string>
-    <string name="title_activity_perfil_externo">PerfilExterno</string>
+    <string name="title_activity_perfil_externo">Informacion del jugador</string>
     <string name="title_activity_splash">Yo+10</string>
     <string name="title_activity_invitacion_equipo">Invitacion Equipo</string>
     <string name="title_activity_equipo">Equipo</string>

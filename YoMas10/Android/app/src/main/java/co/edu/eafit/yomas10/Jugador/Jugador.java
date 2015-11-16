@@ -45,6 +45,8 @@ public class Jugador implements Serializable {
         //TODO: sacar los datos de la base de datos
     }
 
+    public void initialize()
+
     /**
      * Metodo para crear un equipo, en dicho equipo quedara como capitan
      * @param nombre nombre del equipo

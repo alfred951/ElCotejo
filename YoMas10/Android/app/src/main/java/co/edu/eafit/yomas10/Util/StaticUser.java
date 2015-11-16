@@ -1,21 +1,40 @@
 package co.edu.eafit.yomas10.Util;
 
+import android.content.Context;
+import android.os.Bundle;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Jugador.Jugador;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
-public class StaticUser {
+public class StaticUser implements Receiver{
 
     public static Jugador jugador;
     public static boolean ready = false;
     //public static Equipo equipo;
     //public static LinkedList<Jugador> jugadores;
 
-    public static void initialize(){
+    public void initialize(Context ctx){
         if (!ready){
             ready = true;
             jugador = new Jugador("Aleochoam");
+
+
+            HashMap<String, String> map = new HashMap<>();
+            map.put("nickname", jugador.getUsername());
+            try {
+                ctx.startService(HttpBridge.startWorking(ctx, map, this));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
 
             jugador.setNombre("Alejandro");
             jugador.setPosicion("Portero");
@@ -86,5 +105,19 @@ public class StaticUser {
         integrantes.add(gaxel);
 
         return integrantes;
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+         try{
+            JSONObject json = new JSONObject(resultData.getString("GetResponse"));
+
+            jugador.setNombre(json.getString("nombre"));
+            jugador.setBio(json.getString("bio"));
+            jugador.setCorreo(json.getString("correo"));
+            jugador.setPosicion(json.getString("posicion"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
