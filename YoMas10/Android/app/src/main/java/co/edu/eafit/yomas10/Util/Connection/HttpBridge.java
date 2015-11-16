@@ -12,7 +12,8 @@ import java.util.HashMap;
  */
 public class HttpBridge{
 
-    public static Intent startWorking(Context ctx, HashMap<String, String> mapa, Receiver receiver, String type) throws UnsupportedEncodingException {
+    public static Intent startWorking(Context ctx, HashMap<String, String> mapa, Receiver receiver,
+                                      String type) throws UnsupportedEncodingException {
         OwnResultReceiver mReceiver = new OwnResultReceiver(new Handler());
         mReceiver.setmReceiver(receiver);
         Intent intent = new Intent(Intent.ACTION_SYNC, null, ctx, Http.class);
@@ -20,4 +21,6 @@ public class HttpBridge{
         intent.putExtra("urlget", Http.getGetDataString(type, mapa));
         return intent;
     }
+
+    public static Intent startWorking2(Context ctx, HashMap<String, String>, )
 }

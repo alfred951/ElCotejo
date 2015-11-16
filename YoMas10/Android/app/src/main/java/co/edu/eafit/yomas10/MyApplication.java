@@ -34,7 +34,7 @@ public class MyApplication extends Application implements Receiver{
             ParseInstallation.getCurrentInstallation().saveInBackground();
         }catch (Exception e){}
 
-        user = new Jugador("Aleochoam");
+        user = new Jugador("Aleochoam", this); //TODO cambiar por login
         ParsePush.subscribeInBackground(user.getUsername());
 
 

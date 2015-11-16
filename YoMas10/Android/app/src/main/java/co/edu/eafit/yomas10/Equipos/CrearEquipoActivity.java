@@ -14,18 +14,25 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.Http;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 import co.edu.eafit.yomas10.Util.ParseNotificationSender;
 
-public class CrearEquipoActivity extends AppCompatActivity {
+public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
 
+    private Equipo equipo;
     private final static int REQUEST_AMIGOS = 1;
     private ArrayList<Jugador> jugadores;
     private ArrayList<String> nuevosJugadores;
@@ -109,7 +116,7 @@ public class CrearEquipoActivity extends AppCompatActivity {
         }
         else {
             Jugador user = ((MyApplication)getApplicationContext()).getUser();
-            Equipo equipo = user.crearEquipo(nombreEquipo.getText().toString());
+            equipo = user.crearEquipo(nombreEquipo.getText().toString());
             equipo.agregarJugadores(jugadores);
 
             for (Jugador jugador: jugadores) {
@@ -120,10 +127,49 @@ public class CrearEquipoActivity extends AppCompatActivity {
                     Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
                 }
             }
+            updateDBEquipo(equipo);
+            updateDBJugadores(equipo);
             Toast.makeText(this, "Se han invitado a los jugadores", Toast.LENGTH_LONG).show();
             user.agregarEquipo(equipo);
         }
 
 
+    }
+
+    public void updateDBEquipo(Equipo equipo){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("nombre", equipo.getNombre());
+        map.put("capitan", equipo.getCapitan().getUsername());
+
+        try {
+            HttpBridge.startWorking(this, map, this, Http.EQUIPO);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateDBJugadores(Equipo equipo){
+        for (int i = 0; i < equipo.getIntegrantes().size(); i++) {
+            HashMap map = new HashMap();
+            map.put("idEquipo", this.equipo.getId());
+            map.put("nickname", this.equipo.getIntegrantes().get(i));
+
+            try {
+                HttpBridge.startWorking(this, map, this, Http.INTEGRANTES);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        try {
+            JSONObject json = new JSONObject(resultData.getString("GetResponse"));
+            int id = json.getInt("idEquipo");
+            equipo.setId(id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

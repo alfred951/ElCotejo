@@ -14,6 +14,7 @@ public class Equipo implements Serializable {
 
     private String nombre;
     private Capitan capitan;
+    private int id;
     private ArrayList<Jugador> integrantes;
 
     /**
@@ -66,6 +67,14 @@ public class Equipo implements Serializable {
 
     public Capitan getCapitan() {
         return capitan;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public ArrayList<Jugador> getIntegrantes() {

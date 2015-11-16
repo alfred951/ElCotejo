@@ -1,21 +1,31 @@
 package co.edu.eafit.yomas10.Jugador;
 
+import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 
 import com.parse.ParsePush;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Partidos.Cancha;
 import co.edu.eafit.yomas10.Partidos.Partido;
+import co.edu.eafit.yomas10.Util.Connection.Http;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 
 /**
  * Created by Alejandro on 23/09/2015.
  */
-public class Jugador implements Serializable {
+public class Jugador implements Serializable, Receiver {
 
     protected String username;
     protected String nombre = null;
@@ -35,7 +45,7 @@ public class Jugador implements Serializable {
      * Constructor del jugador
      * @param username el usuario del jugador, debe ser unico y sera la llave primaria en la DB
      */
-    public Jugador(String username){
+    public Jugador(String username, Context context){
         this.username = username;
         equipos = new ArrayList<>();
         partidos = new ArrayList<>();
@@ -43,7 +53,44 @@ public class Jugador implements Serializable {
         canchasFavoritas = new ArrayList<>();
         canales = new ArrayList<>();
 
-        //TODO: sacar los datos de la base de datos
+        getInfoDB(context);
+    }
+
+    public void getInfoDB(Context context){
+        getAmigosDB(context);
+        getPartidosDB(context);
+        getEquiposDB(context);
+    }
+
+    private void getAmigosDB(Context context){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("nickname", username);
+
+        try {
+            HttpBridge.startWorking(context, map, this, Http.AMIGOS);
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void getPartidosDB(Context context){
+
+    }
+
+    private void getEquiposDB(Context context){
+
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        try {
+            JSONObject json = new JSONObject(resultData.getString("GetResponse"));
+            if (json.getString("amigo") != null){
+              //TODO
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

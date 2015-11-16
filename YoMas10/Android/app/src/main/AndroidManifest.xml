@@ -174,10 +174,6 @@
             android:name=".CreateNotificacionActivity"
             android:label="@string/title_activity_create_notificacion" >
         </activity>
-        <activity
-            android:name=".Splash"
-            android:label="@string/title_activity_splash" >
-        </activity>
     </application>
 
 </manifest>

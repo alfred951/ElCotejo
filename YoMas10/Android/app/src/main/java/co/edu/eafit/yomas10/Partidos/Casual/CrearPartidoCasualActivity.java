@@ -113,7 +113,10 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
             return true;
         }else if (id == R.id.crearPartido){
             Partido partido = new PartidoCasual(fechaPartido.getText().toString(),
-                    horaPartido.getText().toString(), canchaPartido.getText().toString(), jugadores);
+                    horaPartido.getText().toString(),canchaPartido.getText().toString(), jugadores);
+
+            HashMap<String, String> map = new HashMap<>();
+            //TODO
 
             for (Jugador jugador: jugadores){
                 try {
@@ -143,20 +146,16 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
     public void elegirHora(View view) throws UnsupportedEncodingException {
         DialogFragment selHora = new TimePickerFragment();
         selHora.show(getFragmentManager(), "timePicker");
-
-        HashMap<String, String> jugador = new HashMap<>();
-        jugador.put("nickname", "Chepesonsito");
-        jugador.put("correo", "chepebueno@eafit.edu.co");
-        String tipo = "Jugador";
-
-        startService(HttpBridge.startWorking(this, jugador, this, tipo));
     }
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode){
             case 0:
-                Log.d("Ensayo", resultData.getString("GetResponse"));
+                //TODO
+                break;
+            default:
+                break;
         }
     }
 

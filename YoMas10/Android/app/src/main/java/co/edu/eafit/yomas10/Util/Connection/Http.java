@@ -34,6 +34,13 @@ public class Http extends IntentService{
    static StringBuilder urlbase;
    String urlapi =  "http://www.yomasdiez.com/index.php/api/";
 
+    public static final String JUGADOR= "Jugador";
+    public static final String PARTICIPANTES= "Participantes";
+    public static final String AMIGOS = "Amigos";
+    public static final String PARTIDO = "Partido";
+    public static final String EQUIPO = "Equipo";
+    public static final String INTEGRANTES = "Integrantes";
+
    public Http() throws UnsupportedEncodingException {
        super(Http.class.getName());
 
@@ -71,45 +78,32 @@ public class Http extends IntentService{
        return response;
    }
 
-    public String makePostRequest(HashMap<String, String> postDataParams, String stringURL) throws Exception{
+    public static JSONArray makeMultipleGetRequest(String stringurl){
+        JSONArray response = new JSONArray();
+        StringBuilder urlS = new StringBuilder();
+        urlS.append(stringurl);
+        try{
+            URL url = new URL(urlS.toString());
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-        URL url;
-        String response = "";
-        try {
-            url = new URL(stringURL);
+            // Request Header
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Accept", "application/json");
+            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            con.setRequestProperty("http.agent", "");
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("http.agent", "");
-            conn.setDoOutput(true);
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(getPostDataString(postDataParams));
-
-            writer.flush();
-            writer.close();
-            os.close();
-            int responseCode=conn.getResponseCode();
-
-            if (responseCode == HttpsURLConnection.HTTP_OK) {
-                String line;
-                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while ((line=br.readLine()) != null) {
-                    response+=line;
-                }
+            //Parse JSON
+            if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                String json = getJSON(con.getInputStream());
+                return new JSONArray(json);
             }
-            else {
-                response="";
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
+        catch (Exception e){
+            Log.e("ErrorConnection", e.getMessage());
+        }
         return response;
     }
+
 
     public static String getJSON(InputStream inputStream) throws IOException {
         StringBuilder json = new StringBuilder();
@@ -125,44 +119,27 @@ public class Http extends IntentService{
         return json.toString();
     }
 
-    public String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for(Map.Entry<String, String> entry : params.entrySet()){
-            if (first) {
-                first = false;
-            }
-            else {
-                result.append("&");
-            }
-            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-        }
-
-        return result.toString();
-    }
-
-    public static String getGetDataString(String type, HashMap<String, String> params) throws UnsupportedEncodingException{
+    public static String getGetDataString(String type, HashMap<String, String> params)
+            throws UnsupportedEncodingException{
         StringBuilder result = new StringBuilder();
         boolean first = true;
         switch (type){
-            case "Jugador":
+            case JUGADOR:
                 result.append("Usuario/Jugador");
                 break;
-            case "Amigos":
+            case AMIGOS:
                 result.append("Usuario/Amigos");
                 break;
-            case "Partido":
+            case PARTIDO:
                 result.append("Partido/Partido");
                 break;
-            case "Participantes":
+            case PARTICIPANTES:
                 result.append("Partido/Participantes");
                 break;
-            case "Integrantes":
+            case INTEGRANTES:
                 result.append("Equipo/Integrantes");
                 break;
-            case "Equipo":
+            case EQUIPO:
                 result.append("Equipo/Equipo");
                 break;
         }
