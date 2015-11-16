@@ -51,8 +51,8 @@ public class Http extends IntentService{
 
    }
 
-   public static JSONObject makeGetRequest(String stringurl) {
-       JSONObject response = new JSONObject();
+   public static JSONArray makeGetRequest(String stringurl) {
+       JSONArray response = new JSONArray();
        StringBuilder urlS = new StringBuilder();
        urlS.append(stringurl);
        try {
@@ -69,7 +69,7 @@ public class Http extends IntentService{
            if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
               String json = getJSON(con.getInputStream());
               JSONArray obj = new JSONArray(json);
-              response = obj.getJSONObject(0);
+              response = obj;
            }
        }
        catch (Exception e){
@@ -77,33 +77,6 @@ public class Http extends IntentService{
        }
        return response;
    }
-
-    public static JSONArray makeMultipleGetRequest(String stringurl){
-        JSONArray response = new JSONArray();
-        StringBuilder urlS = new StringBuilder();
-        urlS.append(stringurl);
-        try{
-            URL url = new URL(urlS.toString());
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-            // Request Header
-            con.setRequestMethod("GET");
-            con.setRequestProperty("Accept", "application/json");
-            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            con.setRequestProperty("http.agent", "");
-
-            //Parse JSON
-            if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                String json = getJSON(con.getInputStream());
-                return new JSONArray(json);
-            }
-        }
-        catch (Exception e){
-            Log.e("ErrorConnection", e.getMessage());
-        }
-        return response;
-    }
-
 
     public static String getJSON(InputStream inputStream) throws IOException {
         StringBuilder json = new StringBuilder();
@@ -171,7 +144,7 @@ public class Http extends IntentService{
         urlbase.append(intent.getStringExtra("urlget"));
 
         try{
-            JSONObject getResult = makeGetRequest(urlbase.toString());
+            JSONArray getResult = makeGetRequest(urlbase.toString());
             bundle.putString("GetResponse", getResult.toString());
             receiver.send(0, bundle);
         }catch (Exception e){
