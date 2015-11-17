@@ -117,7 +117,7 @@ public class Http extends IntentService{
                 result.append("Equipo/Equipo");
                 break;
             case EQUIPO_JUGADOR:
-                result.append("Usuario/Equipo");
+                result.append("Usuario/Equipos");
                 break;
         }
         for(Map.Entry<String, String> entry : params.entrySet()) {
@@ -150,6 +150,7 @@ public class Http extends IntentService{
         try{
             JSONArray getResult = makeGetRequest(urlbase.toString());
             bundle.putString("GetResponse", getResult.toString());
+            Log.d("onHandleIntent", urlbase.toString());
             receiver.send(0, bundle);
         }catch (Exception e){
             Log.e("ErrorIntent", e.getMessage());

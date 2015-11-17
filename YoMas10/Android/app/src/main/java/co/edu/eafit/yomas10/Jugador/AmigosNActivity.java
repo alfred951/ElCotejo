@@ -3,6 +3,7 @@ package co.edu.eafit.yomas10.Jugador;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,13 +12,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.Http;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
-public class AmigosNActivity extends AppCompatActivity {
+public class AmigosNActivity extends AppCompatActivity implements Receiver{
 
     private ArrayList<Jugador> amigos;
     private ArrayAdapter<Jugador> mAdapter;
@@ -29,7 +39,18 @@ public class AmigosNActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amigos_n);
 
-        amigos = ((MyApplication)getApplicationContext()).getUser().getAmigos();
+        Jugador user = ((MyApplication)getApplicationContext()).getUser();
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("nickname", user.getUsername());
+
+        try{
+            startService(HttpBridge.startWorking(this, map, this, Http.AMIGOS));
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+
+        amigos = user.getAmigos();
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, amigos);
 
         amigosLV = (ListView) findViewById(R.id.listaAmigos);
@@ -45,11 +66,6 @@ public class AmigosNActivity extends AppCompatActivity {
                 Jugador amigo = (Jugador) parent.getItemAtPosition(position);
                 Bundle bn = new Bundle();
                 bn.putSerializable("JUGADOR", amigo);
-//                bn.putString("USERNAME", amigo.toString());
-//                bn.putString("NOMBRE", amigo.getNombre());
-//                bn.putString("POSICION", amigo.getPosicion());
-//                bn.putString("BIO", amigo.getBio());
-//                bn.putString("CORREO", amigo.getCorreo());
 
                 Intent in = new Intent(getApplicationContext(), PerfilExterno.class);
                 in.putExtras(bn);
@@ -79,5 +95,24 @@ public class AmigosNActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        try {
+            JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
+            Log.d("JSONARRAY", jsonArray.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject json = jsonArray.getJSONObject(i);
+                Log.d("JSONOBJECT", json.toString());
+                Jugador amigo = new Jugador(json.getString("amigo"));
+                mAdapter.add(amigo);
+                mAdapter.notifyDataSetChanged();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

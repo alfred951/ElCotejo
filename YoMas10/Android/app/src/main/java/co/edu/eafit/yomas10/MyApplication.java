@@ -3,6 +3,7 @@ package co.edu.eafit.yomas10;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
@@ -66,8 +67,8 @@ public class MyApplication extends Application implements Receiver{
     }
 
     public void getInfoDB(){
-        getAmigosDB();
-        getPartidosDB();
+        //getAmigosDB();
+        //getPartidosDB();
         getEquiposDB();
     }
 
@@ -87,7 +88,7 @@ public class MyApplication extends Application implements Receiver{
         //TODO map.put("nickname", user.getUsername());
 
         try {
-            HttpBridge.startWorking(this, map, this, Http.PARTIDO); //TODO
+            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO)); //TODO
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
@@ -98,7 +99,7 @@ public class MyApplication extends Application implements Receiver{
         map.put("nickname", user.getUsername());
 
         try {
-            HttpBridge.startWorking(this, map, this, Http.EQUIPO_JUGADOR); //TODO
+            startService(HttpBridge.startWorking(this, map, this, Http.EQUIPO_JUGADOR)); //TODO
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
@@ -108,21 +109,19 @@ public class MyApplication extends Application implements Receiver{
     public void onReceiveResult(int resultCode, Bundle resultData) {
         try {
             JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
+            Log.i("onReceiveResult1", jsonArray.toString());
             JSONObject json = jsonArray.getJSONObject(0);
             if (json.has("nombre")) { // perfil
                 initialize(json);
-            }else if (json.getString("amigo") != null){   //amigos
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    Jugador amigo = new Jugador(jsonArray.getJSONObject(i).getString("amigo"));
-                    user.agregarAmigo(amigo);
-                }
-            }else if (false) {//  partido
+                Log.i("onReceiveResult2", json.toString());
+
+            /*}else if (false) {//  partido*/
 
             }else if (json.has("idEquipo")) { // Equipo
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject equipojs = jsonArray.getJSONObject(i);
 
-                    Equipo equipo = new Equipo(null, null);
+                    Equipo equipo = new Equipo();
                     equipo.getInfoDB(this, equipojs.getInt("idEquipo"));
 
                     equipo = equipo.getEquipo();

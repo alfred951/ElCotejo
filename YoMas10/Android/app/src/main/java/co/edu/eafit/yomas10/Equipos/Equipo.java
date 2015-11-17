@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
+import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.Connection.Receiver;
@@ -29,7 +30,11 @@ public class Equipo implements Serializable, Receiver {
     private int id;
     private ArrayList<Jugador> integrantes;
 
-    private Equipo equipo;
+    private Context ctx;
+
+    public Equipo(Context ctx){
+        this.ctx = ctx;
+    }
 
     /**
      * A la hora de crear un equipo, el jugador creador se asciende a capitan del equipo
@@ -91,14 +96,17 @@ public class Equipo implements Serializable, Receiver {
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
 
+        Jugador user = ((MyApplication)ctx.getApplicationContext()).getUser();
+
         try {
             JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
             JSONObject json = jsonArray.getJSONObject(0);
 
             if (json.has("nombre")){
-                equipo = new Equipo(json.getString("nombre"), new Jugador(json.getString("capitan")));
+                user.agregarEquipo(new Equipo(json.getString("nombre"), new Jugador(json.getString("capitan"))));
             }else if (json.has("nickname")){
                 for (int i = 0; i < jsonArray.length(); i++) {
+                    Equipo equipo = user.findEquipo()
                     equipo.agregarJugador(new Jugador(jsonArray.getJSONObject(i).getString("nickname")));
                 }
             }
@@ -109,9 +117,6 @@ public class Equipo implements Serializable, Receiver {
 
     }
 
-    public Equipo getEquipo() {
-        return equipo;
-    }
 
     public String getNombre() {
         return nombre;
