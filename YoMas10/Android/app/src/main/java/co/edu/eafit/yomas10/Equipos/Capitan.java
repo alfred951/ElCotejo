@@ -23,8 +23,6 @@ public class Capitan extends Jugador implements Serializable{
         //profilePic = jugador.getProfilePic();
         equipos = jugador.getEquipos();
         amigos = jugador.getAmigos();
-        canchasFavoritas = jugador.getCanchasFavoritas();
-        canales = jugador.getChannels();
     }
 
     /**

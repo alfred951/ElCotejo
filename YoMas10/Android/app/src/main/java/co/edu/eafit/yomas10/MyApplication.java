@@ -67,7 +67,7 @@ public class MyApplication extends Application implements Receiver{
     }
 
     public void getInfoDB(){
-        //getAmigosDB();
+        getAmigosDB();
         //getPartidosDB();
         getEquiposDB();
     }
@@ -77,7 +77,7 @@ public class MyApplication extends Application implements Receiver{
         map.put("nickname", user.getUsername());
 
         try {
-            HttpBridge.startWorking(this, map, this, Http.AMIGOS); //TODO
+            HttpBridge.startWorking(this, map, this, Http.AMIGOS);
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
@@ -109,22 +109,22 @@ public class MyApplication extends Application implements Receiver{
     public void onReceiveResult(int resultCode, Bundle resultData) {
         try {
             JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
-            Log.i("onReceiveResult1", jsonArray.toString());
             JSONObject json = jsonArray.getJSONObject(0);
-            if (json.has("nombre")) { // perfil
+            if (json.has("edad")) { // perfil
                 initialize(json);
-                Log.i("onReceiveResult2", json.toString());
 
-            /*}else if (false) {//  partido*/
-
-            }else if (json.has("idEquipo")) { // Equipo
+            }else if (json.has("amigo")){ //amigos del usuario
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject equipojs = jsonArray.getJSONObject(i);
-
-                    Equipo equipo = new Equipo();
-                    equipo.getInfoDB(this, equipojs.getInt("idEquipo"));
-
-                    equipo = equipo.getEquipo();
+                    JSONObject amigoJS = jsonArray.getJSONObject(i);
+                    Log.d("JSONOBJECT", json.toString());
+                    Jugador amigo = new Jugador(json.getString("amigo"));
+                    user.agregarAmigo(amigo);
+                }
+            }else if (json.has("capitan")){ //equipos del usuario
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject equipoJS = jsonArray.getJSONObject(i);
+                    Jugador capitan = new Jugador(equipoJS.getString("capitan"));
+                    Equipo equipo = capitan.crearEquipo(equipoJS.getString("nombre"), json.getInt("idEquipo"));
                     user.agregarEquipo(equipo);
                 }
             }
@@ -134,9 +134,8 @@ public class MyApplication extends Application implements Receiver{
         }
     }
 
-
-
     public Jugador getUser(){
         return user;
     }
+
 }

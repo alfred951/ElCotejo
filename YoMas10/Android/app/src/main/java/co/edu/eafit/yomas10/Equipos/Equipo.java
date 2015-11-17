@@ -25,15 +25,18 @@ import co.edu.eafit.yomas10.Util.Connection.Receiver;
  */
 public class Equipo implements Serializable, Receiver {
 
+    private int id;
     private String nombre;
     private Capitan capitan;
-    private int id;
-    private ArrayList<Jugador> integrantes;
+    private ArrayList<Jugador> integrantes = new ArrayList<>();
 
-    private Context ctx;
 
-    public Equipo(Context ctx){
-        this.ctx = ctx;
+    public Equipo(String nombre, Jugador creador, int id){
+        integrantes = new ArrayList<>();
+        this.id = id;
+        this.nombre = nombre;
+        this.capitan = new Capitan(creador);
+        this.capitan.setEquipo(this);
     }
 
     /**
@@ -64,53 +67,21 @@ public class Equipo implements Serializable, Receiver {
         for (int i = 0; i < jugadores.size(); i++){
             agregarJugador(jugadores.get(i));
         }
-
     }
 
-    /**
-     * Ir a la base de datos y conseguir el objeto equipo con la informacion actual
-     * @return Objeto equipo con toda la informacion lista
-     */
-    public void getInfoDB(Context ctx, int i){
-        HashMap<String, String> map = new HashMap<>();
-        map.put("idEquipo", i+"");
-
-        try {
-            HttpBridge.startWorking(ctx, map, this, Http.EQUIPO);
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void getIntegrantesDB(Context ctx, int i){
-        HashMap<String, String> map = new HashMap<>();
-        map.put("idEquipo",  i+"");
-
-        try {
-            HttpBridge.startWorking(ctx, map, this, Http.INTEGRANTES);
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-
-        Jugador user = ((MyApplication)ctx.getApplicationContext()).getUser();
 
         try {
             JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
             JSONObject json = jsonArray.getJSONObject(0);
 
             if (json.has("nombre")){
-                user.agregarEquipo(new Equipo(json.getString("nombre"), new Jugador(json.getString("capitan"))));
-            }else if (json.has("nickname")){
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    Equipo equipo = user.findEquipo()
-                    equipo.agregarJugador(new Jugador(jsonArray.getJSONObject(i).getString("nickname")));
-                }
+                nombre = json.getString("nombre");
+                Jugador capitan = new Jugador(json.getString("capitan"));
+                this.capitan = new Capitan(capitan);
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

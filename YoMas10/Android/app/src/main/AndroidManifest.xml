@@ -121,8 +121,7 @@
         </activity>
         <activity
             android:name=".Jugador.EditarPerfilActivity"
-            android:label="@string/title_activity_editar_perfil"
-            android:parentActivityName=".Jugador.PerfilActivity">
+            android:label="@string/title_activity_editar_perfil">
         </activity>
         <activity
             android:name=".Jugador.AmigosNActivity"
@@ -139,8 +138,7 @@
         </activity>
         <activity
             android:name=".Equipos.EquipoActivity"
-            android:label="@string/title_activity_equipo"
-            android:parentActivityName=".MainActivity">
+            android:label="@string/title_activity_equipo">
         </activity>
         <activity
             android:name=".Equipos.InvitacionEquipoActivity"
@@ -149,35 +147,29 @@
         </activity>
         <activity
             android:name=".Equipos.CrearEquipoActivity"
-            android:label="@string/title_activity_crear_equipo"
-            android:parentActivityName=".MainActivity">
+            android:label="@string/title_activity_crear_equipo">
         </activity>
 
         <activity
             android:name=".Partidos.Casual.PartidoCasualActivity"
-            android:label="@string/title_activity_partido_casual"
-            android:parentActivityName=".MainActivity">
+            android:label="@string/title_activity_partido_casual">
         </activity>
         <activity
             android:name=".Partidos.Casual.CrearPartidoCasualActivity"
-            android:label="@string/title_activity_crear_partido"
-            android:parentActivityName=".MainActivity">
+            android:label="@string/title_activity_crear_partido">
         </activity>
         <activity
             android:name=".Partidos.Casual.InvitacionPartidoCasualActivity"
-            android:label="@string/title_activity_invitacion_partido_casual"
-            android:parentActivityName=".MainActivity">
+            android:label="@string/title_activity_invitacion_partido_casual">
         </activity>
 
         <activity
         android:name=".Partidos.Equipos.InvitacionPartidoEquiposActivity"
-        android:label="@string/title_activity_partido"
-            android:parentActivityName=".MainActivity">
+        android:label="@string/title_activity_partido">
         </activity>
         <activity
         android:name=".Partidos.Equipos.PartidoPorEquiposActivity"
-        android:label="@string/title_activity_partido_por_equipos"
-            android:parentActivityName=".MainActivity">
+        android:label="@string/title_activity_partido_por_equipos">
         </activity>
 
     </application>

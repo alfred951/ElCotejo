@@ -144,7 +144,7 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
         map.put("capitan", equipo.getCapitan().getUsername());
 
         try {
-            HttpBridge.startWorking(this, map, this, Http.EQUIPO);
+            startService(HttpBridge.startWorking(this, map, this, Http.EQUIPO));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -154,10 +154,10 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
         for (int i = 0; i < equipo.getIntegrantes().size(); i++) {
             HashMap map = new HashMap();
             map.put("idEquipo", this.equipo.getId());
-            map.put("nickname", this.equipo.getIntegrantes().get(i));
+            map.put("nickname", this.equipo.getIntegrantes().get(i).getUsername());
 
             try {
-                HttpBridge.startWorking(this, map, this, Http.INTEGRANTES);
+                startService(HttpBridge.startWorking(this, map, this, Http.INTEGRANTES));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

@@ -41,15 +41,6 @@ public class AmigosNActivity extends AppCompatActivity implements Receiver{
 
         Jugador user = ((MyApplication)getApplicationContext()).getUser();
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("nickname", user.getUsername());
-
-        try{
-            startService(HttpBridge.startWorking(this, map, this, Http.AMIGOS));
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-        }
-
         amigos = user.getAmigos();
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, amigos);
 
@@ -106,8 +97,11 @@ public class AmigosNActivity extends AppCompatActivity implements Receiver{
                 JSONObject json = jsonArray.getJSONObject(i);
                 Log.d("JSONOBJECT", json.toString());
                 Jugador amigo = new Jugador(json.getString("amigo"));
-                mAdapter.add(amigo);
-                mAdapter.notifyDataSetChanged();
+
+                if (!amigos.contains(amigo)) {
+                    mAdapter.add(amigo);
+                    mAdapter.notifyDataSetChanged();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

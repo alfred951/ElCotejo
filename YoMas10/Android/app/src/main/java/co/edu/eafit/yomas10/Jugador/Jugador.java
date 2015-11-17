@@ -38,8 +38,6 @@ public class Jugador implements Serializable {
     protected ArrayList<Equipo> equipos = null;
     protected ArrayList<Partido> partidos = null;
     protected ArrayList<Jugador> amigos = null;
-    protected ArrayList<Cancha> canchasFavoritas = null;
-    protected ArrayList<String> canales = null;
 
 
     /**
@@ -51,8 +49,6 @@ public class Jugador implements Serializable {
         equipos = new ArrayList<>();
         partidos = new ArrayList<>();
         amigos = new ArrayList<>();
-        canchasFavoritas = new ArrayList<>();
-        canales = new ArrayList<>();
 
     }
 
@@ -63,6 +59,12 @@ public class Jugador implements Serializable {
      */
     public Equipo crearEquipo(String nombre){
         Equipo equipo = new Equipo(nombre, this);
+        agregarEquipo(equipo);
+        return equipo;
+    }
+
+    public Equipo crearEquipo(String nombre, int id){
+        Equipo equipo = new Equipo(nombre, this, id);
         agregarEquipo(equipo);
         return equipo;
     }
@@ -87,32 +89,6 @@ public class Jugador implements Serializable {
     public void agregarAmigo(Jugador jug){
         if (!amigos.contains(jug)) {
             amigos.add(jug);
-        }
-    }
-
-    public void agregarCancha(Cancha cancha) {
-        if(!canchasFavoritas.contains(cancha)) {
-            canchasFavoritas.add(cancha);
-        }
-    }
-
-    /**
-     * Como jugador, se solicita el ingreso a un equipo medianta una notificacion al capitan
-     * @param equi equipo al que se quiere inscribir
-     */
-    public void solicitarIngreso(Equipo equi){
-        //TODO
-    }
-
-    public void suscribirseCanal(String canal){
-        if (!canales.contains(canal)){
-            canales.add(canal);
-        }
-    }
-
-    public void removerCanal(String canal){
-        if (canales.contains(canal)){
-            canales.remove(canal);
         }
     }
 
@@ -141,7 +117,6 @@ public class Jugador implements Serializable {
 
     public String getUsername() { return username; }
 
-    public ArrayList getChannels(){ return canales; }
 
     public String getNombre() { return nombre; }
 
@@ -177,7 +152,4 @@ public class Jugador implements Serializable {
 
     public ArrayList<Jugador> getAmigos() { return amigos; }
 
-    public ArrayList<Cancha> getCanchasFavoritas() {
-        return canchasFavoritas;
-    }
 }

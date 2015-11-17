@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,18 +13,31 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.Http;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 /**
  * Activity con la informacion del equipo que lo haya llamado
  */
-public class EquipoActivity extends AppCompatActivity {
+public class EquipoActivity extends AppCompatActivity implements Receiver{
 
     private Context ctx = this;
     private TextView capitan;
     private ListView listaJugadores;
+    private ArrayAdapter<Jugador> adapter;
+
+    private Equipo equipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +47,9 @@ public class EquipoActivity extends AppCompatActivity {
         capitan = (TextView) findViewById(R.id.capitan);
         listaJugadores = (ListView) findViewById(R.id.listaJugadores);
 
-        //TODO: Sacar la info del la DB
+        equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
 
-        final Equipo equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
+        buscarJugadores();
         setTitle(equipo.getNombre());
 
         capitan.setText(equipo.getCapitan().getNombre());
@@ -48,7 +62,7 @@ public class EquipoActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<Jugador> adapter = new ArrayAdapter<>
+        adapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, equipo.getIntegrantes());
 
         listaJugadores.setAdapter(adapter);
@@ -89,5 +103,31 @@ public class EquipoActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void buscarJugadores(){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("IdEquipo", equipo.getId() + "");
+        try {
+            startService(HttpBridge.startWorking(this, map, this, Http.INTEGRANTES));
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        try {
+            JSONArray jugadoresJS = new JSONArray(resultData.getString("GetResponse"));
+            //capitan.setText();
+            ArrayList<Jugador> jugadores = new ArrayList<>();
+            for (int i = 0; i < jugadoresJS.length(); i++) {
+                Jugador jugador = new Jugador(jugadoresJS.getJSONObject(i).getString("username"));
+                adapter.add(jugador);
+                adapter.notifyDataSetChanged();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
