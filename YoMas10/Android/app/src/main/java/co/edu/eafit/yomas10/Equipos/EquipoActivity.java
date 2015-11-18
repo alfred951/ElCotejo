@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -49,10 +50,11 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
 
         equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
 
-        buscarJugadores();
+        buscarInfo();
+        buscarIntegrantes();
+
         setTitle(equipo.getNombre());
 
-        capitan.setText(equipo.getCapitan().getNombre());
         capitan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +107,18 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
         return super.onOptionsItemSelected(item);
     }
 
-    public void buscarJugadores(){
+    public void buscarInfo(){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("idEquipo", equipo.getId() + "");
+
+        try {
+            startService(HttpBridge.startWorking(ctx, map, this, Http.EQUIPO));
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void buscarIntegrantes(){
         HashMap<String, String> map = new HashMap<>();
         map.put("IdEquipo", equipo.getId() + "");
         try {
@@ -118,13 +131,23 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         try {
-            JSONArray jugadoresJS = new JSONArray(resultData.getString("GetResponse"));
-            //capitan.setText();
-            ArrayList<Jugador> jugadores = new ArrayList<>();
-            for (int i = 0; i < jugadoresJS.length(); i++) {
-                Jugador jugador = new Jugador(jugadoresJS.getJSONObject(i).getString("username"));
-                adapter.add(jugador);
-                adapter.notifyDataSetChanged();
+            JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
+            JSONObject json = jsonArray.getJSONObject(0);
+            if (json.has("capitan")){
+                Jugador capitan = new Jugador(json.getString("capitan"));
+                equipo.cambiarCapitan(capitan);
+
+                this.capitan.setText(capitan.getUsername());
+            }else if (json.has("nickname")){
+                ArrayList<Jugador> jugadores = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Jugador jugador = new Jugador(jsonArray.getJSONObject(i).getString("username"));
+                    //adapter.add(jugador);
+                    //adapter.notifyDataSetChanged();
+                }
+                equipo.agregarJugadores(jugadores);
+                listaJugadores.setAdapter(new ArrayAdapter<Jugador>(this, android.R.layout.simple_list_item_1, equipo.getIntegrantes()));
+                //adapter.notifyDataSetChanged();
             }
         } catch (JSONException e) {
             e.printStackTrace();

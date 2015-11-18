@@ -39,17 +39,12 @@ public class MyApplication extends Application implements Receiver{
             ParseInstallation.getCurrentInstallation().saveInBackground();
         }catch (Exception e){}
 
-        user = new Jugador("jalvar"); //TODO cambiar por login
+        user = new Jugador("aleochoam"); //TODO cambiar por login
         ParsePush.subscribeInBackground(user.getUsername());
 
-
-        HashMap<String, String> map = new HashMap<>();
-        map.put("nickname", user.getUsername());
-        try {
-            startService(HttpBridge.startWorking(this, map, this, "Jugador"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        getAmigosDB();
+        getPartidosDB();
+        getEquiposDB();
     }
 
     public void initialize(JSONObject jugador){
@@ -60,7 +55,7 @@ public class MyApplication extends Application implements Receiver{
             user.setEdad(jugador.getInt("edad"));
             user.setPosicion(jugador.getString("posicion"));
 
-            getInfoDB();
+            //getInfoDB();
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -68,7 +63,7 @@ public class MyApplication extends Application implements Receiver{
 
     public void getInfoDB(){
         getAmigosDB();
-        //getPartidosDB();
+        getPartidosDB();
         getEquiposDB();
     }
 
@@ -77,7 +72,7 @@ public class MyApplication extends Application implements Receiver{
         map.put("nickname", user.getUsername());
 
         try {
-            HttpBridge.startWorking(this, map, this, Http.AMIGOS);
+            startService(HttpBridge.startWorking(this, map, this, Http.AMIGOS));
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
@@ -85,10 +80,10 @@ public class MyApplication extends Application implements Receiver{
 
     private void getPartidosDB(){
         HashMap<String, String> map = new HashMap<>();
-        //TODO map.put("nickname", user.getUsername());
+        map.put("nickname", user.getUsername());
 
         try {
-            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO)); //TODO
+            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO_EQUIPO));
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }

@@ -57,7 +57,7 @@ public class EquiposFragment extends ListFragment implements Receiver{
         map.put("nickname", user.getUsername());
 
         try {
-            context.startService(HttpBridge.startWorking(context, map, this, Http.EQUIPO_JUGADOR));
+            context.startService(HttpBridge.startWorking(context.getApplicationContext(), map, this, Http.EQUIPO_JUGADOR));
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
@@ -73,7 +73,6 @@ public class EquiposFragment extends ListFragment implements Receiver{
         Intent in = new Intent(getContext(), EquipoActivity.class);
         in.putExtra("EQUIPO", equipo);
         startActivity(in);
-
     }
 
     @Override

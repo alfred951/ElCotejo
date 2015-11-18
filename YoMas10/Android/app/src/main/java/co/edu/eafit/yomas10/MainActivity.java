@@ -24,6 +24,7 @@ import com.parse.ParsePush;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
@@ -37,6 +38,8 @@ import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.Equipos.PartidoPorEquiposActivity;
 import co.edu.eafit.yomas10.Util.Connection.Http;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 import co.edu.eafit.yomas10.Util.StaticUser;
 
 
@@ -156,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         }
     }
 
+
     public static class ArrayListFragment extends ListFragment {
         private static final String SECTION_NUMBER = "section_number";
         Http http;
@@ -181,10 +185,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 //TODO cambiar por la base de datos
                 case 0:
                     ArrayList<Equipo> equipos = user.getEquipos();
-                    ArrayList<String> nombreEquipos = new ArrayList<>();
-                    for (int i = 0; i < equipos.size(); i++) {
-                        nombreEquipos.add(equipos.get(i).getNombre());
-                    }
                     setListAdapter(new ArrayAdapter<Equipo>(getActivity(),
                             android.R.layout.simple_list_item_1, equipos));
                     break;

@@ -62,6 +62,8 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
         catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
+
+
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data){

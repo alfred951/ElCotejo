@@ -69,6 +69,12 @@ public class Equipo implements Serializable, Receiver {
         }
     }
 
+    public void cambiarCapitan(Jugador nuevo){
+        Capitan capitan = new Capitan(nuevo);
+        capitan.setEquipo(this);
+        this.capitan = capitan;
+    }
+
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
