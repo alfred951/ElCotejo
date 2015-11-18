@@ -31,14 +31,6 @@ public class Equipo implements Serializable, Receiver {
     private ArrayList<Jugador> integrantes = new ArrayList<>();
 
 
-    public Equipo(String nombre, Jugador creador, int id){
-        integrantes = new ArrayList<>();
-        this.id = id;
-        this.nombre = nombre;
-        this.capitan = new Capitan(creador);
-        this.capitan.setEquipo(this);
-    }
-
     /**
      * A la hora de crear un equipo, el jugador creador se asciende a capitan del equipo
      * @param nombre Nombre del equipo
@@ -46,6 +38,14 @@ public class Equipo implements Serializable, Receiver {
      */
     public Equipo(String nombre, Jugador creador){
         integrantes = new ArrayList<>();
+        this.nombre = nombre;
+        this.capitan = new Capitan(creador);
+        this.capitan.setEquipo(this);
+    }
+
+    public Equipo(String nombre, Jugador creador, int id){
+        integrantes = new ArrayList<>();
+        this.id = id;
         this.nombre = nombre;
         this.capitan = new Capitan(creador);
         this.capitan.setEquipo(this);

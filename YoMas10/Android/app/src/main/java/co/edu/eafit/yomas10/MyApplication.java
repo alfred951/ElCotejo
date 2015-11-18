@@ -43,8 +43,8 @@ public class MyApplication extends Application implements Receiver{
         ParsePush.subscribeInBackground(user.getUsername());
 
         getAmigosDB();
-        getPartidosDB();
-        getEquiposDB();
+        //getPartidosDB();
+        //getEquiposDB();
     }
 
     public void initialize(JSONObject jugador){
@@ -83,7 +83,7 @@ public class MyApplication extends Application implements Receiver{
         map.put("nickname", user.getUsername());
 
         try {
-            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO_EQUIPO));
+            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO_JUGADOR));
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }

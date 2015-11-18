@@ -11,14 +11,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.Http;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
-public class PartidoCasualActivity extends AppCompatActivity {
+public class PartidoCasualActivity extends AppCompatActivity implements Receiver{
 
     private TextView horaPartido, fechaPartido, cancha;
     private ListView participantesLV;
+    private PartidoCasual partido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +41,7 @@ public class PartidoCasualActivity extends AppCompatActivity {
         cancha = (TextView) findViewById(R.id.canchaPartido);
         participantesLV = (ListView) findViewById(R.id.integrantes);
 
-        PartidoCasual partido = (PartidoCasual) getIntent().getExtras().getSerializable("PARTIDO");
+        partido = (PartidoCasual) getIntent().getExtras().getSerializable("PARTIDO");
         horaPartido.setText(partido.getHora());
         fechaPartido.setText(partido.getFecha());
         cancha.setText(partido.getCancha());
@@ -42,15 +53,8 @@ public class PartidoCasualActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Jugador jugador = (Jugador) parent.getItemAtPosition(position);
-                //Jugador amigo = (Jugador) parent.getItemAtPosition(position); //cambiar
                 Bundle bn = new Bundle();
                 bn.putSerializable("JUGADOR", jugador);
-//                bn.putString("USERNAME", amigo.toString());
-//                bn.putString("NOMBRE", amigo.getNombre());
-//                bn.putString("POSICION", amigo.getPosicion());
-//                bn.putString("BIO", amigo.getBio());
-//                bn.putString("CORREO", amigo.getCorreo());
-
 
                 Intent in = new Intent(getApplicationContext(), PerfilExterno.class);
                 in.putExtras(bn);
@@ -79,5 +83,33 @@ public class PartidoCasualActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void buscarInfo(){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("idPartido", partido.getId() +"");
+
+        try{
+            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO));
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        try {
+            JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject json = jsonArray.getJSONObject(i);
+                Jugador integrante = new Jugador(json.getString("nickname"));
+                partido.agregarParticipante(integrante);
+            }
+            participantesLV.setAdapter(new ArrayAdapter<Jugador>(this,
+                    android.R.layout.simple_list_item_1, partido.getIntegrantes()));
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 }

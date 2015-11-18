@@ -48,11 +48,6 @@ public class EquiposFragment extends ListFragment implements Receiver{
 
         View view = inflater.inflate(R.layout.fragment_equipos, container, false);
 
-        //adapter = new ArrayAdapter<Equipo>(context, android.R.layout.simple_list_item_1,
-          //      user.getEquipos());
-
-//        setListAdapter(adapter);
-
         HashMap<String, String> map = new HashMap<>();
         map.put("nickname", user.getUsername());
 
@@ -81,7 +76,6 @@ public class EquiposFragment extends ListFragment implements Receiver{
             JSONArray jsonArray= new JSONArray(resultData.getString("GetResponse"));
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject equipoJS = jsonArray.getJSONObject(i);
-                Log.d("JSON", equipoJS.toString());
                 Jugador capitan = new Jugador(equipoJS.getString("capitan"));
                 Equipo equipo = capitan.crearEquipo(equipoJS.getString("nombre"), equipoJS.getInt("idEquipo"));
                 user.agregarEquipo(equipo);

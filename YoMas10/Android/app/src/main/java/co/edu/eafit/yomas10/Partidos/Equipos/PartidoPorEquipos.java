@@ -19,6 +19,14 @@ public class PartidoPorEquipos extends Partido {
         this.contrincante = contrincante;
     }
 
+    public PartidoPorEquipos(String fecha, String hora, String cancha,
+                             Equipo organizador, Equipo contrincante, int id){
+
+        super(fecha, hora, cancha, id);
+        this.organizador = organizador;
+        this.contrincante = contrincante;
+    }
+
     public Equipo getOrganizador() {
         return organizador;
     }

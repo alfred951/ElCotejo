@@ -9,11 +9,19 @@ import co.edu.eafit.yomas10.Equipos.Equipo;
  */
 public abstract class Partido implements Serializable {
 
+    protected int id;
     protected String fecha;
     protected String hora;
     protected String cancha;
 
     public Partido(String fecha, String hora, String cancha){
+        this.fecha = fecha;
+        this.hora = hora;
+        this.cancha = cancha;
+    }
+
+    public Partido(String fecha, String hora, String cancha, int id){
+        this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.cancha = cancha;
@@ -29,5 +37,9 @@ public abstract class Partido implements Serializable {
 
     public String getCancha() {
         return cancha;
+    }
+
+    public int getId() {
+        return id;
     }
 }

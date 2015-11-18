@@ -31,7 +31,7 @@ public class Http extends IntentService{
    String urlget;
    String type;
    Bundle bundle;
-   static StringBuilder urlbase;
+   StringBuilder urlbase;
    String urlapi =  "http://www.yomasdiez.com/index.php/api/";
 
     public static final String JUGADOR= "Jugador";
@@ -41,7 +41,7 @@ public class Http extends IntentService{
     public static final String EQUIPO = "Equipo";
     public static final String INTEGRANTES = "Integrantes";
     public static final String EQUIPO_JUGADOR = "Equipo_Jugador";
-    public static final String PARTIDO_EQUIPO = "Partido_Equipo";
+    public static final String PARTIDO_JUGADOR = "Partido_Equipo";
 
    public Http() throws UnsupportedEncodingException {
        super(Http.class.getName());
@@ -120,7 +120,7 @@ public class Http extends IntentService{
             case EQUIPO_JUGADOR:
                 result.append("Usuario/Equipos");
                 break;
-            case PARTIDO_EQUIPO:
+            case PARTIDO_JUGADOR:
                 result.append("Usuario/Partidos");
                 break;
         }
@@ -148,6 +148,7 @@ public class Http extends IntentService{
         //Objeto ResultReceiver que se encarga de
         // enviar y recibir mensajes de un Thread al otro.
         final ResultReceiver receiver = intent.getParcelableExtra("mReceiver");
+        urlbase = new StringBuilder();
         urlbase.append(this.urlapi);
         urlbase.append(intent.getStringExtra("urlget"));
 

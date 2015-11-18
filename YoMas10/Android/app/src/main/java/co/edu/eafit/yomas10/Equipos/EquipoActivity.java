@@ -50,7 +50,7 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
 
         equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
 
-        buscarInfo();
+        //buscarInfo();
         buscarIntegrantes();
 
         setTitle(equipo.getNombre());
@@ -120,7 +120,7 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
 
     public void buscarIntegrantes(){
         HashMap<String, String> map = new HashMap<>();
-        map.put("IdEquipo", equipo.getId() + "");
+        map.put("idEquipo", equipo.getId() + "");
         try {
             startService(HttpBridge.startWorking(this, map, this, Http.INTEGRANTES));
         }catch (UnsupportedEncodingException e){
@@ -141,7 +141,7 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
             }else if (json.has("nickname")){
                 ArrayList<Jugador> jugadores = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    Jugador jugador = new Jugador(jsonArray.getJSONObject(i).getString("username"));
+                    Jugador jugador = new Jugador(jsonArray.getJSONObject(i).getString("nickname"));
                     //adapter.add(jugador);
                     //adapter.notifyDataSetChanged();
                 }

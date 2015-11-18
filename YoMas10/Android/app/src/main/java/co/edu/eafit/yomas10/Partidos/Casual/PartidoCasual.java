@@ -20,7 +20,12 @@ public class PartidoCasual extends Partido {
     public PartidoCasual(String fecha, String hora, String cancha, ArrayList<Jugador> integrantes){
         super(fecha, hora, cancha);
         this.integrantes = integrantes;
+    }
 
+
+    public PartidoCasual(String fecha, String hora, String cancha, ArrayList<Jugador> integrantes, int id){
+        super(fecha, hora, cancha, id);
+        this.integrantes = integrantes;
     }
 
     public void agregarParticipante(Jugador jugador){
