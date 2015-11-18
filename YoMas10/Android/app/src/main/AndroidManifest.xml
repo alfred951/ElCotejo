@@ -25,15 +25,15 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
-        android:theme="@style/AppTheme"
-        android:name="MyApplication">
+        android:theme="@style/AppTheme" >
         <service android:name="com.parse.PushService" />
-
-        <service android:name=".Util.Connection.Http"
+        <service
+            android:name=".Util.Connection.Http"
             android:exported="false" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
@@ -89,13 +89,12 @@
         <meta-data
             android:name="com.parse.push.notification_icon"
             android:resource="@drawable/ic_launcher" />
-
         <meta-data
             android:name="com.parse.APPLICATION_ID"
-            android:value="@string/app_id"/>
+            android:value="@string/app_id" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="@string/client_key"/>
+            android:value="@string/client_key" />
 
         <activity
             android:name=".MainActivity"
@@ -121,12 +120,12 @@
         </activity>
         <activity
             android:name=".Jugador.EditarPerfilActivity"
-            android:label="@string/title_activity_editar_perfil">
+            android:label="@string/title_activity_editar_perfil" >
         </activity>
         <activity
             android:name=".Jugador.AmigosNActivity"
             android:label="@string/title_activity_amigos_n"
-            android:parentActivityName=".Jugador.PerfilActivity">
+            android:parentActivityName=".Jugador.PerfilActivity" >
         </activity>
         <activity
             android:name=".Jugador.SeleccionarAmigosActivity"
@@ -138,40 +137,42 @@
         </activity>
         <activity
             android:name=".Equipos.EquipoActivity"
-            android:label="@string/title_activity_equipo">
+            android:label="@string/title_activity_equipo" >
         </activity>
         <activity
             android:name=".Equipos.InvitacionEquipoActivity"
             android:label="@string/title_activity_invitacion_equipo"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".Equipos.CrearEquipoActivity"
-            android:label="@string/title_activity_crear_equipo">
+            android:label="@string/title_activity_crear_equipo" >
         </activity>
-
         <activity
             android:name=".Partidos.Casual.PartidoCasualActivity"
-            android:label="@string/title_activity_partido_casual">
+            android:label="@string/title_activity_partido_casual" >
         </activity>
         <activity
             android:name=".Partidos.Casual.CrearPartidoCasualActivity"
-            android:label="@string/title_activity_crear_partido">
+            android:label="@string/title_activity_crear_partido" >
         </activity>
         <activity
             android:name=".Partidos.Casual.InvitacionPartidoCasualActivity"
-            android:label="@string/title_activity_invitacion_partido_casual">
-        </activity>
-
-        <activity
-        android:name=".Partidos.Equipos.InvitacionPartidoEquiposActivity"
-        android:label="@string/title_activity_partido">
+            android:label="@string/title_activity_invitacion_partido_casual" >
         </activity>
         <activity
-        android:name=".Partidos.Equipos.PartidoPorEquiposActivity"
-        android:label="@string/title_activity_partido_por_equipos">
+            android:name=".Partidos.Equipos.InvitacionPartidoEquiposActivity"
+            android:label="@string/title_activity_partido" >
         </activity>
+        <activity
+            android:name=".Partidos.Equipos.PartidoPorEquiposActivity"
+            android:label="@string/title_activity_partido_por_equipos" >
+        </activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2" >
 
+        </activity>
     </application>
 
 </manifest>
