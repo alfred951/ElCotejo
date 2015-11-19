@@ -50,7 +50,7 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
 
         equipo = (Equipo) getIntent().getSerializableExtra("EQUIPO");
 
-        //buscarInfo();
+        buscarInfo();
         buscarIntegrantes();
 
         setTitle(equipo.getNombre());
@@ -140,14 +140,15 @@ public class EquipoActivity extends AppCompatActivity implements Receiver{
                 this.capitan.setText(capitan.getUsername());
             }else if (json.has("nickname")){
                 ArrayList<Jugador> jugadores = new ArrayList<>();
+                Log.d("Integrantes", jsonArray.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     Jugador jugador = new Jugador(jsonArray.getJSONObject(i).getString("nickname"));
-                    //adapter.add(jugador);
+                    adapter.add(jugador);
                     //adapter.notifyDataSetChanged();
                 }
-                equipo.agregarJugadores(jugadores);
-                listaJugadores.setAdapter(new ArrayAdapter<Jugador>(this, android.R.layout.simple_list_item_1, equipo.getIntegrantes()));
-                //adapter.notifyDataSetChanged();
+                //equipo.agregarJugadores(jugadores);
+                //listaJugadores.setAdapter(new ArrayAdapter<Jugador>(this, android.R.layout.simple_list_item_1, equipo.getIntegrantes()));
+                adapter.notifyDataSetChanged();
             }
         } catch (JSONException e) {
             e.printStackTrace();

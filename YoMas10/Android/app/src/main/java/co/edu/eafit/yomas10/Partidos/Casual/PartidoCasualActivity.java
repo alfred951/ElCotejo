@@ -3,6 +3,7 @@ package co.edu.eafit.yomas10.Partidos.Casual;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ public class PartidoCasualActivity extends AppCompatActivity implements Receiver
 
     private TextView horaPartido, fechaPartido, cancha;
     private ListView participantesLV;
+    private ArrayAdapter<Jugador> adapter;
     private PartidoCasual partido;
 
     @Override
@@ -42,12 +44,17 @@ public class PartidoCasualActivity extends AppCompatActivity implements Receiver
         participantesLV = (ListView) findViewById(R.id.integrantes);
 
         partido = (PartidoCasual) getIntent().getExtras().getSerializable("PARTIDO");
+
+        buscarInfo();
+
         horaPartido.setText(partido.getHora());
         fechaPartido.setText(partido.getFecha());
         cancha.setText(partido.getCancha());
 
-        participantesLV.setAdapter(new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, partido.getIntegrantes()));
+        adapter = new ArrayAdapter<Jugador>(this,
+                android.R.layout.simple_list_item_1, partido.getIntegrantes());
+
+        participantesLV.setAdapter(adapter);
 
         participantesLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,7 +97,7 @@ public class PartidoCasualActivity extends AppCompatActivity implements Receiver
         map.put("idPartido", partido.getId() +"");
 
         try{
-            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO));
+            startService(HttpBridge.startWorking(this, map, this, Http.PARTICIPANTES));
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
@@ -100,13 +107,13 @@ public class PartidoCasualActivity extends AppCompatActivity implements Receiver
     public void onReceiveResult(int resultCode, Bundle resultData) {
         try {
             JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
+            Log.d("Participantes", jsonArray.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject json = jsonArray.getJSONObject(i);
                 Jugador integrante = new Jugador(json.getString("nickname"));
-                partido.agregarParticipante(integrante);
+                adapter.add(integrante);
             }
-            participantesLV.setAdapter(new ArrayAdapter<Jugador>(this,
-                    android.R.layout.simple_list_item_1, partido.getIntegrantes()));
+            adapter.notifyDataSetChanged();
 
         }catch (JSONException e){
             e.printStackTrace();

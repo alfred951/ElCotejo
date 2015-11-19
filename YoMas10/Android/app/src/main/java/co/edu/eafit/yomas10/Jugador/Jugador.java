@@ -87,27 +87,36 @@ public class Jugador implements Serializable {
     }
 
     public void agregarAmigo(Jugador jug){
-        if (!amigos.contains(jug)) {
-            amigos.add(jug);
+        for (Jugador amigo: amigos) {
+            if (amigo.getUsername().equals(jug.getUsername())){
+                return;
+            }
         }
+        amigos.add(jug);
     }
 
     /**
      * Agregar un equipo a la lista de los equipos donde esta registrado
-     * @param equipo equipo al que se va a unir
+     * @param nuevoEquipo equipo al que se va a unir
      */
-    public void agregarEquipo(Equipo equipo){
-        if (!equipos.contains(equipo)){
-            equipos.add(equipo);
-            ParsePush.subscribeInBackground(equipo.getNombre());
+    public void agregarEquipo(Equipo nuevoEquipo){
+        for (Equipo equipo: equipos) {
+            if (equipo.getId() == nuevoEquipo.getId()){
+                return;
+            }
         }
+        equipos.add(nuevoEquipo);
+        ParsePush.subscribeInBackground(nuevoEquipo.getId() + "");
     }
 
-    public void agregarPartido(Partido partido){
-        if(!partidos.contains(partido)){
-            partidos.add(partido);
-            ///ParsePush.subscribeInBackground(null) TODO cambiar por el id del partido
+    public void agregarPartido(Partido nuevoPartido){
+        for (Partido partido: partidos) {
+            if (partido.getId() == nuevoPartido.getId()){
+                return;
+            }
         }
+        partidos.add(nuevoPartido);
+        ParsePush.subscribeInBackground(nuevoPartido.getId() + "");
     }
 
     @Override
