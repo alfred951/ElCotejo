@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
-import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Main2Activity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.Connection.Http;
@@ -100,14 +100,9 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         if (id == R.id.action_crear){
             crearEquipo();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, Main2Activity.class));
             //finish();
         }
 

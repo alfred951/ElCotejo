@@ -23,9 +23,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
-import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.MyApplication;
-import co.edu.eafit.yomas10.Partidos.Casual.CrearPartidoCasualActivity;
 import co.edu.eafit.yomas10.R;
 
 public class SeleccionarAmigosActivity extends AppCompatActivity {
@@ -147,11 +145,6 @@ public class SeleccionarAmigosActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

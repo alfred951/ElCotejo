@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Equipos.InvitacionEquipoActivity;
 import co.edu.eafit.yomas10.Jugador.Jugador;
-import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Main2Activity;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Casual.InvitacionPartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.Equipos.PartidoPorEquipos;
@@ -39,7 +39,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
     public void onPushReceive(Context context, Intent intent){
         Log.i("Parse Notification", "PUSH RECEIVED!!");
 
-        Intent in = new Intent(context, MainActivity.class);
+        Intent in = new Intent(context, Main2Activity.class);
         try{
             String action = intent.getAction();
 

@@ -74,10 +74,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }else if (id == R.id.action_editSave){
+        if (id == R.id.action_editSave){
            saveChanges();
             Toast.makeText(this, getString(R.string.editado), Toast.LENGTH_LONG).show();
             Intent in = new Intent(this, PerfilActivity.class);

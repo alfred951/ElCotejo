@@ -20,7 +20,7 @@ import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
-import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Main2Activity;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.Connection.Receiver;
@@ -81,11 +81,6 @@ public class InvitacionEquipoActivity extends AppCompatActivity implements Recei
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -117,7 +112,7 @@ public class InvitacionEquipoActivity extends AppCompatActivity implements Recei
         }catch(Exception e) {
             Log.e("Error", e.getMessage());
         }
-        Intent in = new Intent(this, MainActivity.class);
+        Intent in = new Intent(this, Main2Activity.class);
         startActivity(in);
         finish();
 
@@ -125,7 +120,7 @@ public class InvitacionEquipoActivity extends AppCompatActivity implements Recei
 
     public void rechazarEquipo(View view){
         //TODO notificar el rechazo
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        Intent in = new Intent(getApplicationContext(), Main2Activity.class);
         startActivity(in);
         finish();
     }

@@ -19,7 +19,7 @@ import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
-import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Main2Activity;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.Connection.Receiver;
@@ -75,15 +75,6 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity implement
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -113,14 +104,14 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity implement
         catch(Exception e) {
             e.printStackTrace();
         }
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        Intent in = new Intent(getApplicationContext(), Main2Activity.class);
         startActivity(in);
         finish();
 
     }
 
     public void rechazarPartido(View view){
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        Intent in = new Intent(getApplicationContext(), Main2Activity.class);
         startActivity(in);
         finish();
     }

@@ -32,7 +32,7 @@ import java.util.HashMap;
 
 import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.SeleccionarAmigosActivity;
-import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Main2Activity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.Connection.Http;
@@ -115,10 +115,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }else if (id == R.id.crearPartido){
+        if (id == R.id.crearPartido){
             partido = new PartidoCasual(fechaPartido.getText().toString(),
                     horaPartido.getText().toString(),canchaPartido.getText().toString(), jugadores);
             user.agregarPartido(partido);
@@ -193,7 +190,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
 
 
         //((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, Main2Activity.class));
     }
 
     //Clases para elegir fecha y hora

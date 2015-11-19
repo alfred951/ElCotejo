@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import co.edu.eafit.yomas10.MainActivity;
+import co.edu.eafit.yomas10.Main2Activity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
@@ -86,10 +86,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }else if (id == R.id.action_edit) {
+        if (id == R.id.action_edit) {
             Bundle bn = new Bundle();
             bn.putString("NOMBRE", name.getText().toString());
             bn.putString("POSICION", posicion.getText().toString());
@@ -108,7 +105,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
 
 
     public void onBackPressed(){
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, Main2Activity.class));
     }
 
     @Override
