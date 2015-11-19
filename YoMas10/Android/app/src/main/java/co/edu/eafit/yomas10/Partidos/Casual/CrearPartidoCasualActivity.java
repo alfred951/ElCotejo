@@ -136,7 +136,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
 
             //((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
             startActivity(new Intent(this, MainActivity.class));
-            finish();
+            //finish();
         }
 
         return super.onOptionsItemSelected(item);

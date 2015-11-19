@@ -105,7 +105,7 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
         if (id == R.id.action_crear){
             crearEquipo();
             startActivity(new Intent(this, MainActivity.class));
-            finish();
+            //finish();
         }
 
         return super.onOptionsItemSelected(item);
