@@ -99,10 +99,10 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity implement
             Toast.makeText(this, "Te has inscrito al partido", Toast.LENGTH_SHORT)
                     .show();
             Jugador user = ((MyApplication) getApplicationContext()).getUser();
-            user.agregarPartido(partido);
+            //user.agregarPartido(partido);
 
             HashMap<String, String> jugador = new HashMap<>();
-            jugador.put("idEquipo", partido.getId() + "");
+            jugador.put("idPartido", partido.getId() + "");
             jugador.put("nickname", user.getUsername());
             try {
                 startService(HttpBridge.startWorking(this, jugador, this, Http.PARTICIPANTES));

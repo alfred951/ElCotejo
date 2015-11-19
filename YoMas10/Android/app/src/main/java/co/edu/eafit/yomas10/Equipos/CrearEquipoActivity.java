@@ -33,6 +33,7 @@ import co.edu.eafit.yomas10.Util.ParseNotificationSender;
 
 public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
 
+    private Jugador user;
     private Equipo equipo;
     private final static int REQUEST_AMIGOS = 1;
     private ArrayList<Jugador> jugadores;
@@ -45,6 +46,8 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_equipo);
+
+        user = ((MyApplication)getApplicationContext()).getUser();
 
         nombreEquipo = (EditText) findViewById(R.id.nombreEquipo);
 
@@ -117,22 +120,9 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
             return;
         }
         else {
-            Jugador user = ((MyApplication)getApplicationContext()).getUser();
             equipo = user.crearEquipo(nombreEquipo.getText().toString());
             equipo.agregarJugadores(jugadores);
-
-            for (Jugador jugador: jugadores) {
-                try{
-                    ParseNotificationSender.sendTeamInvitation(jugador.getUsername(),
-                            nombreEquipo.getText().toString(), user.getUsername(), jugadores, equipo.getId());
-                }catch (JSONException e){
-                    Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
-                }
-            }
             updateDBEquipo(equipo);
-            //updateDBJugadores(equipo);
-            Toast.makeText(this, "Se han invitado a los jugadores", Toast.LENGTH_LONG).show();
-            user.agregarEquipo(equipo);
         }
 
 
@@ -140,8 +130,8 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
 
     public void updateDBEquipo(Equipo equipo){
         HashMap<String, String> map = new HashMap<>();
-        map.put("nombre", equipo.getNombre());
-        map.put("capitan", equipo.getCapitan().getUsername());
+        map.put("nombre", nombreEquipo.getText().toString());
+        map.put("capitan", user.getUsername());
 
         try {
             startService(HttpBridge.startWorking(this, map, this, Http.EQUIPO));
@@ -170,10 +160,24 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
             JSONObject json = (new JSONArray(resultData.getString("GetResponse"))).getJSONObject(0);
             if (json.has("capitan")){
                 int id = json.getInt("idEquipo");
-                equipo.setId(id);
+                this.equipo.setId(id);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+        for (Jugador jugador: jugadores) {
+            try{
+                ParseNotificationSender.sendTeamInvitation(jugador.getUsername(),
+                        nombreEquipo.getText().toString(), user.getUsername(), jugadores, equipo.getId());
+            }catch (JSONException e){
+                Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
+            }
+        }
+
+        //updateDBJugadores(equipo);
+        Toast.makeText(this, "Se han invitado a los jugadores", Toast.LENGTH_LONG).show();
+        user.agregarEquipo(equipo);
     }
 }

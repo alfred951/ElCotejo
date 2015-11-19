@@ -48,7 +48,7 @@ public class InvitacionEquipoActivity extends AppCompatActivity implements Recei
 
         equipo = (Equipo) getIntent().getExtras().getSerializable("EQUIPO");
 
-        equipoTV.setText(equipo.getNombre());
+        equipoTV.setText(equipo.getNombre() + equipo.getId());
         capitanTV.setText(equipo.getCapitan().getNombre());
         jugadoresLV.setAdapter(new ArrayAdapter<Jugador>(this, android.R.layout.simple_list_item_1,
                 equipo.getIntegrantes()));
@@ -99,12 +99,13 @@ public class InvitacionEquipoActivity extends AppCompatActivity implements Recei
         try {
             Toast.makeText(this, "Te has inscrito a " + equipoTV.getText().toString(), Toast.LENGTH_SHORT)
                     .show();
-            Equipo equipo = new Equipo(this.equipoTV.getText().toString(),
+            /*Equipo equipo = new Equipo(this.equipoTV.getText().toString(),
                     new Jugador(this.capitanTV.getText().toString()));
-            Jugador user = ((MyApplication) getApplicationContext()).getUser();
+
 
             user.agregarEquipo(equipo);
-
+*/
+            Jugador user = ((MyApplication) getApplicationContext()).getUser();
             HashMap<String, String> jugador = new HashMap<>();
             jugador.put("idEquipo", equipo.getId() + "");
             jugador.put("nickname", user.getUsername());

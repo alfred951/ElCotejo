@@ -51,11 +51,14 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
     private final static int REQUEST_AMIGOS = 1;
 
     private PartidoCasual partido;
+    private Jugador user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_partido);
+
+        user = ((MyApplication)getApplicationContext()).getUser();
 
         fechaPartido = (TextView) findViewById(R.id.fechaPartido);
         horaPartido = (TextView) findViewById(R.id.horaPartido);
@@ -118,24 +121,12 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
         }else if (id == R.id.crearPartido){
             partido = new PartidoCasual(fechaPartido.getText().toString(),
                     horaPartido.getText().toString(),canchaPartido.getText().toString(), jugadores);
+            user.agregarPartido(partido);
 
             updateDB();
-            updateParticipantes();
-
-            for (Jugador jugador: jugadores){
-                try {
-                    ParseNotificationSender.sendCasualGameInvitation(jugador.getUsername(),
-                            fechaPartido.getText().toString(), horaPartido.getText().toString(),
-                            canchaPartido.getText().toString(), jugadores, id);
-                }catch (JSONException e){
-                    Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
-                }
-            }
-            Toast.makeText(getApplicationContext(),"Se han invitado los jugadores", Toast.LENGTH_LONG).show();
+            //updateParticipantes();
 
 
-            //((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
-            startActivity(new Intent(this, MainActivity.class));
             //finish();
         }
 
@@ -188,6 +179,21 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
         }catch (JSONException e){
             e.printStackTrace();
         }
+
+        for (Jugador jugador: jugadores){
+            try {
+                ParseNotificationSender.sendCasualGameInvitation(jugador.getUsername(),
+                        fechaPartido.getText().toString(), horaPartido.getText().toString(),
+                        canchaPartido.getText().toString(), jugadores, partido.getId());
+            }catch (JSONException e){
+                Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
+            }
+        }
+        Toast.makeText(getApplicationContext(), "Se han invitado los jugadores", Toast.LENGTH_LONG).show();
+
+
+        //((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     //Clases para elegir fecha y hora
