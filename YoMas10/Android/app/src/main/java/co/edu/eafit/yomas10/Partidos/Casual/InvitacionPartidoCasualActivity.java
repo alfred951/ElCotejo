@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import co.edu.eafit.yomas10.MyApplication;
@@ -20,8 +21,10 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
-public class InvitacionPartidoCasualActivity extends AppCompatActivity {
+public class InvitacionPartidoCasualActivity extends AppCompatActivity implements Receiver{
 
     private TextView horaPartido, fechaPartido, cancha;
     private ListView participantesLV;
@@ -85,18 +88,30 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+
+    }
+
     public void aceptarPartido(View view){
 
         try {
-            //TODO: Cambiar Todo esto
             Toast.makeText(this, "Te has inscrito al partido", Toast.LENGTH_SHORT)
                     .show();
-            ((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
-            //TODO: agregarse al equipo en la base de datos
-            //equipo.agregarJugador(StaticUser.jugador);
-            //TODO: Notificar la aceptacion
+            Jugador user = ((MyApplication) getApplicationContext()).getUser();
+            user.agregarPartido(partido);
+
+            HashMap<String, String> jugador = new HashMap<>();
+            jugador.put("idEquipo", partido.getId() + "");
+            jugador.put("nickname", user.getUsername());
+            try {
+                startService(HttpBridge.startWorking(this, jugador, this, Http.PARTICIPANTES));
+            }catch (UnsupportedEncodingException e){
+                e.printStackTrace();
+            }
         }
         catch(Exception e) {
+            e.printStackTrace();
         }
         Intent in = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(in);
@@ -105,7 +120,6 @@ public class InvitacionPartidoCasualActivity extends AppCompatActivity {
     }
 
     public void rechazarPartido(View view){
-        //TODO notificar el rechazo
         Intent in = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(in);
         finish();

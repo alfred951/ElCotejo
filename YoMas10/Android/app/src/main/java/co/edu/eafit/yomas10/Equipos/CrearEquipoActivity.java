@@ -124,13 +124,13 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
             for (Jugador jugador: jugadores) {
                 try{
                     ParseNotificationSender.sendTeamInvitation(jugador.getUsername(),
-                            nombreEquipo.getText().toString(), user.getUsername(), jugadores);
+                            nombreEquipo.getText().toString(), user.getUsername(), jugadores, equipo.getId());
                 }catch (JSONException e){
                     Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
                 }
             }
             updateDBEquipo(equipo);
-            updateDBJugadores(equipo);
+            //updateDBJugadores(equipo);
             Toast.makeText(this, "Se han invitado a los jugadores", Toast.LENGTH_LONG).show();
             user.agregarEquipo(equipo);
         }
@@ -153,7 +153,7 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
     public void updateDBJugadores(Equipo equipo){
         for (int i = 0; i < equipo.getIntegrantes().size(); i++) {
             HashMap map = new HashMap();
-            map.put("idEquipo", this.equipo.getId());
+            map.put("idEquipo", this.equipo.getId() +"");
             map.put("nickname", this.equipo.getIntegrantes().get(i).getUsername());
 
             try {
@@ -168,8 +168,10 @@ public class CrearEquipoActivity extends AppCompatActivity implements Receiver {
     public void onReceiveResult(int resultCode, Bundle resultData) {
         try {
             JSONObject json = (new JSONArray(resultData.getString("GetResponse"))).getJSONObject(0);
-            int id = json.getInt("idEquipo");
-            equipo.setId(id);
+            if (json.has("capitan")){
+                int id = json.getInt("idEquipo");
+                equipo.setId(id);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

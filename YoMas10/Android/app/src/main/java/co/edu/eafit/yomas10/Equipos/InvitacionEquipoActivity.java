@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import co.edu.eafit.yomas10.MyApplication;
@@ -21,11 +22,13 @@ import co.edu.eafit.yomas10.Jugador.Jugador;
 import co.edu.eafit.yomas10.Jugador.PerfilExterno;
 import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
+import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 /**
  * Activity que se muestra cuando se recibe una notificacion para unirse a un equipo
  */
-public class InvitacionEquipoActivity extends AppCompatActivity {
+public class InvitacionEquipoActivity extends AppCompatActivity implements Receiver{
 
     private TextView equipoTV, capitanTV;
     private ListView jugadoresLV;
@@ -86,26 +89,34 @@ public class InvitacionEquipoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+
+    }
+
     public void aceptarEquipo(View view){
 
         try {
-            //TODO: Cambiar Todo esto
             Toast.makeText(this, "Te has inscrito a " + equipoTV.getText().toString(), Toast.LENGTH_SHORT)
                     .show();
             Equipo equipo = new Equipo(this.equipoTV.getText().toString(),
                     new Jugador(this.capitanTV.getText().toString()));
-            ((MyApplication)getApplicationContext()).getUser().agregarEquipo(equipo);
+            Jugador user = ((MyApplication) getApplicationContext()).getUser();
+
+            user.agregarEquipo(equipo);
+
             HashMap<String, String> jugador = new HashMap<>();
-            jugador.put("nickname", "Aleochoam");
-            //Log.d("try", this.http.makeGetRequest(jugador));
-            //TODO: agregarse al equipo en la base de datos
-            //equipo.agregarJugador(StaticUser.jugador);
-            //TODO: Notificar la aceptacion
-        }
-        catch(Exception e) {
+            jugador.put("idEquipo", equipo.getId() + "");
+            jugador.put("nickname", user.getUsername());
+            try {
+                startService(HttpBridge.startWorking(this, jugador, this, Http.INTEGRANTES));
+            }catch (UnsupportedEncodingException e){
+                e.printStackTrace();
+            }
+        }catch(Exception e) {
             Log.e("Error", e.getMessage());
         }
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+        Intent in = new Intent(this, MainActivity.class);
         startActivity(in);
         finish();
 

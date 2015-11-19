@@ -64,11 +64,14 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
 
     public Intent onCasualGameInvitation(JSONObject json, Context ctx) throws JSONException{
         String msg = "", fecha = "", hora = "", cancha = "";
+        int id = -1;
+
         ArrayList<Jugador> jugadores = new ArrayList<>();
 
         JSONArray integrantesJSON = json.getJSONArray("INTEGRANTES");
 
         msg = json.getString("MSG");
+        id = json.getInt("ID");
         fecha = json.getString("FECHA");
         hora = json.getString("HORA");
         cancha = json.getString("CANCHA");
@@ -80,7 +83,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
             jugadores.add(new Jugador(username));
         }
 
-        PartidoCasual partido = new PartidoCasual(fecha, hora, cancha, jugadores);
+        PartidoCasual partido = new PartidoCasual(fecha, hora, cancha, jugadores, id);
         Bundle bn = new Bundle();
         bn.putString("MSG", msg);
         bn.putSerializable("PARTIDO", partido);
@@ -143,8 +146,10 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
      */
     public Intent onTeamInvitation(JSONObject json, Context context) throws JSONException{
         String msg = "", nombre = "", nameCapitan = "";
+        int id = -1;
 
         msg = json.getString("MSG");
+        id = json.getInt("ID");
         nombre = json.getString("NOMBRE");
         nameCapitan = json.getString("CAPITAN");
 
@@ -160,7 +165,7 @@ public class ParseReceiver extends ParsePushBroadcastReceiver {
             jugadores.add(new Jugador(username));
         }
 
-        Equipo equipo = capitan.crearEquipo(nombre);
+        Equipo equipo = capitan.crearEquipo(nombre, id);
         equipo.agregarJugadores(jugadores);
         Bundle bn = new Bundle();
         bn.putString("MSG", msg);

@@ -32,11 +32,12 @@ public class ParseNotificationSender {
      * @String username el ususername del destinatario
      */
     public static void sendCasualGameInvitation(String username, String fecha, String hora, String cancha,
-                                                ArrayList<Jugador> jugadores) throws JSONException {
+                                                ArrayList<Jugador> jugadores, int id) throws JSONException {
         JSONObject json = new JSONObject();
         json.put("action", ACTION);
         json.put("TIPO", INV_CASUAL_GAME);
         json.put("MSG", GAME_MESSAGE);
+        json.put("ID", id);
         json.put("FECHA", fecha);
         json.put("HORA", hora);
         json.put("CANCHA", cancha);
@@ -70,11 +71,12 @@ public class ParseNotificationSender {
      * @param capitan username del capitan
      */
     public static void sendTeamInvitation(String username, String nombreEquipo, String capitan,
-                                          ArrayList<Jugador> jugadores)  throws JSONException{
+                                          ArrayList<Jugador> jugadores, int id)  throws JSONException{
         JSONObject json = new JSONObject();
         json.put("action", ACTION);
         json.put("TIPO", INV_TEAM);
         json.put("MSG", TEAM_MESSAGE);
+        json.put("ID", id);
         json.put("NOMBRE", nombreEquipo);
         json.put("CAPITAN", capitan);
 

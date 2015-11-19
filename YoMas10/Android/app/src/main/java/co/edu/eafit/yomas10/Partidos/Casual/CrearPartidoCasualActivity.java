@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.Partidos.Partido;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.ParseNotificationSender;
 import co.edu.eafit.yomas10.Util.Connection.Receiver;
@@ -48,6 +51,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
     private ArrayAdapter<Jugador> mAdapter;
     private final static int REQUEST_AMIGOS = 1;
 
+    private PartidoCasual partido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
         jugadoresLV = (ListView) findViewById(R.id.jugadores);
 
         jugadores = new ArrayList<>();
+        jugadores.add(((MyApplication)getApplicationContext()).getUser());
 
         mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, jugadores);
         //jugadoresLV.setEmptyView((TextView) findViewById(R.id.emptyText));
@@ -112,17 +117,17 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
         if (id == R.id.action_settings) {
             return true;
         }else if (id == R.id.crearPartido){
-            Partido partido = new PartidoCasual(fechaPartido.getText().toString(),
+            partido = new PartidoCasual(fechaPartido.getText().toString(),
                     horaPartido.getText().toString(),canchaPartido.getText().toString(), jugadores);
 
-            HashMap<String, String> map = new HashMap<>();
-            //TODO
+            updateDB();
+            updateParticipantes();
 
             for (Jugador jugador: jugadores){
                 try {
                     ParseNotificationSender.sendCasualGameInvitation(jugador.getUsername(),
                             fechaPartido.getText().toString(), horaPartido.getText().toString(),
-                            canchaPartido.getText().toString(), jugadores);
+                            canchaPartido.getText().toString(), jugadores, id);
                 }catch (JSONException e){
                     Log.e("PARSE NOTIFICATION", "Error enviado la notificacion");
                 }
@@ -130,12 +135,38 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
             Toast.makeText(getApplicationContext(),"Se han invitado los jugadores", Toast.LENGTH_LONG).show();
 
 
-            ((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
+            //((MyApplication)getApplicationContext()).getUser().agregarPartido(partido);
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void updateDB(){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("fecha", fechaPartido.getText().toString());
+        map.put("hora", horaPartido.getText().toString());
+        map.put("cancha", canchaPartido.getText().toString());
+
+        try{
+            startService(HttpBridge.startWorking(this, map, this, Http.PARTIDO));
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateParticipantes(){
+        for (int i = 0; i < partido.getIntegrantes().size(); i++) {
+            HashMap<String, String> map = new HashMap<>();
+            map.put("nickname", partido.getIntegrantes().get(i).getUsername());
+
+            try {
+                startService(HttpBridge.startWorking(this, map, this, Http.PARTICIPANTES));
+            }catch (UnsupportedEncodingException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void elegirFecha(View view){
@@ -150,12 +181,13 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        switch (resultCode){
-            case 0:
-                //TODO
-                break;
-            default:
-                break;
+        try {
+            JSONArray jsonArray = new JSONArray(resultData.getString("GetResponse"));
+            JSONObject json = jsonArray.getJSONObject(0);
+            if (json.has("fecha"))
+                partido.setId(json.getInt("idPartido"));
+        }catch (JSONException e){
+            e.printStackTrace();
         }
     }
 
@@ -176,7 +208,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
 
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            horaPartido.setText(hourOfDay + ":" + minute);
+            horaPartido.setText(hourOfDay + ":" + minute + ":00");
             hora = hourOfDay;
             minuto = minute;
         }
@@ -206,7 +238,7 @@ public class CrearPartidoCasualActivity extends AppCompatActivity implements Rec
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            fechaPartido.setText(dayOfMonth + "/" + monthOfYear + "/" +  year);
+            fechaPartido.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
             this.year = year;
             this.month = monthOfYear;
             this.day = dayOfMonth;
