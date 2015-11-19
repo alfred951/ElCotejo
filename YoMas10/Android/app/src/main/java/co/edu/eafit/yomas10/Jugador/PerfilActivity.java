@@ -20,6 +20,7 @@ import java.util.HashMap;
 import co.edu.eafit.yomas10.Main2Activity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
+import co.edu.eafit.yomas10.Util.Connection.Http;
 import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
@@ -28,6 +29,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
     Jugador jugador;
     private ImageView profilePic;
     private TextView name;
+    private TextView edad;
     private TextView username;
     private TextView posicion;
     private TextView userBio;
@@ -45,6 +47,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
 
         profilePic = (ImageView)findViewById(R.id.usrPic);
         name       = (TextView) findViewById(R.id.name);
+        edad       = (TextView) findViewById(R.id.edad);
         username   = (TextView) findViewById(R.id.username);
         posicion   = (TextView) findViewById(R.id.posicion);
         userBio    = (TextView) findViewById(R.id.userBio);
@@ -55,7 +58,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
         HashMap<String, String> map = new HashMap<>();
         map.put("nickname", jugador.getUsername());
         try{
-            startService(HttpBridge.startWorking(this, map, this, "Jugador"));
+            startService(HttpBridge.startWorking(this, map, this, Http.JUGADOR));
         }
         catch (UnsupportedEncodingException e){
             e.printStackTrace();
@@ -91,6 +94,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
             bn.putString("NOMBRE", name.getText().toString());
             bn.putString("POSICION", posicion.getText().toString());
             bn.putString("BIO", userBio.getText().toString());
+            bn.putString("EDAD", edad.getText().toString());
 
             Intent in = new Intent(this, EditarPerfilActivity.class);
             in.putExtras(bn);
@@ -117,6 +121,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
 
                     try{
                         jugador.setNombre(json.getString("nombre"));
+                        jugador.setEdad(json.getInt("edad"));
                         jugador.setBio(json.getString("bio"));
                         jugador.setCorreo(json.getString("correo"));
                         jugador.setPosicion(json.getString("posicion"));
@@ -126,6 +131,7 @@ public class PerfilActivity extends AppCompatActivity implements Receiver{
                     }
 
                     name.setText(jugador.getNombre());
+                    edad.setText(jugador.getEdad()+ "");
                     username.setText(jugador.getUsername());
                     posicion.setText(jugador.getPosicion());
                     userBio.setText(jugador.getBio());

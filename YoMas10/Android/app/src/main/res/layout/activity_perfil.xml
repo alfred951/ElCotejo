@@ -85,12 +85,35 @@
         android:layout_marginTop="5dp" />
 
     <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/edadTV"
+        android:layout_row="7"
+        android:layout_column="0"
+        android:text="Edad"
+        android:textColor="@color/negro"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:hint="10 años"
+        android:id="@+id/edad"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/about"
         android:id="@+id/aboutTV"
-        android:layout_row="7"
+        android:layout_row="9"
         android:layout_column="0"
         android:textColor="@color/negro"
         android:layout_marginLeft="10dp" />
@@ -101,7 +124,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/userBio"
-        android:layout_row="8"
+        android:layout_row="10"
         android:layout_column="0"
         android:hint="Descripción de tí"
         android:layout_gravity="fill"
@@ -116,7 +139,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/email"
         android:id="@+id/emailTV"
-        android:layout_row="9"
+        android:layout_row="11"
         android:layout_column="0"
         android:layout_columnSpan="2"
         android:textColor="@color/negro"
@@ -128,7 +151,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/email"
-        android:layout_row="10"
+        android:layout_row="12"
         android:layout_column="0"
         android:layout_columnSpan="2"
         android:layout_marginLeft="10dp"

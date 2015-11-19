@@ -29,6 +29,7 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
     private ImageView profilePic;
     private TextView name;
     private TextView username;
+    private TextView edad;
     private TextView posicion;
     private TextView userBio;
     private TextView correo;
@@ -41,6 +42,7 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
         profilePic = (ImageView)findViewById(R.id.usrPic);
         name       = (TextView) findViewById(R.id.name);
         username   = (TextView) findViewById(R.id.username);
+        edad       = (TextView) findViewById(R.id.edad);
         posicion   = (TextView) findViewById(R.id.posicion);
         userBio    = (TextView) findViewById(R.id.userBio);
         correo     = (TextView) findViewById(R.id.email);
@@ -95,6 +97,7 @@ public class PerfilExterno extends AppCompatActivity implements Receiver{
 
                     name.setText(jugador.getNombre());
                     username.setText(jugador.getUsername());
+                    edad.setText(jugador.getEdad()+ "");
                     posicion.setText(jugador.getPosicion());
                     userBio.setText(jugador.getBio());
                     correo.setText(jugador.getCorreo());

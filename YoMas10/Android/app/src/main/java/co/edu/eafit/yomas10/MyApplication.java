@@ -49,6 +49,7 @@ public class MyApplication extends Application implements Receiver{
     public void initialize(JSONObject jugador){
         try {
             user.setNombre(jugador.getString("nombre"));
+            user.setEdad(jugador.getInt("edad"));
             user.setBio(jugador.getString("bio"));
             user.setCorreo(jugador.getString("correo"));
             user.setEdad(jugador.getInt("edad"));

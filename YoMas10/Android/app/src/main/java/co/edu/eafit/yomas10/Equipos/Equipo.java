@@ -113,6 +113,6 @@ public class Equipo implements Serializable, Receiver {
 
     @Override
     public String toString() {
-        return getNombre() + getId() ;
+        return getNombre();
     }
 }
