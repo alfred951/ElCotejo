@@ -16,15 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.MyApplication;
 import co.edu.eafit.yomas10.R;
-import co.edu.eafit.yomas10.Util.Connection.Http;
-import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
 import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 public class AmigosNActivity extends AppCompatActivity implements Receiver{

@@ -1,7 +1,6 @@
 package co.edu.eafit.yomas10;
 
 import android.support.v7.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,13 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.ParsePush;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 import co.edu.eafit.yomas10.Equipos.CrearEquipoActivity;
@@ -38,9 +32,6 @@ import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasual;
 import co.edu.eafit.yomas10.Partidos.Casual.PartidoCasualActivity;
 import co.edu.eafit.yomas10.Partidos.Equipos.PartidoPorEquiposActivity;
 import co.edu.eafit.yomas10.Util.Connection.Http;
-import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
-import co.edu.eafit.yomas10.Util.Connection.Receiver;
-import co.edu.eafit.yomas10.Util.StaticUser;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {

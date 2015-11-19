@@ -19,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Equipos.InvitacionEquipoActivity;

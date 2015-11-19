@@ -2,8 +2,6 @@ package co.edu.eafit.yomas10.Partidos;
 
 import java.io.Serializable;
 
-import co.edu.eafit.yomas10.Equipos.Equipo;
-
 /**
  * Created by Usuario on 10/10/2015.
  */

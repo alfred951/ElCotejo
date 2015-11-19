@@ -1,7 +1,6 @@
 package co.edu.eafit.yomas10;
 
 import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 

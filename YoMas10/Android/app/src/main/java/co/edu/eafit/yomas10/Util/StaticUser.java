@@ -1,19 +1,9 @@
 package co.edu.eafit.yomas10.Util;
 
 import android.content.Context;
-import android.os.Bundle;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Jugador.Jugador;
-import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
-import co.edu.eafit.yomas10.Util.Connection.Receiver;
 
 public class StaticUser{
 

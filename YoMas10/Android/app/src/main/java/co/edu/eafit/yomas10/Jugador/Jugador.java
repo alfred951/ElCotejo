@@ -1,27 +1,10 @@
 package co.edu.eafit.yomas10.Jugador;
 
-import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
-
 import com.parse.ParsePush;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import co.edu.eafit.yomas10.Equipos.Equipo;
-import co.edu.eafit.yomas10.Partidos.Cancha;
 import co.edu.eafit.yomas10.Partidos.Partido;
-import co.edu.eafit.yomas10.Util.Connection.Http;
-import co.edu.eafit.yomas10.Util.Connection.HttpBridge;
-import co.edu.eafit.yomas10.Util.Connection.Receiver;
-
 
 /**
  * Created by Alejandro on 23/09/2015.

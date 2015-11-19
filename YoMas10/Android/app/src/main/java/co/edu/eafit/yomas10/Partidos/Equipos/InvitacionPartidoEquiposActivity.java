@@ -7,9 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.parse.ParsePush;
-
-import co.edu.eafit.yomas10.MainActivity;
 import co.edu.eafit.yomas10.R;
 
 /**

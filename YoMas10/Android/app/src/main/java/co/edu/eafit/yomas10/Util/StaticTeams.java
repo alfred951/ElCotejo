@@ -1,7 +1,5 @@
 package co.edu.eafit.yomas10.Util;
 
-import java.util.ArrayList;
-
 import co.edu.eafit.yomas10.Equipos.Equipo;
 import co.edu.eafit.yomas10.Jugador.Jugador;
 
