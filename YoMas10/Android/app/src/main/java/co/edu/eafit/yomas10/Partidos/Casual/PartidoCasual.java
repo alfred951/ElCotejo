@@ -40,6 +40,6 @@ public class PartidoCasual extends Partido {
 
     @Override
     public String toString() {
-        return "Partido el " + fecha + "\nHora: " + hora;
+        return "Partido el " + fecha + "\nLugar: " + cancha;
     }
 }

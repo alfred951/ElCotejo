@@ -112,14 +112,14 @@ public class MyApplication extends Application implements Receiver{
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject amigoJS = jsonArray.getJSONObject(i);
                     Log.d("JSONOBJECT", json.toString());
-                    Jugador amigo = new Jugador(json.getString("amigo"));
+                    Jugador amigo = new Jugador(amigoJS.getString("amigo"));
                     user.agregarAmigo(amigo);
                 }
             }else if (json.has("capitan")){ //equipos del usuario
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject equipoJS = jsonArray.getJSONObject(i);
                     Jugador capitan = new Jugador(equipoJS.getString("capitan"));
-                    Equipo equipo = capitan.crearEquipo(equipoJS.getString("nombre"), json.getInt("idEquipo"));
+                    Equipo equipo = capitan.crearEquipo(equipoJS.getString("nombre"), equipoJS.getInt("idEquipo"));
                     user.agregarEquipo(equipo);
                 }
             }
